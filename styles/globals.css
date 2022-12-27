@@ -12,6 +12,7 @@
     --primary-900: #0b0e2b;
 
     --accent: #FF9442;
+    --accent-10: #fff1e5;
     --accent-light: #ffd4b3;
     --white: #ffffff;
     --gray: #808080;
@@ -113,7 +114,7 @@ html {
 body {
     max-width: 100vw;
     overflow: hidden;
-    background-color: var(--white);
+    background-color: var(--accent-10);
     font-size: var(--fs-6);
     line-height: 1.6;
 }
@@ -237,6 +238,7 @@ body.loaded {
 .card {
     box-shadow: var(--shadow-2);
     border-radius: var(--radius-10);
+    background: var(--white);
 }
 
 
@@ -456,6 +458,10 @@ ul.skills-list li span {
     gap: 10px;
 }
 
+.education-list-item .score {
+    color: var(--accent);
+}
+
 
 /*work history*/
 
@@ -473,7 +479,7 @@ ul.skills-list li span {
 }
 
 .work-list-item .card-sub-title {
-    color: var(--primary-900);
+    color: var(--accent);
 }
 
 /*common*/
@@ -572,6 +578,7 @@ ul.skills-list li span {
 }
 
 .project {
+    background: var(--white);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -799,6 +806,7 @@ ul.skills-list li span {
 .contact-form {
     box-shadow: var(--shadow-2);
     padding: 10px;
+    background: var(--white);
 }
 
 .contact-form .btn-accent:is(:hover, :focus) {
