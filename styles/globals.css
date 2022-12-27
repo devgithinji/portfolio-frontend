@@ -47,6 +47,7 @@
 
     /*border radius*/
     --radius-10: 10px;
+    --radius-20: 20px;
     --radius-30: 30px;
 
     /*transition*/
@@ -197,7 +198,7 @@ body.loaded {
     transition: var(--transition);
 }
 
-.btn ion-icon {
+.btn > * {
     font-size: 20px;
 }
 
@@ -218,16 +219,280 @@ body.loaded {
 .social-link {
     background-color: var(--white);
     color: var(--accent);
-    padding: 15px;
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-content: center;
     border-radius: 50%;
     transition: var(--transition);
-}
-
-.social-link ion-icon {
     font-size: 20px;
 }
+
 
 .social-link:is(:hover, :focus) {
     background-color: var(--accent);
     color: var(--white);
 }
+
+.card {
+    box-shadow: var(--shadow-2);
+    border-radius: var(--radius-10);
+}
+
+
+/*-----------------------------------*\
+  #HEADER
+\*-----------------------------------*/
+
+.header .btn {
+    display: none;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-block: 10px;
+    transition: var(--transition);
+}
+
+.header.fixed {
+    background-color: var(--white);
+    box-shadow: var(--shadow-1);
+    z-index: 4;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--accent);
+    font-family: var(--ff-montseratt);
+    font-size: var(--fs-2);
+    font-weight: var(--fw-700);
+}
+
+.nav-open-btn {
+    background-color: var(--accent);
+    padding: 20px 15px;
+    border-radius: var(--radius-10);
+}
+
+.nav-open-btn .line {
+    background-color: var(--white);
+    width: 30px;
+    height: 3px;
+}
+
+.nav-open-btn .line:not(:last-child) {
+    margin-block-end: 6px;
+}
+
+.nav-open-btn .line:nth-child(2) {
+    width: 25px;
+    margin-inline-start: auto;
+}
+
+.navbar {
+    background-color: var(--white);
+    color: var(--primary-900);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    display: grid;
+    place-content: flex-start;
+    transform: scaleY(0);
+    transform-origin: top;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.navbar.active {
+    transform: scaleY(1);
+    visibility: visible;
+    transition-duration: 0.5s;
+    transition-delay: 0s;
+}
+
+
+.navbar-link {
+    letter-spacing: 3px;
+    padding: 10px;
+    transition: var(--transition);
+}
+
+.navbar-link:is(:hover, :focus, .active) {
+    color: var(--accent);
+}
+
+/*-----------------------------------*\
+  #HERO
+\*-----------------------------------*/
+.hero {
+    background: var(--primary-500);
+    padding-block-start: calc(var(--section-padding) + 40px);
+    overflow: hidden;
+}
+
+.hero-content {
+    margin-block-end: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.hero-title {
+    font-family: var(--ff-montseratt);
+    font-size: var(--fs-1);
+    color: var(--accent);
+    font-weight: var(--fw-700);
+    line-height: 1.25;
+}
+
+.hero-subtitle {
+    color: var(--white);
+    font-family: var(--ff-montseratt);
+    font-weight: var(--fw-500);
+    font-size: var(--fs-4);
+    line-height: 1.25;
+}
+
+/*-----------------------------------*\
+  #about me
+\*-----------------------------------*/
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-block-end: 30px;
+}
+
+.tab-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--primary-900);
+    font-weight: var(--fw-500);
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: var(--transition);
+}
+
+.tab-icon {
+    font-size: 20px;
+    color: var(--accent);
+    transition: var(--transition);
+}
+
+.tab-link.active {
+    background: var(--accent);
+    border-radius: var(--radius-10);
+}
+
+.tab-link.active .tab-icon {
+    color: var(--white);
+    font-size: 25px;
+}
+
+/*about me banner*/
+.about-me-banner {
+    margin-block-end: 30px;
+}
+
+.about-me-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.about-me-content .sub-title, .about-me-content .title {
+    margin-inline: auto;
+    text-align: center;
+}
+
+ul.skills-list li {
+    list-style-type: disc;
+    line-height: 1.8;
+    list-style-position: inside;
+}
+
+ul.skills-list li span {
+    display: inline;
+    font-weight: var(--fw-500);
+    color: var(--primary-900);
+}
+
+.about-me-content .btn-accent:is(:hover, :focus) {
+    background: var(--accent-light);
+}
+
+.title-section {
+    text-align: center;
+    margin-block-end: 50px;
+}
+
+.title-section .sub-title {
+    margin-inline: auto;
+    margin-bottom: 20px;
+}
+
+/*education list*/
+.education-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.education-list-item {
+    padding-block: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/*work history*/
+
+.work-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.work-list-item {
+    padding-block: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.work-list-item .card-sub-title {
+    color: var(--primary-900);
+}
+
+/*common*/
+.card-label {
+    background: var(--primary-900);
+    color: var(--white);
+    width: max-content;
+    padding: 10px;
+    border-top-right-radius: var(--radius-20);
+    border-bottom-right-radius: var(--radius-20);
+}
+
+.card-info {
+    padding-inline: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+
