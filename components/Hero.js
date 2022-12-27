@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from "next/link";
-import {FaFacebook, FaFileDownload, FaGithub, FaLinkedinIn, FaTwitter} from "react-icons/fa";
+import {FaFileDownload} from "react-icons/fa";
+import SocialIcons from "./SocialIcons";
 
 const Hero = () => {
     return (
@@ -15,20 +16,7 @@ const Hero = () => {
                         Download Resume
                         <FaFileDownload/>
                     </Link>
-                    <div className="social-icons">
-                        <Link href="components/hero" className="social-link">
-                            <FaFacebook/>
-                        </Link>
-                        <Link href="components/hero" className="social-link">
-                            <FaTwitter/>
-                        </Link>
-                        <Link href="components/hero" className="social-link">
-                            <FaLinkedinIn/>
-                        </Link>
-                        <Link href="components/hero" className="social-link">
-                            <FaGithub/>
-                        </Link>
-                    </div>
+                    <SocialIcons/>
                 </div>
                 <div className="hero-banner">
                     <img src="/images/hero-banner.png" alt="hero banner" className="img"/>

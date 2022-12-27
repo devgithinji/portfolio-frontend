@@ -180,7 +180,7 @@ body.loaded {
 
 .img {
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
 }
 
@@ -552,6 +552,306 @@ ul.skills-list li span {
     background: var(--white);
     color: var(--accent);
 }
+
+/*-----------------------------------*\
+  #projects
+\*-----------------------------------*/
+
+.projects .container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.projects-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.project {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: var(--shadow-2);
+    border-radius: var(--radius-10);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.project .img {
+    height: 100px;
+}
+
+.project-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    text-align: start;
+}
+
+.project-btns {
+    align-self: flex-end;
+    display: flex;
+    gap: 20px;
+}
+
+.project-btn {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    font-size: 20px;
+    place-content: center;
+    background: var(--accent);
+}
+
+.project-btn.outline {
+    background: var(--white);
+    border: 1px solid var(--accent);
+}
+
+/*-----------------------------------*\
+  #blog
+\*-----------------------------------*/
+
+.blogs {
+    background: var(--primary-200);
+}
+
+.blogs .container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.blog-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.blog {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    background: var(--white);
+    border-radius: var(--radius-10);
+    box-shadow: var(--shadow-2);
+}
+
+.blog-img {
+    position: relative;
+    overflow: hidden;
+    height: 100px;
+    border-top-left-radius: var(--radius-10);
+    border-top-right-radius: var(--radius-10);
+}
+
+.blog-img .img {
+    transition: var(--transition);
+}
+
+.blog:is(:hover, :focus) .blog-img .img {
+    transform: scale(1.1);
+}
+
+.date-posted {
+    background: var(--primary-500);
+    padding: 10px;
+    color: var(--white);
+    width: max-content;
+    border-top-right-radius: var(--radius-10);
+    border-bottom-left-radius: var(--radius-10);
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.blog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: start;
+    padding: 10px 20px;
+    gap: 10px;
+}
+
+.blog-content .card-sub-title {
+    color: var(--accent);
+    position: relative;
+    cursor: pointer;
+}
+
+.blog-content .card-sub-title::after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: none;
+    transition: var(--transition);
+}
+
+.blog:is(:hover, :focus) .img-overlay {
+    opacity: 0.3;
+}
+
+.blog:is(:hover, :focus) .blog-icon, .blog:is(:hover, :focus) .blog-content .card-sub-title::after {
+    display: block;
+}
+
+/*-----------------------------------*\
+  #contact
+\*-----------------------------------*/
+.contact .container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.contact .contact-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    width: 100%;
+}
+
+.contact-details ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.contact-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-content: center;
+    background: var(--accent);
+    color: var(--primary-900);
+    font-size: 20px;
+}
+
+/*contact form*/
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 2px solid var(--accent);
+    padding: 20px 10px;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.form-input, .form-textarea {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: var(--gray-light);
+    border: 1px solid var(--primary-900);
+    color: var(--primary-900);
+}
+
+.form-textarea {
+    height: 120px;
+}
+
+.contact-form .btn {
+    align-self: flex-end;
+}
+
+.contact-form {
+    box-shadow: var(--shadow-2);
+    padding: 10px;
+}
+
+.contact-form .btn-accent:is(:hover, :focus) {
+    background: var(--accent-light);
+}
+
+/*-----------------------------------*\
+  #footer
+\*-----------------------------------*/
+.footer {
+    background: var(--primary-500);
+}
+
+.footer.section {
+    padding-block: 30px;
+}
+
+.footer .container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.footer .copyright-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--white);
+}
+
+.footer .copyright-text .divider {
+    display: none;
+}
+
+.footer span:last-child {
+    color: var(--accent);
+}
+
+/*-----------------------------------*\
+  #back to top
+\*-----------------------------------*/
+.back-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    background-color: var(--accent);
+    color: var(--primary-900);
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 4;
+}
+
+.back-top-btn.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-10px);
+}
+
+
+
 
 
 
