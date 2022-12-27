@@ -589,7 +589,7 @@ ul.skills-list li span {
 }
 
 .project .img {
-    height: 100px;
+    height: 150px;
 }
 
 .project-info {
@@ -671,7 +671,7 @@ ul.skills-list li span {
 .blog-img {
     position: relative;
     overflow: hidden;
-    height: 100px;
+    height: 150px;
     border-top-left-radius: var(--radius-10);
     border-top-right-radius: var(--radius-10);
 }
