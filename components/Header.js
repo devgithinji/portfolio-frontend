@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {FaArrowRight} from "react-icons/fa";
 import Link from "next/link";
+import {useRouter} from "next/router";
 
 const Header = () => {
     const [isOpenNavOpen, setNavOpen] = useState(false)
     const [isHeaderFixed, setHeaderFixed] = useState(false)
+    const [activePath, setActivePath] = useState('/')
+    const router = useRouter();
+
 
     const headerFixedFunc = () => {
         if (window.scrollY >= 80) {
@@ -19,6 +23,20 @@ const Header = () => {
         return () => window.removeEventListener("scroll", headerFixedFunc)
     }, [])
 
+    useEffect(() => {
+        router.events.on('hashChangeStart', onHashChangeStart);
+
+        return () => {
+            router.events.off('hashChangeStart', onHashChangeStart)
+        }
+    }, [router.events])
+
+    const onHashChangeStart = (url) => {
+        if (router.isReady) {
+            setActivePath(url)
+        }
+    }
+
 
     return (
         <header className={isHeaderFixed ? 'header fixed' : 'header'}>
@@ -29,22 +47,27 @@ const Header = () => {
                 <nav className={isOpenNavOpen ? 'navbar active' : 'navbar'}>
                     <ul className="navbar-list">
                         <li>
-                            <Link href="/" className="navbar-link active" data-nav-link>Home</Link>
+                            <Link href="/"
+                                  className={activePath === '/' ? 'navbar-link active' : 'navbar-link'}>Home</Link>
                         </li>
                         <li>
-                            <Link href="/#aboutme" className="navbar-link" data-nav-link>About Me</Link>
+                            <Link href="/#aboutme"
+                                  className={activePath === '/#aboutme' ? 'navbar-link active' : 'navbar-link'}>About
+                                Me</Link>
                         </li>
                         <li>
-                            <Link href="/#services" className="navbar-link" data-nav-link>Services</Link>
+                            <Link href="/#services"
+                                  className={activePath === '/#services' ? 'navbar-link active' : 'navbar-link'}>Services</Link>
                         </li>
                         <li>
-                            <Link href="/pages/projects" className="navbar-link" data-nav-link>Projects</Link>
+                            <Link href="/pages/projects" className={activePath === '/projects' ? 'navbar-link active' : 'navbar-link'}>Projects</Link>
                         </li>
                         <li>
-                            <Link href="/blog" className="navbar-link" data-nav-link>Blog</Link>
+                            <Link href="/blog" className={activePath === '/blog' ? 'navbar-link active' : 'navbar-link'}>Blog</Link>
                         </li>
                         <li>
-                            <Link href="/#contact" className="navbar-link" data-nav-link>Contact</Link>
+                            <Link href="/#contact"
+                                  className={activePath === '/#contact' ? 'navbar-link active' : 'navbar-link'}>Contact</Link>
                         </li>
                     </ul>
                 </nav>
