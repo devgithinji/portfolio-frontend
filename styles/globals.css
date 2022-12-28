@@ -24,10 +24,16 @@
 @import "main/contact.css";
 
 /*blog*/
+@import "blog/common.css";
 @import "blog/hero.css";
+@import "blog/navigation.css";
+@import "blog/all-blogs.css";
+@import "blog/other-blogs.css";
 
 @import "client-layout/footer.css";
 
 @import "client-layout/back-top-btn.css";
 
 @import "responsive.css";
+
+@import "custom-slick.css";

@@ -44,13 +44,13 @@
 }
 
 .card-title {
-    font-size: var(--fs-4);
+    font-size: var(--fs-5);
     font-weight: var(--fw-500);
     color: var(--primary-500);
 }
 
 .card-sub-title {
-    font-size: var(--fs-5);
+    font-size: var(--fs-6);
     font-weight: var(--fw-500);
 }
 

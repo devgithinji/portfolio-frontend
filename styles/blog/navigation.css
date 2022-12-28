@@ -1,0 +1,21 @@
+/*-----------------------------------*\
+  #BLOG NAV
+\*-----------------------------------*/
+.navigation .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.nav-item {
+    width: max-content;
+    min-width: 50px;
+    text-align: center;
+    border: 1px solid var(--accent);
+    padding: 5px;
+    border-radius: var(--radius-10);
+}
+
+.nav-item.active {
+    background: var(--accent);
+}
