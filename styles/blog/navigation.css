@@ -1,6 +1,9 @@
 /*-----------------------------------*\
   #BLOG NAV
 \*-----------------------------------*/
+.navigation{
+    padding-block: 30px;
+}
 .navigation .container {
     display: flex;
     flex-wrap: wrap;

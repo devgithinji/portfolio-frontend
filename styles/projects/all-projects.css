@@ -1,0 +1,89 @@
+/*===================*\
+#ALL PROJECTS
+\*===================*/
+.projects-section {
+    background: var(--primary-200);
+    padding-block: 40px;
+}
+
+.projects-section .container {
+    display: grid;
+    gap: 30px;
+}
+
+.project-item {
+    display: grid;
+    gap: 20px;
+}
+
+.project-item .image-holder {
+    max-height: 150px;
+}
+
+.image-holder .img {
+    border-top-left-radius: var(--radius-10);
+    border-top-right-radius: var(--radius-10);
+    max-height: 150px;
+}
+
+.project-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.tag {
+    padding: 10px;
+    background: var(--accent-light);
+    border-radius: var(--radius-10);
+}
+
+.project-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.project-links .button-link {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: var(--primary-900);
+    color: var(--white);
+    padding: 5px 10px;
+    border-radius: var(--radius-10);
+}
+
+/*-----------------------------------*\
+  #MEDIA QUERIES
+\*-----------------------------------*/
+
+@media screen and (min-width: 768px) {
+    .project-item {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        padding-block: 20px;
+    }
+
+    .projects-section .container > .project-item:nth-child(2n) .image-holder { order: 1; }
+
+    .project-item .image-holder {
+        max-height: 200px;
+    }
+
+
+    .image-holder .img {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        max-height: 200px;
+    }
+}

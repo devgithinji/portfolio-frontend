@@ -1,0 +1,19 @@
+/*===================*\
+#PROJECTS HERO
+\*===================*/
+
+.projects-hero.section {
+    background: var(--primary-500);
+    padding-block: calc(var(--section-padding) + 50px) 50px;
+}
+
+.projects-hero .container {
+    display: grid;
+    gap: 30px;
+    place-content: center;
+}
+
+.projects-hero .title {
+    color: var(--accent);
+    text-align: center;
+}

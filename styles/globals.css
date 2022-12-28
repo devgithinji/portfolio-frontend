@@ -30,6 +30,10 @@
 @import "blog/all-blogs.css";
 @import "blog/other-blogs.css";
 
+/*projects*/
+@import "projects/hero.css";
+@import "projects/all-projects.css";
+
 @import "client-layout/footer.css";
 
 @import "client-layout/back-top-btn.css";
