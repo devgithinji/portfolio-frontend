@@ -9,6 +9,8 @@
 
 @import "client-layout/header.css";
 
+/*main*/
+
 @import "main/hero.css";
 
 @import "main/about-me.css";
@@ -20,6 +22,9 @@
 @import "main/blog.css";
 
 @import "main/contact.css";
+
+/*blog*/
+@import "blog/hero.css";
 
 @import "client-layout/footer.css";
 

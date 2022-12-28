@@ -32,7 +32,7 @@ const BasicInfo = () => {
                         <span>Additional skills</span>: Microservices, Cloud services (AWS)
                     </li>
                 </ul>
-                <Link href="" className="btn btn-accent">
+                <Link href="components/main/aboutme" className="btn btn-accent">
                     Download Resume
                     <FaDownload/>
                 </Link>

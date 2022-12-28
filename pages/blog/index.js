@@ -1,10 +1,11 @@
 import React from 'react';
 import ClientSideLayout from "../../components/ClientSideLayout";
+import Hero from "../../components/blog/Hero";
 
 const Blog = () => {
     return (
         <ClientSideLayout>
-            <h1>blog</h1>
+            <Hero/>
         </ClientSideLayout>
     );
 };

@@ -5,16 +5,16 @@ import {FaFacebook, FaGithub, FaLinkedinIn, FaTwitter} from "react-icons/fa";
 const SocialIcons = () => {
     return (
         <div className="social-icons">
-            <Link href="" className="social-link">
+            <Link href="components" className="social-link">
                 <FaFacebook/>
             </Link>
-            <Link href="" className="social-link">
+            <Link href="components" className="social-link">
                 <FaTwitter/>
             </Link>
-            <Link href="" className="social-link">
+            <Link href="components" className="social-link">
                 <FaLinkedinIn/>
             </Link>
-            <Link href="" className="social-link">
+            <Link href="components" className="social-link">
                 <FaGithub/>
             </Link>
         </div>

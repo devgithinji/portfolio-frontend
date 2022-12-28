@@ -62,7 +62,7 @@ const Projects = () => {
                         </div>
                     </div>
                 </div>
-                <Link href="/projects" className="btn btn-accent">
+                <Link href="/pages/projects" className="btn btn-accent">
                     View All
                     <FaArrowRight/>
                 </Link>
