@@ -4,7 +4,7 @@ import {FaDownload} from "react-icons/fa";
 
 const BasicInfo = () => {
     return (
-        <div className="tab-content">
+        <div className="tab-content basic-info">
             <div className="about-me-banner">
                 <img src="/images/abt-me.png" className="img" alt="dennis githinji"/>
             </div>

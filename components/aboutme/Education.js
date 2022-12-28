@@ -2,7 +2,7 @@ import React from 'react';
 
 const Education = () => {
     return (
-        <div className="tab-content" id="school">
+        <div className="tab-content education" id="school">
             <div className="title-section">
                 <h2 className="sub-title">Education</h2>
                 <h1 className="title">My Schooling Journey</h1>

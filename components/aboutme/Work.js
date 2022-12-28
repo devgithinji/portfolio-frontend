@@ -2,7 +2,7 @@ import React from 'react';
 
 const Work = () => {
     return (
-        <div className="tab-content">
+        <div className="tab-content work">
             <div className="title-section">
                 <h2 className="sub-title">Work</h2>
                 <h1 className="title">My Job History</h1>
