@@ -1,0 +1,244 @@
+/*-----------------------------------*\
+  #MEDIA QUERIES
+\*-----------------------------------*/
+
+/*responsive for larger than 576px screen*/
+@media screen and (min-width: 575px) {
+    .container {
+        max-width: 540px;
+        width: 100%;
+        margin-inline: auto;
+    }
+
+    .footer .copyright-text {
+        flex-direction: row;
+    }
+
+    .footer .copyright-text .divider {
+        display: block;
+    }
+}
+
+/*responsive for larger than 768px screen*/
+@media screen and (min-width: 768px) {
+    /*custom property*/
+    :root {
+        /*typography*/
+        --fs-1: 4.9rem;
+        --fs-2: 3.9rem;
+        --fs-3: 3.1rem;
+        --fs-4: 2.5rem;
+        --fs-5: 2.0rem;
+        --fs-6: 1.6rem;
+    }
+
+    body{
+        padding-bottom: 145px;
+    }
+
+    .hero .hero-content {
+        gap: 30px;
+    }
+
+    /*reused style*/
+    .container {
+        max-width: 750px;
+    }
+
+
+    .hero {
+        overflow: hidden;
+        display: grid;
+        place-content: center;
+    }
+
+    .hero .container {
+        display: grid;
+        grid-template-columns: 1fr 0.75fr;
+        place-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .hero-content {
+        margin-block-end: 0;
+    }
+
+    /*tab links*/
+    .tabs {
+        width: 80%;
+        max-width: 720px;
+        margin-inline: auto;
+    }
+
+
+    /*services projects blog*/
+    .services .container .services-list, .projects .container .projects-list, .blogs .container .blog-list, .contact .container .contact-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .contact .container .contact-content {
+        grid-template-columns: 0.6fr 1fr;
+        align-items: center;
+    }
+
+}
+
+/*responsive for larger than 992px screen*/
+@media screen and (min-width: 992px) {
+    /*custom property*/
+    :root {
+        /*typography*/
+
+    }
+
+    /*reused style*/
+    .container {
+        max-width: 980px;
+    }
+
+    /*header*/
+    .nav-open-btn,
+    .nav-close-btn {
+        display: none;
+    }
+
+    .header .btn {
+        display: flex;
+
+    }
+
+    .header {
+        background-color: transparent;
+        box-shadow: none;
+        padding-block: 30px;
+        transition: var(--transition);
+    }
+
+
+    .header.active {
+        transform: translateY(-100%);
+        background-color: var(--white);
+        padding-block: 20px;
+        box-shadow: var(--shadow-1);
+        animation: slideIn 0.5s ease forwards;
+    }
+
+    @keyframes slideIn {
+        0% {
+            transform: translateY(-100%)
+        }
+        100% {
+            transform: translateY(0)
+        }
+    }
+
+    .header .container {
+        gap: 30px;
+    }
+
+
+    .navbar,
+    .navbar.active {
+        all: unset;
+        margin-inline-start: auto;
+    }
+
+    .navbar-list {
+        display: flex;
+        gap: 10px;
+    }
+
+    .navbar-link {
+        color: var(--white);
+        font-size: unset;
+        padding: 0 10px;
+        margin-block-end: 0;
+    }
+
+    .header.fixed .navbar-link {
+        color: var(--primary-900);
+    }
+
+    .header .navbar-link:is(:hover, :focus, .active) {
+        color: var(--accent);
+    }
+
+    .header.active .btn:is(:hover, :focus) {
+        background-color: var(--accent-light);
+    }
+
+    /*hero*/
+    .hero{
+        min-height: 100vh;
+    }
+    .hero .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* about*/
+    .about-me .container {
+        display: grid;
+        grid-template-columns:  1fr;
+        gap: 30px;
+    }
+
+    .basic-info {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .about-me-banner {
+        margin-block-end: 0;
+    }
+
+    .education .education-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .work .work-list {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+
+    /*services projects blog*/
+    .services .container .services-list, .projects .container .projects-list, .blogs .container .blog-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .service, .project, .blog {
+        height: 100%;
+    }
+
+}
+
+/*responsive for larger than 1200px screen*/
+@media screen and (min-width: 1200px) {
+    /*custom property*/
+    :root {
+        /*    typography */
+        --fs-1: 6.1rem;
+        --fs-2: 4.9rem;
+        --fs-3: 3.9rem;
+        --fs-4: 3.1rem;
+        --fs-5: 2.5rem;
+    }
+
+    /*    reused style */
+    .container {
+        max-width: 1180px;
+    }
+}
+
+
+
+
+
