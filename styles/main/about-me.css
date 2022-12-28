@@ -1,0 +1,140 @@
+/*-----------------------------------*\
+  #about me
+\*-----------------------------------*/
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-block-end: 30px;
+}
+
+.tab-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--primary-900);
+    font-weight: var(--fw-500);
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: var(--transition);
+}
+
+.tab-icon {
+    font-size: 20px;
+    color: var(--accent);
+    transition: var(--transition);
+}
+
+.tab-link.active {
+    background: var(--accent);
+    border-radius: var(--radius-10);
+}
+
+.tab-link.active .tab-icon {
+    color: var(--white);
+    font-size: 25px;
+}
+
+/*about me banner*/
+
+.about-me-banner {
+    margin-block-end: 30px;
+}
+
+.about-me-banner img{
+    height: 500px;
+    object-fit: contain;
+}
+
+.about-me-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.about-me-content .sub-title, .about-me-content .title {
+    margin-inline: auto;
+    text-align: center;
+}
+
+ul.skills-list li {
+    list-style-type: disc;
+    line-height: 1.8;
+    list-style-position: inside;
+}
+
+ul.skills-list li span {
+    display: inline;
+    font-weight: var(--fw-500);
+    color: var(--primary-900);
+}
+
+.about-me-content .btn-accent:is(:hover, :focus) {
+    background: var(--accent-light);
+}
+
+.title-section {
+    text-align: center;
+    margin-block-end: 50px;
+}
+
+.title-section .sub-title {
+    margin-inline: auto;
+    margin-bottom: 20px;
+}
+
+/*education list*/
+.education-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.education-list-item {
+    padding-block: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.education-list-item .score {
+    color: var(--accent);
+}
+
+
+/*work history*/
+
+.work-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.work-list-item {
+    padding-block: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.work-list-item .card-sub-title {
+    color: var(--accent);
+}
+
+/*common*/
+.card-label {
+    background: var(--primary-900);
+    color: var(--white);
+    width: max-content;
+    padding: 10px;
+    border-top-right-radius: var(--radius-20);
+    border-bottom-right-radius: var(--radius-20);
+}
+
+.card-info {
+    padding-inline: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

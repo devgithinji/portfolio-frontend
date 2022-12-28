@@ -1,0 +1,76 @@
+/*-----------------------------------*\
+  #projects
+\*-----------------------------------*/
+
+.projects .container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.projects-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.project {
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: var(--shadow-2);
+    border-radius: var(--radius-10);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.project .img {
+    height: 150px;
+}
+
+.project-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    text-align: start;
+}
+
+.project-btns {
+    align-self: flex-end;
+    display: flex;
+    gap: 20px;
+}
+
+.project-btn {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    font-size: 20px;
+    place-content: center;
+    background: var(--accent);
+    color: var(--white);
+}
+
+.project-btn.outline {
+    background: var(--white);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+
+.project .img {
+    transition: var(--transition);
+}
+
+.project:is(:hover, :focus) .img {
+    transform: scale(1.1);
+}
+
+.projects .btn-accent:is(:hover, :focus) {
+    background: var(--accent-light);
+}

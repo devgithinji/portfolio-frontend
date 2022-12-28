@@ -1,0 +1,31 @@
+/*-----------------------------------*\
+  #HERO
+\*-----------------------------------*/
+.hero {
+    background: var(--primary-500);
+    padding-block-start: calc(var(--section-padding) + 40px);
+    overflow: hidden;
+}
+
+.hero-content {
+    margin-block-end: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.hero-title {
+    font-family: var(--ff-montseratt);
+    font-size: var(--fs-1);
+    color: var(--accent);
+    font-weight: var(--fw-700);
+    line-height: 1.25;
+}
+
+.hero-subtitle {
+    color: var(--white);
+    font-family: var(--ff-montseratt);
+    font-weight: var(--fw-500);
+    font-size: var(--fs-4);
+    line-height: 1.25;
+}

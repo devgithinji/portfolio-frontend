@@ -1,0 +1,89 @@
+/*-----------------------------------*\
+  #HEADER
+\*-----------------------------------*/
+
+.header .btn {
+    display: none;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-block: 10px;
+    transition: var(--transition);
+}
+
+.header.fixed {
+    background-color: var(--white);
+    box-shadow: var(--shadow-1);
+    z-index: 4;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--accent);
+    font-family: var(--ff-montseratt);
+    font-size: var(--fs-2);
+    font-weight: var(--fw-700);
+}
+
+.nav-open-btn {
+    background-color: var(--accent);
+    padding: 20px 15px;
+    border-radius: var(--radius-10);
+}
+
+.nav-open-btn .line {
+    background-color: var(--white);
+    width: 30px;
+    height: 3px;
+}
+
+.nav-open-btn .line:not(:last-child) {
+    margin-block-end: 6px;
+}
+
+.nav-open-btn .line:nth-child(2) {
+    width: 25px;
+    margin-inline-start: auto;
+}
+
+.navbar {
+    background-color: var(--white);
+    color: var(--primary-900);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    display: grid;
+    place-content: flex-start;
+    transform: scaleY(0);
+    transform-origin: top;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.navbar.active {
+    transform: scaleY(1);
+    visibility: visible;
+    transition-duration: 0.5s;
+    transition-delay: 0s;
+}
+
+
+.navbar-link {
+    letter-spacing: 3px;
+    padding: 10px;
+    transition: var(--transition);
+}
+
+.navbar-link:is(:hover, :focus, .active) {
+    color: var(--accent);
+}

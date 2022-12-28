@@ -1,0 +1,37 @@
+/*-----------------------------------*\
+  #footer
+\*-----------------------------------*/
+.footer {
+    background: var(--primary-500);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.footer.section {
+    padding-block: 30px;
+}
+
+.footer .container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.footer .copyright-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    color: var(--white);
+}
+
+.footer .copyright-text .divider {
+    display: none;
+}
+
+.footer span:last-child {
+    color: var(--accent);
+}

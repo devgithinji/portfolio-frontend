@@ -1,0 +1,117 @@
+/*-----------------------------------*\
+  #REUSED STYLE
+\*-----------------------------------*/
+
+.container {
+    padding-inline: 15px;
+}
+
+.section {
+    padding-block: var(--section-padding);
+}
+
+.title,
+.sub-title,
+.card-title,
+.card-sub-title {
+    font-family: var(--ff-montseratt);
+    line-height: 1.25;
+    text-transform: capitalize;
+}
+
+.title {
+    font-size: var(--fs-2);
+    font-weight: var(--fw-700);
+    color: var(--primary-900);
+}
+
+.sub-title {
+    font-size: var(--fs-3);
+    font-weight: var(--fw-600);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: var(--primary-500);
+    max-width: max-content;
+}
+
+.sub-title::before, .sub-title::after {
+    content: '';
+    border-bottom: 2px solid var(--primary-500);
+    width: 50px;
+    height: 3px;
+    background: var(--primary-500);
+}
+
+.card-title {
+    font-size: var(--fs-4);
+    font-weight: var(--fw-500);
+    color: var(--primary-500);
+}
+
+.card-sub-title {
+    font-size: var(--fs-5);
+    font-weight: var(--fw-500);
+}
+
+.img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    max-width: max-content;
+    text-transform: capitalize;
+    border-radius: var(--radius-10);
+    font-size: var(--fs-6);
+    font-weight: var(--fw-500);
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.btn > * {
+    font-size: 20px;
+}
+
+.btn-accent {
+    background: var(--accent);
+}
+
+.btn-accent:is(:hover, :focus) {
+    background-color: var(--white);
+    color: var(--accent);
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    background-color: var(--white);
+    color: var(--accent);
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+    font-size: 20px;
+}
+
+
+.social-link:is(:hover, :focus) {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+.card {
+    box-shadow: var(--shadow-2);
+    border-radius: var(--radius-10);
+    background: var(--white);
+}

@@ -1,0 +1,94 @@
+/*-----------------------------------*\
+  #blog
+\*-----------------------------------*/
+
+.blogs {
+    background: var(--primary-200);
+}
+
+.blogs .container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.blog-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.blog {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    background: var(--white);
+    border-radius: var(--radius-10);
+    box-shadow: var(--shadow-2);
+}
+
+.blog-img {
+    position: relative;
+    overflow: hidden;
+    height: 150px;
+    border-top-left-radius: var(--radius-10);
+    border-top-right-radius: var(--radius-10);
+}
+
+.blog-img .img {
+    transition: var(--transition);
+}
+
+.blog:is(:hover, :focus) .blog-img .img {
+    transform: scale(1.1);
+}
+
+.date-posted {
+    background: var(--primary-500);
+    padding: 10px;
+    color: var(--white);
+    width: max-content;
+    border-top-right-radius: var(--radius-10);
+    border-bottom-left-radius: var(--radius-10);
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.blog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: start;
+    padding: 10px 20px;
+    gap: 10px;
+}
+
+.blog-content .card-sub-title {
+    color: var(--accent);
+    position: relative;
+    cursor: pointer;
+}
+
+.blog-content .card-sub-title::after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: none;
+    transition: var(--transition);
+}
+
+.blog:is(:hover, :focus) .img-overlay {
+    opacity: 0.3;
+}
+
+.blog:is(:hover, :focus) .blog-icon, .blog:is(:hover, :focus) .blog-content .card-sub-title::after {
+    display: block;
+}

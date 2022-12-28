@@ -1,0 +1,27 @@
+/*-----------------------------------*\
+  #back to top
+\*-----------------------------------*/
+
+.back-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    background-color: var(--accent);
+    color: var(--primary-900);
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-content: center;
+    border-radius: 50%;
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 4;
+}
+
+.back-top-btn.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-10px);
+}
