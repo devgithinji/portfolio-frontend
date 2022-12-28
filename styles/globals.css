@@ -41,3 +41,6 @@
 @import "responsive.css";
 
 @import "custom-slick.css";
+
+/*admin*/
+@import "admin/admin.css";

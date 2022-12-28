@@ -1,0 +1,152 @@
+.admin-header .container {
+    height: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    box-shadow: var(--shadow-1);
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.admin-header button {
+    color: var(--accent);
+    font-size: 40px;
+}
+
+.account {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.account-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    padding: 5px 10px;
+    border-radius: var(--radius-10);
+}
+
+.account-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 1px;
+    background: var(--white);
+    width: max-content;
+    padding: 5px;
+    margin: 5px;
+    z-index: 4;
+    box-shadow: var(--shadow-2);
+    border-radius: var(--radius-10);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    visibility: hidden;
+    transform: scale(0);
+    transition: var(--transition);
+    transform-origin: top;
+}
+
+.account-dropdown.active {
+    visibility: visible;
+    transform: scale(1);
+}
+
+.account-dropdown-link {
+    display: flex;
+    gap: 5px;
+}
+
+.account-dropdown-link .dropdown-icon {
+    color: var(--accent);
+}
+
+.admin-nav {
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    width: 200px;
+    background: var(--white);
+    box-shadow: var(--shadow-1);
+    z-index: 3;
+    transform: translateX(-100%);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-nav.active {
+    transform: translateX(0);
+}
+
+.admin-nav .links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-nav .links .nav-link {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+    margin-inline: 20px;
+    padding: 5px 10px;
+}
+
+.nav-link.active {
+    background: var(--accent);
+    border-radius: var(--radius-10);
+}
+
+.nav-link.active .link-icon {
+    color: var(--primary-900);
+}
+
+.link-icon {
+    font-size: 20px;
+    color: var(--accent);
+}
+
+.branding {
+    height: 100px;
+    border-bottom: 1px solid var(--accent);
+    display: grid;
+    place-content: center;
+    position: relative;
+}
+
+.branding .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 25px;
+    cursor: pointer;
+    color: var(--accent);
+}
+
+.admin-content {
+    padding-block: 100px 80px;
+    min-height: 100vh;
+    position: relative;
+    background: yellow;
+
+}
+
+.admin-footer {
+    position: absolute;
+    bottom: 0;
+    background: var(--white);
+    left: 0;
+    width: 100%;
+    padding: 20px 30px;
+}
