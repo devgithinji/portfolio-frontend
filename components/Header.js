@@ -34,11 +34,13 @@ const Header = () => {
     }, [router.events])
 
     const onHashChangeStart = (url) => {
+        setNavOpen(false)
         setActivePath(url)
     }
 
     const onRouteChange = (url) => {
-      setActivePath(url)
+        setActivePath(url)
+        setNavOpen(false)
     }
 
 
