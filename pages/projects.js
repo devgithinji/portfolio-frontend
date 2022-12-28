@@ -1,10 +1,11 @@
 import React from 'react';
+import ClientSideLayout from "../components/ClientSideLayout";
 
 const Projects = () => {
     return (
-        <div>
-            
-        </div>
+        <ClientSideLayout>
+            <h1>projects</h1>
+        </ClientSideLayout>
     );
 };
 

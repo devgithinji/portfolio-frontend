@@ -8,23 +8,17 @@ import Services from "../components/Services";
 import Projects from "../components/Projects";
 import Blogs from "../components/Blogs";
 import ContactMe from "../components/ContactMe";
-import Footer from "../components/Footer";
-import BackToTop from "../components/BackToTop";
+import ClientSideLayout from "../components/ClientSideLayout";
 
 export default function Home() {
     return (
-        <>
-            <Header/>
-            <main>
-                <Hero/>
-                <AboutMe/>
-                <Services/>
-                <Projects/>
-                <Blogs/>
-                <ContactMe/>
-            </main>
-            <BackToTop/>
-            <Footer/>
-        </>
+        <ClientSideLayout>
+            <Hero/>
+            <AboutMe/>
+            <Services/>
+            <Projects/>
+            <Blogs/>
+            <ContactMe/>
+        </ClientSideLayout>
     )
 }

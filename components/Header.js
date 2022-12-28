@@ -25,16 +25,20 @@ const Header = () => {
 
     useEffect(() => {
         router.events.on('hashChangeStart', onHashChangeStart);
+        router.events.on('routeChangeComplete', onRouteChange)
 
         return () => {
             router.events.off('hashChangeStart', onHashChangeStart)
+            router.events.off('routeChangeComplete', onRouteChange)
         }
     }, [router.events])
 
     const onHashChangeStart = (url) => {
-        if (router.isReady) {
-            setActivePath(url)
-        }
+        setActivePath(url)
+    }
+
+    const onRouteChange = (url) => {
+      setActivePath(url)
     }
 
 
@@ -60,10 +64,12 @@ const Header = () => {
                                   className={activePath === '/#services' ? 'navbar-link active' : 'navbar-link'}>Services</Link>
                         </li>
                         <li>
-                            <Link href="/pages/projects" className={activePath === '/projects' ? 'navbar-link active' : 'navbar-link'}>Projects</Link>
+                            <Link href="/projects"
+                                  className={activePath === '/projects' ? 'navbar-link active' : 'navbar-link'}>Projects</Link>
                         </li>
                         <li>
-                            <Link href="/blog" className={activePath === '/blog' ? 'navbar-link active' : 'navbar-link'}>Blog</Link>
+                            <Link href="/blog"
+                                  className={activePath === '/blog' ? 'navbar-link active' : 'navbar-link'}>Blog</Link>
                         </li>
                         <li>
                             <Link href="/#contact"

@@ -1,10 +1,11 @@
 import React from 'react';
+import ClientSideLayout from "../../components/ClientSideLayout";
 
 const Blog = () => {
     return (
-        <div>
-
-        </div>
+        <ClientSideLayout>
+            <h1>blog</h1>
+        </ClientSideLayout>
     );
 };
 
