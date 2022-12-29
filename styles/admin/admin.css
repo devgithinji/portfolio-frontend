@@ -1,4 +1,4 @@
-.admin-header .container {
+.admin-header {
     height: 100px;
     position: fixed;
     top: 0;
@@ -8,6 +8,11 @@
     box-shadow: var(--shadow-1);
     z-index: 3;
     display: flex;
+}
+
+.admin-header .container {
+    width: 100%;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
@@ -16,6 +21,8 @@
 .admin-header button {
     color: var(--accent);
     font-size: 40px;
+    display: flex;
+    align-items: center;
 }
 
 .account {
@@ -63,10 +70,14 @@
 .account-dropdown-link {
     display: flex;
     gap: 5px;
+    align-items: center;
+    flex-direction: row;
 }
 
 .account-dropdown-link .dropdown-icon {
     color: var(--accent);
+    display: flex;
+    align-items: center;
 }
 
 .admin-nav {
@@ -149,4 +160,10 @@
     left: 0;
     width: 100%;
     padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-body {
+    padding-bottom: 0;
 }
