@@ -1,0 +1,25 @@
+/*===================*\
+#ADMIN PROJECTS
+\*===================*/
+.admin-project-items {
+    display: grid;
+    gap: 10px;
+}
+
+.admin-project-item {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.admin-project-item span {
+    text-transform: capitalize;
+    color: var(--accent);
+}
+
+.admin-project-item-action-btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}

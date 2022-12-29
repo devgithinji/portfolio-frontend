@@ -1,0 +1,27 @@
+/*-----------------------------------*\
+  #add project
+\*-----------------------------------*/
+.admin-form-item {
+    gap: 5px;
+}
+
+.admin-input {
+    border-radius: 5px;
+    border: none;
+}
+
+.admin-input:focus {
+    border: 1px solid var(--accent);
+}
+
+.form-error {
+    font-size: small;
+    color: red;
+}
+
+.add-project-form {
+    padding-inline: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

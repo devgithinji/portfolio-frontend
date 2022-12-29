@@ -1,8 +1,11 @@
 import React from 'react';
 import {FaCog, FaFile, FaFileCode, FaHome, FaTimes} from "react-icons/fa";
 import Link from "next/link";
+import {useRouter} from "next/router";
 
 const Navbar = ({isNavActive, setNavActive}) => {
+    const router = useRouter();
+
     return (
         <aside className={isNavActive ? 'admin-nav active' : 'admin-nav'}>
             <div className="branding">
@@ -12,16 +15,16 @@ const Navbar = ({isNavActive, setNavActive}) => {
                 </div>
             </div>
             <div className="links">
-                <Link href="" className="nav-link active">
+                <Link href="/admin" className={router.pathname === "/admin" ? 'nav-link active' : 'nav-link'}>
                     <FaHome className="link-icon"/> Dashboard
                 </Link>
-                <Link href="" className="nav-link">
+                <Link href="/admin/projects" className={router.pathname === "/admin/projects" ? 'nav-link active' : 'nav-link'}>
                     <FaFileCode className="link-icon"/> Projects
                 </Link>
-                <Link href="" className="nav-link">
+                <Link href="/admin/blog" className={router.pathname === "/admin/blog" ? 'nav-link active' : 'nav-link'}>
                     <FaFile className="link-icon"/> Blogs
                 </Link>
-                <Link href="" className="nav-link">
+                <Link href="/admin/settings" className={router.pathname === "/admin/settings" ? 'nav-link active' : 'nav-link'}>
                     <FaCog className="link-icon"/> Settings
                 </Link>
             </div>

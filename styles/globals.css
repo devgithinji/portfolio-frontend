@@ -47,3 +47,6 @@
 @import "admin/admin.css";
 @import "admin/breadcrumbs.css";
 @import "admin/home/admin-home-stats.css";
+/*projects*/
+@import "admin/projects/projects.css";
+@import "admin/projects/add-project.css";

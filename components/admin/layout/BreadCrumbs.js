@@ -10,14 +10,14 @@ const BreadCrumbs = ({pageName, links}) => {
                 {links.map(link => {
                     if (!link.isPresent) {
                         return (
-                            <Link href={link.url} className="bread-crumb-link">
+                            <Link href={link.url} key={link.name} className="bread-crumb-link">
                                 <span className="link-name">{link.name}</span>
                                 <FaAngleRight className="bread-crumb-link-icon"/>
                             </Link>
                         )
                     }
                     return (
-                        <div className="bread-crumb-link">
+                        <div className="bread-crumb-link" key={link.name}>
                             <span className="link-name">{link.name}</span>
                         </div>
                     )
