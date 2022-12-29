@@ -1,3 +1,6 @@
+/*===================*\
+#ADMIN CSS
+\*===================*/
 .admin-header {
     height: 100px;
     position: fixed;
@@ -149,8 +152,6 @@
     padding-block: 100px 80px;
     min-height: 100vh;
     position: relative;
-    background: yellow;
-
 }
 
 .admin-footer {

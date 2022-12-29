@@ -43,4 +43,7 @@
 @import "custom-slick.css";
 
 /*admin*/
+@import "admin/global-admin.css";
 @import "admin/admin.css";
+@import "admin/breadcrumbs.css";
+@import "admin/home/admin-home-stats.css";

@@ -1,0 +1,32 @@
+/*===================*\
+#ADMIN STATS
+\*===================*/
+
+.stat-items-list {
+    display: grid;
+    gap: 20px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 10px;
+    cursor: pointer;
+    height: 100px;
+}
+
+.stat-item-icon {
+    font-size: 40px;
+    color: var(--accent);
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.stat-info span {
+    font-size: 30px;
+}
