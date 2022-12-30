@@ -1,13 +1,12 @@
 import React from 'react';
 import AdminLayout from "../../../components/admin/layout/AdminLayout";
 import BreadCrumbs from "../../../components/admin/layout/BreadCrumbs";
-import ArticlesList from "../../../components/admin/blog/ArticlesList";
+import AddArticleForm from "../../../components/admin/blog/AddArticleForm";
 
+const AddArticle = () => {
 
-
-const Index = () => {
     const breadCrumbData = {
-        pageName: 'Articles',
+        pageName: 'Add Article',
         links: [
             {
                 name: 'Home',
@@ -15,17 +14,23 @@ const Index = () => {
                 isPresent: false
             },
             {
-                name: 'All Articles',
+                name: 'Articles',
+                url: '/admin/blog',
+                isPresent: false
+            },
+            {
+                name: 'Add Article',
                 isPresent: true
             }
         ]
     }
+
     return (
         <AdminLayout>
             <BreadCrumbs {...breadCrumbData}/>
-            <ArticlesList/>
+            <AddArticleForm/>
         </AdminLayout>
     );
 };
 
-export default Index;
+export default AddArticle;

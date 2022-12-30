@@ -50,3 +50,6 @@
 /*projects*/
 @import "admin/projects/projects.css";
 @import "admin/projects/add-project.css";
+/*blog*/
+@import "admin/blog/articles-list.css";
+@import "admin/blog/add-article-form.css";

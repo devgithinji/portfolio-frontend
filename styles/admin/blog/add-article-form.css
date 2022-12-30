@@ -1,11 +1,13 @@
 /*-----------------------------------*\
-  #add project
+  #ADD ARTICLE
 \*-----------------------------------*/
-
-.add-project-form {
+.add-article-form {
     padding-inline: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+.add-article-form label {
+    text-transform: capitalize;
+}

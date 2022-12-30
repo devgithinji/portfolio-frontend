@@ -1,0 +1,31 @@
+/*-----------------------------------*\
+  #ARTICLES LIST
+\*-----------------------------------*/
+.admin-article-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+}
+
+.admin-article-item span:not(.article-tag) {
+    color: var(--accent);
+}
+
+.article-tag {
+    padding: 5px;
+    background: var(--accent);
+    width: max-content;
+    border-radius: var(--radius-10);
+}
+
+.admin-article-item-action-btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.admin-article-items {
+    display:grid;
+    gap: 10px;
+}

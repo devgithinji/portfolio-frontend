@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import FormInput from "../general/FormInput";
+import SelectInput from "../general/SelectInput";
+import FileInput from "../general/FileInput";
 
 const AddProjectForm = () => {
     const [name, setName] = useState('');
@@ -24,9 +26,9 @@ const AddProjectForm = () => {
                 <FormInput value={repoLink} setValue={setRepoLink} placeholder='Repo Link' id='repo-link'
                            name='Repo Link'
                            error={errors.repo_link}/>
-                <FormInput type="select" value={tags} setValue={setTags} id='category' options={options} name='Category'
-                           error={errors.category} multiselect={false}/>
-                <FormInput name="Image" setValue={setImage} value={image} type="file" id="image" error={errors.image}
+                <SelectInput type="select" value={tags} setValue={setTags} id='category' options={options} name='Category'
+                           error={errors.category} multiselect={true}/>
+                <FileInput name="Image" setValue={setImage} value={image} type="file" id="image" error={errors.image}
                            existingFile={existingFile}/>
                 <FormInput type='textarea' value={description} setValue={setDescription} placeholder='Description'
                            id='description' name='Description' error={errors.description}/>
