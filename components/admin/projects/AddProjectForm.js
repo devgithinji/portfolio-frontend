@@ -7,7 +7,11 @@ const AddProjectForm = () => {
     const [siteLink, setLink] = useState('');
     const [repoLink, setRepoLink] = useState('');
     const [tags, setTags] = useState([]);
+    const [image, setImage] = useState('')
+    const [existingFile, setExistingFile] = useState({url:''})
     const [errors, setErrors] = useState({})
+
+    const [isLoading, setLoading] = useState(false);
 
     const options = ["option one", "option two", "option three", "option four"]
     return (
@@ -20,9 +24,14 @@ const AddProjectForm = () => {
                 <FormInput value={repoLink} setValue={setRepoLink} placeholder='Repo Link' id='repo-link'
                            name='Repo Link'
                            error={errors.repo_link}/>
-                <FormInput type="select" value={tags} setValue={setTags} id='category' options={options} name='Category' error={errors.category} multiselect={true}/>
+                <FormInput type="select" value={tags} setValue={setTags} id='category' options={options} name='Category'
+                           error={errors.category} multiselect={false}/>
+                <FormInput name="Image" setValue={setImage} value={image} type="file" id="image" error={errors.image}
+                           existingFile={existingFile}/>
                 <FormInput type='textarea' value={description} setValue={setDescription} placeholder='Description'
                            id='description' name='Description' error={errors.description}/>
+                <button type="submit" className="form-btn"
+                        disabled={isLoading}>{isLoading ? 'Please wait..' : 'Add Project'}</button>
             </div>
         </div>
     );

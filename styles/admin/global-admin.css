@@ -67,6 +67,46 @@
 }
 
 .select-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     cursor: pointer;
+}
+
+.checkbox {
+    width: 30px;
+}
+
+.image-uploader {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-btn {
+    padding: 5px;
+    background: var(--accent);
+    border-radius: 5px;
+    width: max-content;
+}
+
+.image-container {
+    max-width: 200px;
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-10);
+}
+
+.image-container .img {
+    border-radius: var(--radius-10);
+}
+
+.form-btn {
+    padding: 5px;
+    background: var(--accent);
+    border-radius: 5px;
 }
 
