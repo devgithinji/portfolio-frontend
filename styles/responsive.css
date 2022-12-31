@@ -91,7 +91,7 @@
     /*custom property*/
     :root {
         /*typography*/
-
+        --fs-6: 1.7rem;
     }
 
     /*reused style*/
@@ -136,7 +136,7 @@
     }
 
     .header .container {
-        gap: 30px;
+        gap: 20px;
     }
 
 
@@ -230,6 +230,7 @@
         --fs-3: 3.9rem;
         --fs-4: 3.1rem;
         --fs-5: 2.0rem;
+        --fs-6: 1.8rem;
     }
 
     /*    reused style */

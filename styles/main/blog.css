@@ -32,14 +32,17 @@
 
 .blog-img {
     position: relative;
-    overflow: hidden;
-    height: 150px;
     border-top-left-radius: var(--radius-10);
     border-top-right-radius: var(--radius-10);
+    overflow: hidden;
 }
 
 .blog-img .img {
+    height: 200px;
+    object-position: center;
     transition: var(--transition);
+    border-top-left-radius: var(--radius-10);
+    border-top-right-radius: var(--radius-10);
 }
 
 .blog:is(:hover, :focus) .blog-img .img {

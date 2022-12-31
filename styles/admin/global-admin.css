@@ -114,13 +114,15 @@
 }
 
 .image-container {
-    max-width: 200px;
     border: 2px solid var(--accent);
     border-radius: var(--radius-10);
 }
 
 .image-container .img {
+    max-width: 200px;
+    max-height: 200px;
     border-radius: var(--radius-10);
+    object-fit: contain;
 }
 
 .form-btn {
@@ -129,5 +131,8 @@
     border-radius: 5px;
 }
 
+.rc-md-editor{
+    width: 100%;
+}
 
 

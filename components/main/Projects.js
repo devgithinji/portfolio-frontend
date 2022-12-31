@@ -44,7 +44,7 @@ const Projects = () => {
                         </div>
                     </div>
                     <div className="project">
-                        <img src="/images/project-three.png" className="img" alt="project three"/>
+                        <img src="/images/abt-me.png" className="img" alt="project three"/>
                         <div className="project-info">
                             <h3 className="card-title">Fitlife Gym Website</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab amet, corporis debitis

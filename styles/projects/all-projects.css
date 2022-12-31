@@ -16,9 +16,6 @@
     gap: 20px;
 }
 
-.project-item .image-holder {
-    height: 150px;
-}
 
 .image-holder .img {
     border-top-left-radius: var(--radius-10);
@@ -82,9 +79,6 @@
         border-radius: 0 var(--radius-10) var(--radius-10) 0;
     }
 
-    .project-item .image-holder {
-        height: 300px;
-    }
 
 
     .image-holder .img {
