@@ -30,3 +30,19 @@
 .stat-info span {
     font-size: 30px;
 }
+
+/*responsive*/
+
+@media screen and (min-width: 768px) {
+    .stat-items-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .stat-items-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

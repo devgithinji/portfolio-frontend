@@ -6,20 +6,16 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    right: 0;
     background: var(--white);
     box-shadow: var(--shadow-1);
     z-index: 3;
     display: flex;
-}
-
-.admin-header .container {
-    width: 100%;
-    display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row;
+    padding-inline: 15px;
 }
+
 
 .admin-header button {
     color: var(--accent);
@@ -154,6 +150,10 @@
     position: relative;
 }
 
+.admin-container {
+    padding-inline: 15px;
+}
+
 .admin-footer {
     position: absolute;
     bottom: 0;
@@ -167,4 +167,27 @@
 
 .admin-body {
     padding-bottom: 0;
+}
+
+
+
+/*responsive*/
+
+@media screen and (min-width: 992px) {
+    .admin-header {
+        justify-content: flex-end;
+    }
+
+    .admin-header, .admin-content {
+        margin-left: 200px;
+    }
+
+    .admin-header .open-nav-btn, .admin-nav .close-btn {
+        display: none;
+    }
+
+    .admin-nav {
+        transform: translateX(0);
+    }
+
 }

@@ -11,17 +11,15 @@ const Header = ({setNavActive}) => {
 
     return (
         <header className="admin-header">
-            <div className="container">
-                <button className="open-nav-btn" onClick={() => setNavActive(true)}>
-                    <FaBars/>
-                </button>
-                <div className="account">
-                    <div className="account-btn" onClick={showDropDown}>
-                        Dennis
-                        {isDropDownActive ? <FaCaretUp/> : <FaCaretDown/>}
-                    </div>
-                    <DropDown isDropDownActive={isDropDownActive} setDropDownActive={setDropDownActive}/>
+            <button className="open-nav-btn" onClick={() => setNavActive(true)}>
+                <FaBars/>
+            </button>
+            <div className="account">
+                <div className="account-btn" onClick={showDropDown}>
+                    Dennis
+                    {isDropDownActive ? <FaCaretUp/> : <FaCaretDown/>}
                 </div>
+                <DropDown isDropDownActive={isDropDownActive} setDropDownActive={setDropDownActive}/>
             </div>
         </header>
     );

@@ -22,3 +22,12 @@
     font-size: 20px;
     color: var(--accent);
 }
+
+/*responsive*/
+@media screen and (min-width: 768px) {
+    .bread-crumbs{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

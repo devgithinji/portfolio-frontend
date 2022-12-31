@@ -3,7 +3,7 @@ import React from 'react';
 const BodyContent = ({children}) => {
     return (
         <div className="admin-content">
-            <div className="container">
+            <div className="admin-container">
                 {children}
             </div>
             <footer className="admin-footer">

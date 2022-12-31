@@ -29,6 +29,7 @@
 
 .admin-form-item {
     gap: 5px;
+    max-width: 600px;
 }
 
 .admin-input {
@@ -129,6 +130,8 @@
     padding: 5px;
     background: var(--accent);
     border-radius: 5px;
+    max-width: 600px;
+    margin-top: 50px;
 }
 
 .rc-md-editor{
