@@ -53,3 +53,5 @@
 /*blog*/
 @import "admin/blog/articles-list.css";
 @import "admin/blog/add-article-form.css";
+/*form*/
+@import "admin/form.css";
