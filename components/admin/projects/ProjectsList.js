@@ -9,7 +9,7 @@ const ProjectsList = () => {
                     Add Project
                 </Link>
             </div>
-            <div className="admin-project-items">
+            <div className="admin-list-items">
                 <div className="admin-project-item card">
                     <h1 className="card-sub-title"><span>Title: </span>Project Title</h1>
                     <p className="link"><span>git link: </span>http://localhost:3000</p>
@@ -51,6 +51,105 @@ const ProjectsList = () => {
                     </div>
                 </div>
             </div>
+            <div className="card table-list">
+                <div className="admin-table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Title</th>
+                            <th>Photo</th>
+                            <th>Stack</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Lorem ipsum dolor.</td>
+                            <td>
+                                <img src="/images/project-two.png" alt="" className="img"/>
+                            </td>
+                            <td>Lorem ipsum</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
+                            <td>
+                                <div className="table-action-btns">
+                                    <button className="admin-btn admin-btn-accent">edit</button>
+                                    <button className="admin-btn admin-btn-accent">publish</button>
+                                    <button className="admin-btn admin-btn-danger">delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Lorem ipsum dolor.</td>
+                            <td>
+                                <img src="/images/project-two.png" alt="" className="img"/>
+                            </td>
+                            <td>Lorem ipsum</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
+                            <td>
+                                <div className="table-action-btns">
+                                    <button className="admin-btn admin-btn-accent">edit</button>
+                                    <button className="admin-btn admin-btn-accent">publish</button>
+                                    <button className="admin-btn admin-btn-danger">delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Lorem ipsum dolor.</td>
+                            <td>
+                                <img src="/images/project-two.png" alt="" className="img"/>
+                            </td>
+                            <td>Lorem ipsum</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
+                            <td>
+                                <div className="table-action-btns">
+                                    <button className="admin-btn admin-btn-accent">edit</button>
+                                    <button className="admin-btn admin-btn-accent">publish</button>
+                                    <button className="admin-btn admin-btn-danger">delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Lorem ipsum dolor.</td>
+                            <td>
+                                <img src="/images/project-two.png" alt="" className="img"/>
+                            </td>
+                            <td>Lorem ipsum</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
+                            <td>
+                                <div className="table-action-btns">
+                                    <button className="admin-btn admin-btn-accent">edit</button>
+                                    <button className="admin-btn admin-btn-accent">publish</button>
+                                    <button className="admin-btn admin-btn-danger">delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Lorem ipsum dolor.</td>
+                            <td>
+                                <img src="/images/project-two.png" alt="" className="img"/>
+                            </td>
+                            <td>Lorem ipsum</td>
+                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
+                            <td>
+                                <div className="table-action-btns">
+                                    <button className="admin-btn admin-btn-accent">edit</button>
+                                    <button className="admin-btn admin-btn-accent">publish</button>
+                                    <button className="admin-btn admin-btn-danger">delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     );
 };

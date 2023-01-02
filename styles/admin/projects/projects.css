@@ -1,11 +1,6 @@
 /*===================*\
 #ADMIN PROJECTS
 \*===================*/
-.admin-project-items {
-    display: grid;
-    gap: 10px;
-}
-
 .admin-project-item {
     padding: 10px;
     display: flex;

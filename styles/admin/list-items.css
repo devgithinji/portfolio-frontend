@@ -1,0 +1,67 @@
+.admin-list-items {
+    display: grid;
+    gap: 10px;
+}
+
+/*table items*/
+.table-list {
+    display: none;
+}
+
+.admin-table {
+    padding-block: 20px;
+    padding-inline: 10px;
+}
+
+.admin-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background: var(--primary-900);
+    color: var(--white);
+    padding-block: 12px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.table-action-btns {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.admin-table .img {
+    width: 100px;
+    border: 2px solid var(--accent);
+    border-radius: 5px;
+}
+
+/*responsive*/
+
+@media screen and (min-width: 768px) {
+    .table-list {
+        display: block;
+    }
+
+    .admin-list-items {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 992px) {
+
+}

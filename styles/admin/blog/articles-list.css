@@ -24,8 +24,3 @@
     justify-content: flex-end;
     gap: 10px;
 }
-
-.admin-article-items {
-    display:grid;
-    gap: 10px;
-}
