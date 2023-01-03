@@ -29,6 +29,7 @@
 @import "blog/navigation.css";
 @import "blog/all-blogs.css";
 @import "blog/other-blogs.css";
+@import "blog/article.css";
 
 /*projects*/
 @import "projects/hero.css";

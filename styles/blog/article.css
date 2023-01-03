@@ -1,0 +1,32 @@
+/*-----------------------------------*\
+  #ARTICLE CSS
+\*-----------------------------------*/
+.article-section {
+    background: var(--primary-200);
+}
+
+.article-title {
+    color: var(--accent);
+    text-align: center;
+}
+
+.category-label {
+    background: var(--accent-light);
+    width: max-content;
+    padding: 5px;
+    border-radius: var(--radius-10);
+}
+
+.article-section .container {
+    display: grid;
+    gap: 20px;
+}
+
+.live-link {
+    color: var(--accent);
+}
+
+.published-date {
+    font-style: italic;
+    font-weight: 500;
+}

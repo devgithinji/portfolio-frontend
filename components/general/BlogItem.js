@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const BlogItem = () => {
     return (
-        <Link href="" className="blog">
+        <Link href="/blog/slug" className="blog">
             <div className="blog-img">
                 <img src="/images/blog-one.png" className="img" alt="blog one"/>
                 <div className="date-posted">24th Jun 2022</div>
