@@ -10,7 +10,7 @@ const ProfileForm = () => {
     const [phone, setPhone] = useState('');
     const [personalStatement, setPersonalStatement] = useState('');
     const [socialMediaLinks, setSocialMediaLinks] = useState(['']);
-    const [skills, setSkills] = useState([]);
+    const [skills, setSkills] = useState(['']);
     const [resume, setResume] = useState('')
     const [isLoading, setLoading] = useState(false);
     const [errors, setErrors] = useState({});
@@ -22,7 +22,6 @@ const ProfileForm = () => {
         const updatedLinks = [...socialMediaLinks];
         updatedLinks[id] = value;
         setSocialMediaLinks(updatedLinks);
-        console.log(socialMediaLinks)
     }
 
     const addLink = (e) => {
@@ -37,8 +36,29 @@ const ProfileForm = () => {
         setSocialMediaLinks(links)
     }
 
+    // skills
+
+    const updateSkill = (e) => {
+        const id = e.target.id;
+        const value = e.target.value;
+        const updatedSkills = [...skills];
+        updatedSkills[id] = value;
+        setSkills(updatedSkills);
+    }
+
+    const addSkill = (e) => {
+        e.preventDefault();
+        setSkills([...skills, '']);
+    }
+
+    const removeSkill = (e, index) => {
+        e.preventDefault();
+        let skills = [...skills];
+        skills.splice(index, 1);
+        setSkills(skills)
+    }
     const handleSubmit = (e) => {
-      e.preventDefault();
+        e.preventDefault();
         console.log(socialMediaLinks)
     }
     return (
@@ -63,18 +83,19 @@ const ProfileForm = () => {
                     <FileInput name="Resume" setValue={setResume} value={resume} fileType="file" id="resume"
                                error={errors.resume}
                                existingFile={existingFile}/>
-                    <div className="social-media-links">
+                    <div className="dynamic-fields-container">
+                        <label htmlFor="">Add Social Media Links</label>
                         <button onClick={addLink} className="circle-btn" style={{marginBottom: "10px"}}>
                             <FaPlus/>
                         </button>
                         {socialMediaLinks.map((link, index) => {
                             return (
                                 <div key={index} className="dynamic-input-item">
-                                    <FormInput value={socialMediaLinks[index]} setValue={updateLink}
+                                    <FormInput value={link} setValue={updateLink}
                                                onChangeIsFunction={true}
                                                placeholder='Enter Link'
                                                id={index}
-                                               name='Link'/>
+                                               name='Social Media Link'/>
                                     <button onClick={(e) => removeLink(e, index)} className="circle-btn danger">
                                         <FaMinus/>
                                     </button>
@@ -82,8 +103,25 @@ const ProfileForm = () => {
                             )
                         })}
                     </div>
-                    <div className="skills">
-
+                    <div className="dynamic-fields-container">
+                        <label htmlFor="">Add Skills</label>
+                        <button onClick={addSkill} className="circle-btn" style={{marginBottom: "10px"}}>
+                            <FaPlus/>
+                        </button>
+                        {skills.map((skill, index) => {
+                            return (
+                                <div key={index} className="dynamic-input-item">
+                                    <FormInput value={skill} setValue={updateSkill}
+                                               onChangeIsFunction={true}
+                                               placeholder='Enter Skill'
+                                               id={index}
+                                               name='Skill'/>
+                                    <button onClick={(e) => removeSkill(e, index)} className="circle-btn danger">
+                                        <FaMinus/>
+                                    </button>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
                 <button type="submit" className="form-btn"
