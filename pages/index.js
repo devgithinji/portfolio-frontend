@@ -13,9 +13,10 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>Dennis Githinji</title>
-                <meta name="description" content="Dennis Githinji Portfolio"/>
+                <title>Dennis Githinji | Portfolio</title>
+                <meta name="description" content="Dennis Githinji Software Developer Portfolio"/>
                 <meta name="author" content="Dennis Githinji"/>
+                <meta name="keywords" content="Dennis, Githinji, Software Engineer, Java, JavaScript, React, Node Js"/>
                 <link rel="icon" type="image/x-icon" href="/images/dennis-githinji.png"/>
             </Head>
             <ClientSideLayout>
