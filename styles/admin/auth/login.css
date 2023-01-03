@@ -1,0 +1,49 @@
+.login-background {
+    background: var(--primary-500);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+}
+
+.login-background::after {
+    content: '';
+    background: var(--accent);
+    z-index: 10;
+    position: absolute;
+    width: 200px;
+    height: 400px;
+    top: -30%;
+    left: -10%;
+    border-radius: 80px;
+    transform: rotate(-45deg);
+}
+
+
+.login-background::before {
+    content: '';
+    background: var(--accent);
+    z-index: 10;
+    position: absolute;
+    width: 200px;
+    height: 400px;
+    bottom: -30%;
+    right: -10%;
+    border-radius: 80px;
+    transform: rotate(-45deg);
+}
+
+.login-form-container {
+    position: absolute;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    z-index: 12;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

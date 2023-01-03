@@ -115,3 +115,7 @@
     border-radius: var(--radius-10);
     background: var(--white);
 }
+
+.w-100 {
+    width: 100%;
+}

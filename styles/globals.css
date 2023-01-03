@@ -57,3 +57,5 @@
 @import "admin/form.css";
 @import "admin/list-items.css";
 @import "admin/settings/categories.css";
+/*login*/
+@import "admin/auth/login.css";
