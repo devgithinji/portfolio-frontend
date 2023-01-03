@@ -126,7 +126,7 @@ const ProfileForm = () => {
                 </div>
                 <button type="submit" className="form-btn"
                         disabled={isLoading}>
-                    {isLoading ? 'Please wait...' : 'Add Article'}
+                    {isLoading ? 'Please wait...' : 'Submit'}
                 </button>
             </form>
         </div>

@@ -1,0 +1,41 @@
+/*===================*\
+#CATEGORIES
+\*===================*/
+.categories-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-cat-btn {
+    margin-left: auto;
+}
+
+.categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-item {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    background: var(--accent-light);
+    padding: 5px;
+    border-radius: var(--radius-10);
+}
+
+.cat-btn {
+    width: 30px;
+    height: 30px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+    font-size: 10px;
+}
+
+.cat-danger {
+    background: red;
+}
