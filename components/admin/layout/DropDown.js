@@ -8,7 +8,7 @@ const DropDown = ({isDropDownActive, setDropDownActive}) => {
     return (
         <div className={isDropDownActive ? 'account-dropdown active' : 'account-dropdown'}
              onMouseLeave={() => setDropDownActive(false)}>
-            <Link href="" className="account-dropdown-link">
+            <Link href="/admin/profile" className="account-dropdown-link">
                             <span className="dropdown-icon">
                                 <FaUser/>
                             </span>
