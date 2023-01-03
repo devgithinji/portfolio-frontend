@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from "next/link";
-import Header from "../components/Header";
 import Hero from "../components/main/Hero";
 import AboutMe from "../components/main/aboutme/AboutMe";
 import Services from "../components/main/Services";
@@ -12,13 +11,21 @@ import ClientSideLayout from "../components/ClientSideLayout";
 
 export default function Home() {
     return (
-        <ClientSideLayout>
-            <Hero/>
-            <AboutMe/>
-            <Services/>
-            <Projects/>
-            <Blogs/>
-            <ContactMe/>
-        </ClientSideLayout>
+        <>
+            <Head>
+                <title>Dennis Githinji</title>
+                <meta name="description" content="Dennis Githinji Portfolio"/>
+                <meta name="author" content="Dennis Githinji"/>
+                <link rel="icon" type="image/x-icon" href="/images/dennis-githinji.png"/>
+            </Head>
+            <ClientSideLayout>
+                <Hero/>
+                <AboutMe/>
+                <Services/>
+                <Projects/>
+                <Blogs/>
+                <ContactMe/>
+            </ClientSideLayout>
+        </>
     )
 }
