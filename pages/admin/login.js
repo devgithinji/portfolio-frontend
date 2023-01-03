@@ -11,7 +11,7 @@ const Login = () => {
             <div className="login-background">
             </div>
             <div className="login-form-container card">
-                <h1 className="card-title" style={{fontWeight: '800', fontSize: '30px'}}>Admin</h1>
+                <h1 className="card-title login-title">Admin</h1>
                 <FormInput value={email} setValue={setEmail} placeholder='Email' id='email'
                            name='Email'
                            error={errors.email}/>

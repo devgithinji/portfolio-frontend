@@ -36,14 +36,26 @@
 }
 
 .login-form-container {
+    width: 90%;
     position: absolute;
     padding: 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items: center;
     z-index: 12;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.login-title {
+    font-weight: 800;
+    font-size: 30px;
+    align-self: center;
+}
+
+@media screen and (min-width: 575px) {
+    .login-form-container {
+        max-width: 350px;
+    }
 }
