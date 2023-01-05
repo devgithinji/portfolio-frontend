@@ -8,10 +8,8 @@ import {
     LOGIN,
     LOGIN_BEGIN,
     LOGIN_ERROR,
-    LOGOUT_USER,
-    SET_FORM_ERROR,
-    START_LOAD,
-    STOP_LOAD
+    LOGOUT_USER, SET_EDIT_PROJECT,
+    SET_FORM_ERROR, SET_NOT_FOUND, START_FORM_LOAD, START_PAGE_LOAD, STOP_FORM_LOAD, STOP_PAGE_LOAD,
 } from "./actions";
 import {toast} from "react-toastify";
 import {useRouter} from "next/router";
@@ -25,12 +23,15 @@ if (typeof window !== "undefined") {
 }
 
 const initialState = {
-    isLoading: false,
+    isFormLoading: false,
+    isPageLoading: false,
     user: user ? JSON.parse(user) : null,
     token: token,
     projects: [],
+    project: null,
     categories: [],
-    errors: {}
+    errors: {},
+    notFoundError: false
 }
 
 //create context
@@ -78,6 +79,38 @@ const AppProvider = ({children}) => {
         const {data} = await authFetch.get('/category');
         dispatch({type: LOAD_CATEGORIES, payload: data})
     }
+    //update project
+    const updateProject = async (projectDetails, projectId) => {
+        dispatch({type: START_FORM_LOAD})
+        try {
+            const {data} = await authFetch.put(`/projects/${projectId}`, projectDetails, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            });
+            toast.success('project updated successfully')
+            router.push('/admin/projects')
+        } catch (e) {
+            if (e.response.status === 422) {
+                const error = e.response.data.errors;
+                dispatch({type: SET_FORM_ERROR, payload: error})
+            }
+        }
+        dispatch({type: STOP_FORM_LOAD})
+    }
+    //get project
+    const getProject = async (projectId) => {
+        dispatch({type: START_PAGE_LOAD})
+        try {
+            const {data} = await authFetch.get(`/projects/${projectId}`)
+            dispatch({type: SET_EDIT_PROJECT, payload: data})
+        } catch (e) {
+            if (e.response.status === 404) {
+                dispatch({type: SET_NOT_FOUND, payload: true})
+            }
+        }
+        dispatch({type: STOP_PAGE_LOAD})
+    }
     //get projects
     const getProjects = async () => {
         const {data} = await authFetch.get('/projects');
@@ -86,23 +119,22 @@ const AppProvider = ({children}) => {
 
     //add projects
     const addProject = async (projectDetails) => {
-        dispatch({type: START_LOAD})
+        dispatch({type: START_FORM_LOAD})
         try {
             const {data} = await authFetch.post('/projects', projectDetails, {
                 headers: {
                     'content-type': 'multipart/form-data'
                 }
             });
-            dispatch({type: STOP_LOAD})
             toast.success('project added successfully')
             router.push('/admin/projects')
         } catch (e) {
-            dispatch({type: STOP_LOAD})
             if (e.response.status === 422) {
                 const error = e.response.data.errors;
                 dispatch({type: SET_FORM_ERROR, payload: error})
             }
         }
+        dispatch({type: STOP_FORM_LOAD})
     }
 
     const loginUser = async (userDetails) => {
@@ -149,7 +181,17 @@ const AppProvider = ({children}) => {
     }
     return (
         <AppContext.Provider
-            value={{...state, logoutUser, loginUser, addProject, getCategories, setFormError, getProjects}}>
+            value={{
+                ...state,
+                logoutUser,
+                loginUser,
+                addProject,
+                getCategories,
+                setFormError,
+                getProjects,
+                getProject,
+                updateProject
+            }}>
             {children}
         </AppContext.Provider>
     )

@@ -4,10 +4,10 @@ import {
     LOGIN,
     LOGIN_BEGIN,
     LOGIN_ERROR,
-    LOGOUT_USER,
-    SET_FORM_ERROR,
-    START_LOAD,
-    STOP_LOAD
+    LOGOUT_USER, SET_EDIT_PROJECT,
+    SET_FORM_ERROR, SET_NOT_FOUND, START_FORM_LOAD,
+    START_LOAD, START_PAGE_LOAD, STOP_FORM_LOAD,
+    STOP_LOAD, STOP_PAGE_LOAD
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -46,19 +46,39 @@ const reducer = (state, action) => {
         return {...state, projects: action.payload}
     }
 
+    if (action.type === SET_EDIT_PROJECT) {
+        return {...state, project: action.payload};
+    }
+
     if (action.type === SET_FORM_ERROR) {
         return {...state, errors: action.payload}
     }
 
-    if (action.type === START_LOAD) {
+    if (action.type === SET_NOT_FOUND) {
+        return {...state, notFoundError: action.payload}
+    }
+
+    if (action.type === START_PAGE_LOAD) {
         return {
-            ...state, isLoading: true
+            ...state, isPageLoading: true
         }
     }
 
-    if (action.type === STOP_LOAD) {
+    if (action.type === STOP_PAGE_LOAD) {
         return {
-            ...state, isLoading: false
+            ...state, isPageLoading: false
+        }
+    }
+
+    if (action.type === START_FORM_LOAD) {
+        return {
+            ...state, isFormLoading: true
+        }
+    }
+
+    if (action.type === STOP_FORM_LOAD) {
+        return {
+            ...state, isFormLoading: false
         }
     }
 

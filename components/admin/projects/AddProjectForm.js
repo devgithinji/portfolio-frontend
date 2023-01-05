@@ -7,18 +7,58 @@ import {useRouter} from "next/router";
 
 const AddProjectForm = () => {
     const router = useRouter();
-    const {isLoading, addProject, getCategories, categories, errors, setFormError} = useAppContext();
+    const {
+        isFormLoading,
+        isPageLoading,
+        addProject,
+        updateProject,
+        getCategories,
+        categories,
+        errors,
+        setFormError,
+        getProject,
+        project,
+        notFoundError
+    } = useAppContext();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [siteLink, setLink] = useState('');
     const [repoLink, setRepoLink] = useState('');
     const [tags, setTags] = useState([]);
     const [image, setImage] = useState('')
-    const [existingFile, setExistingFile] = useState({url: ''})
+    const [existingFile, setExistingFile] = useState('')
+    const [isEditing, setIsEditing] = useState(false);
+
 
     useEffect(() => {
         getCategories();
     }, [])
+
+    useEffect(() => {
+        if (project) {
+            const {description, image, name, repoLink, siteLink, tags} = project;
+            setName(name)
+            setDescription(description)
+            setLink(siteLink)
+            setRepoLink(repoLink)
+            setExistingFile(image)
+            const newTags = tags.map(tag => tag.name)
+            setTags(newTags)
+        }
+    }, [project])
+
+    const fetchProject = async projectId => {
+        setIsEditing(true)
+        await getProject(projectId);
+    };
+
+    const projectId = router.query.projectId;
+
+    useEffect(() => {
+        if (projectId) {
+            fetchProject(projectId);
+        }
+    }, [projectId])
 
     const validateInputs = () => {
         if (!name) {
@@ -40,7 +80,7 @@ const AddProjectForm = () => {
             return false;
         }
 
-        if (!image) {
+        if (!isEditing && !image) {
             setFormError({image: 'image is required'})
             return false;
         }
@@ -63,37 +103,60 @@ const AddProjectForm = () => {
             data.append('repoLink', repoLink)
             data.append('tags[]', tags)
             data.append('description', description)
-            data.append('image', image)
 
-            addProject(data);
+            if (isEditing) {
+                if(image){
+                    data.append('image', image)
+                }
+                updateProject(data, projectId)
+            } else {
+                data.append('image', image)
+                addProject(data);
+            }
         }
     }
+
+    const form = (
+        <form className="form-container" action="" onSubmit={handleSubmit}>
+            <div className="inputs-container">
+                <FormInput value={name} setValue={setName} placeholder='Name' id='name' name='Name'
+                           error={errors.name}/>
+                <FormInput value={siteLink} setValue={setLink} placeholder='Site Link' id='site-link'
+                           name='Site Link'
+                           error={errors.siteLink}/>
+                <FormInput value={repoLink} setValue={setRepoLink} placeholder='Repo Link' id='repo-link'
+                           name='Repo Link'
+                           error={errors.repoLink}/>
+                <SelectInput type="select" value={tags} setValue={setTags} id='category' options={categories}
+                             name='Category'
+                             error={errors.tags} multiselect={true}/>
+                <FileInput name="Image" setValue={setImage} value={image} type="file" id="image"
+                           error={errors.image}
+                           existingFile={existingFile}/>
+                <FormInput type='textarea' value={description} setValue={setDescription} placeholder='Description'
+                           id='description' name='Description' error={errors.description}/>
+            </div>
+            <button type="submit" className="form-btn"
+                    disabled={isFormLoading}>{isFormLoading ? 'Please wait..' : isEditing ? 'Edit Project' : 'Add Project'}</button>
+        </form>
+    )
+
+    const noProjectFound = (
+        <div style={{textAlign: 'center', fontSize: '25px'}}>
+            <p> no project found</p>
+        </div>
+    )
+
+    const loading = (
+        <div style={{textAlign: 'center', fontSize: '25px'}}>
+            <p>please wait</p>
+        </div>
+    )
 
 
     return (
         <div className="admin-section card">
-            <form className="form-container" action="" onSubmit={handleSubmit}>
-                <div className="inputs-container">
-                    <FormInput value={name} setValue={setName} placeholder='Name' id='name' name='Name'
-                               error={errors.name}/>
-                    <FormInput value={siteLink} setValue={setLink} placeholder='Site Link' id='site-link'
-                               name='Site Link'
-                               error={errors.siteLink}/>
-                    <FormInput value={repoLink} setValue={setRepoLink} placeholder='Repo Link' id='repo-link'
-                               name='Repo Link'
-                               error={errors.repoLink}/>
-                    <SelectInput type="select" value={tags} setValue={setTags} id='category' options={categories}
-                                 name='Category'
-                                 error={errors.tags} multiselect={true}/>
-                    <FileInput name="Image" setValue={setImage} value={image} type="file" id="image"
-                               error={errors.image}
-                               existingFile={existingFile}/>
-                    <FormInput type='textarea' value={description} setValue={setDescription} placeholder='Description'
-                               id='description' name='Description' error={errors.description}/>
-                </div>
-                <button type="submit" className="form-btn"
-                        disabled={isLoading}>{isLoading ? 'Please wait..' : 'Add Project'}</button>
-            </form>
+            {isPageLoading ? loading : notFoundError ? noProjectFound : form}
         </div>
     );
 };

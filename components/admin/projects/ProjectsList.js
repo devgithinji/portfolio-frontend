@@ -26,7 +26,7 @@ const ProjectsList = () => {
                                 <p className="link"><span>Repo link: </span>{project.repoLink}</p>
                                 <p className="link"><span>project link: </span>{project.siteLink}</p>
                                 <div className="admin-project-item-action-btns">
-                                    <button className="admin-btn admin-btn-accent">edit</button>
+                                    <Link href={`/admin/projects/${project.id}`} className="admin-btn admin-btn-accent">edit</Link>
                                     <button className="admin-btn admin-btn-accent">publish</button>
                                     <button className="admin-btn admin-btn-danger">delete</button>
                                 </div>
@@ -62,7 +62,7 @@ const ProjectsList = () => {
                                     <td>{project.description.substring(0, 30)}...</td>
                                     <td>
                                         <div className="table-action-btns">
-                                            <button className="admin-btn admin-btn-accent">edit</button>
+                                            <Link href={`/admin/projects/${project.id}`} className="admin-btn admin-btn-accent">edit</Link>
                                             <button className="admin-btn admin-btn-accent">publish</button>
                                             <button className="admin-btn admin-btn-danger">delete</button>
                                         </div>
