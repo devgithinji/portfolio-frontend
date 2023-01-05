@@ -31,7 +31,7 @@ const FileInput = ({fileType = "image", name, existingFile, id, error, setValue}
                 <label htmlFor={id} className="upload-btn">Select {fileType === 'image' ? 'image' : 'file'}</label>
             </div>
             <input type="file" id={id} accept={acceptType} className="file-input" onChange={fileHandler}/>
-            {error && <span className="form-error">error</span>}
+            {error && <span className="form-error">{error}</span>}
         </div>
     );
 };

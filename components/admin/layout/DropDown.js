@@ -1,8 +1,11 @@
 import React, {useEffect} from 'react';
 import Link from "next/link";
 import {FaLock, FaPowerOff, FaUser} from "react-icons/fa";
+import {useAppContext} from "../../../context/appContext";
 
 const DropDown = ({isDropDownActive, setDropDownActive}) => {
+
+    const {logoutUser} = useAppContext();
 
 
     return (
@@ -20,12 +23,12 @@ const DropDown = ({isDropDownActive, setDropDownActive}) => {
                             </span>
                 Change Password
             </Link>
-            <Link href="" className="account-dropdown-link">
+            <div onClick={logoutUser} className="account-dropdown-link">
                             <span className="dropdown-icon">
                                 <FaPowerOff/>
                             </span>
                 Logout
-            </Link>
+            </div>
         </div>
     );
 };

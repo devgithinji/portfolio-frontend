@@ -1,7 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Link from "next/link";
+import {useAppContext} from "../../../context/appContext";
 
 const ProjectsList = () => {
+    const {getProjects, projects} = useAppContext();
+
+    useEffect(() => {
+        getProjects();
+    }, [])
+
+
     return (
         <div className="admin-section">
             <div className="add-btn-container card">
@@ -10,46 +18,22 @@ const ProjectsList = () => {
                 </Link>
             </div>
             <div className="admin-list-items">
-                <div className="admin-project-item card">
-                    <h1 className="card-sub-title"><span>Title: </span>Project Title</h1>
-                    <p className="link"><span>git link: </span>http://localhost:3000</p>
-                    <p className="link"><span>project link: </span>http://localhost:3000</p>
-                    <div className="admin-project-item-action-btns">
-                        <button className="admin-btn admin-btn-accent">edit</button>
-                        <button className="admin-btn admin-btn-accent">publish</button>
-                        <button className="admin-btn admin-btn-danger">delete</button>
-                    </div>
-                </div>
-                <div className="admin-project-item card">
-                    <h1 className="card-sub-title"><span>Title: </span>Project Title</h1>
-                    <p className="link"><span>git link: </span>http://localhost:3000</p>
-                    <p className="link"><span>project link: </span>http://localhost:3000</p>
-                    <div className="admin-project-item-action-btns">
-                        <button className="admin-btn admin-btn-accent">edit</button>
-                        <button className="admin-btn admin-btn-accent">publish</button>
-                        <button className="admin-btn admin-btn-danger">delete</button>
-                    </div>
-                </div>
-                <div className="admin-project-item card">
-                    <h1 className="card-sub-title"><span>Title: </span>Project Title</h1>
-                    <p className="link"><span>git link: </span>http://localhost:3000</p>
-                    <p className="link"><span>project link: </span>http://localhost:3000</p>
-                    <div className="admin-project-item-action-btns">
-                        <button className="admin-btn admin-btn-accent">edit</button>
-                        <button className="admin-btn admin-btn-accent">publish</button>
-                        <button className="admin-btn admin-btn-danger">delete</button>
-                    </div>
-                </div>
-                <div className="admin-project-item card">
-                    <h1 className="card-sub-title"><span>Title: </span>Project Title</h1>
-                    <p className="link"><span>git link: </span>http://localhost:3000</p>
-                    <p className="link"><span>project link: </span>http://localhost:3000</p>
-                    <div className="admin-project-item-action-btns">
-                        <button className="admin-btn admin-btn-accent">edit</button>
-                        <button className="admin-btn admin-btn-accent">publish</button>
-                        <button className="admin-btn admin-btn-danger">delete</button>
-                    </div>
-                </div>
+                {
+                    projects.map((project, index) => {
+                        return (
+                            <div className="admin-project-item card" key={project.id}>
+                                <h1 className="card-sub-title"><span>Title: </span>{project.title}</h1>
+                                <p className="link"><span>Repo link: </span>{project.repoLink}</p>
+                                <p className="link"><span>project link: </span>{project.siteLink}</p>
+                                <div className="admin-project-item-action-btns">
+                                    <button className="admin-btn admin-btn-accent">edit</button>
+                                    <button className="admin-btn admin-btn-accent">publish</button>
+                                    <button className="admin-btn admin-btn-danger">delete</button>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
             </div>
             <div className="card table-list">
                 <div className="admin-table">
@@ -65,86 +49,27 @@ const ProjectsList = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor.</td>
-                            <td>
-                                <img src="/images/project-two.png" alt="" className="img"/>
-                            </td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
-                            <td>
-                                <div className="table-action-btns">
-                                    <button className="admin-btn admin-btn-accent">edit</button>
-                                    <button className="admin-btn admin-btn-accent">publish</button>
-                                    <button className="admin-btn admin-btn-danger">delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor.</td>
-                            <td>
-                                <img src="/images/project-two.png" alt="" className="img"/>
-                            </td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
-                            <td>
-                                <div className="table-action-btns">
-                                    <button className="admin-btn admin-btn-accent">edit</button>
-                                    <button className="admin-btn admin-btn-accent">publish</button>
-                                    <button className="admin-btn admin-btn-danger">delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor.</td>
-                            <td>
-                                <img src="/images/project-two.png" alt="" className="img"/>
-                            </td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
-                            <td>
-                                <div className="table-action-btns">
-                                    <button className="admin-btn admin-btn-accent">edit</button>
-                                    <button className="admin-btn admin-btn-accent">publish</button>
-                                    <button className="admin-btn admin-btn-danger">delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor.</td>
-                            <td>
-                                <img src="/images/project-two.png" alt="" className="img"/>
-                            </td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
-                            <td>
-                                <div className="table-action-btns">
-                                    <button className="admin-btn admin-btn-accent">edit</button>
-                                    <button className="admin-btn admin-btn-accent">publish</button>
-                                    <button className="admin-btn admin-btn-danger">delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor.</td>
-                            <td>
-                                <img src="/images/project-two.png" alt="" className="img"/>
-                            </td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
-                            <td>
-                                <div className="table-action-btns">
-                                    <button className="admin-btn admin-btn-accent">edit</button>
-                                    <button className="admin-btn admin-btn-accent">publish</button>
-                                    <button className="admin-btn admin-btn-danger">delete</button>
-                                </div>
-                            </td>
-                        </tr>
+                        {projects.map((project, index) => {
+                            const tags = project.tags.map(project => project.name);
+                            return (
+                                <tr key={project.id}>
+                                    <td>{index + 1}</td>
+                                    <td>{project.name}</td>
+                                    <td>
+                                        <img src={project.image} alt="" className="img"/>
+                                    </td>
+                                    <td>{tags.join(', ')}</td>
+                                    <td>{project.description.substring(0, 30)}...</td>
+                                    <td>
+                                        <div className="table-action-btns">
+                                            <button className="admin-btn admin-btn-accent">edit</button>
+                                            <button className="admin-btn admin-btn-accent">publish</button>
+                                            <button className="admin-btn admin-btn-danger">delete</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        })}
                         </tbody>
                     </table>
                 </div>

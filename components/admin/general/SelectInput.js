@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {FaAngleDown, FaAngleUp} from "react-icons/fa";
 
-const SelectInput = ({value,  multiselect = false, setValue, id, name, error, options}) => {
+const SelectInput = ({value, multiselect = false, setValue, id, name, error, options}) => {
     const [isDropDownOpen, setDropDownOpen] = useState(false)
 
     const selectHandler = (e) => {
@@ -25,28 +25,29 @@ const SelectInput = ({value,  multiselect = false, setValue, id, name, error, op
 
     }
 
+
     return (
         <div className="form-item admin-form-item">
             <label htmlFor={id}>{name}</label>
             <div className="select-container">
                 <div className="select-btn" onClick={() => setDropDownOpen(!isDropDownOpen)}>
-                    Select Category
+                    {value.length > 0 ? value.join(', ') : 'Select Category'}
                     {isDropDownOpen ? <FaAngleUp/> : <FaAngleDown/>}
                 </div>
                 <div className={isDropDownOpen ? 'options-container active' : 'options-container'}>
                     {options.map(option => {
-                        const isChecked = value.findIndex(val => val === option) !== -1;
+                        const isChecked = value.findIndex(val => val === option.name) !== -1;
                         return (
-                            <div className="select-option" key={option}>
-                                <input type="checkbox" id={option} value={option} onChange={selectHandler}
+                            <div className="select-option" key={option.id}>
+                                <input type="checkbox" id={option.id} value={option.name} onChange={selectHandler}
                                        checked={isChecked} className="checkbox"/>
-                                <label htmlFor={option}>{option}</label>
+                                <label htmlFor={option.id}>{option.name}</label>
                             </div>
                         )
                     })}
                 </div>
             </div>
-            {error && <span className="form-error">error</span>}
+            {error && <span className="form-error">{error}</span>}
         </div>
     );
 };

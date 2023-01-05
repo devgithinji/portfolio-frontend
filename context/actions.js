@@ -1,0 +1,10 @@
+export const LOGIN = 'LOGIN'
+export const LOGIN_BEGIN = 'LOGIN_BEGIN'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
+
+export const LOGOUT_USER = 'LOGOUT_USER'
+export const START_LOAD = 'START_LOAD'
+export const STOP_LOAD = 'STOP_LOAD'
+export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
+export const SET_FORM_ERROR = 'SET_FORM_ERROR'
+export const GET_PROJECTS = 'GET_PROJECTS'
