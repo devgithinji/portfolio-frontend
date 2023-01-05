@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useAppContext} from "../../../context/appContext";
 
 const ProjectsList = () => {
-    const {getProjects, projects} = useAppContext();
+    const {getProjects, projects, deleteProject} = useAppContext();
 
     useEffect(() => {
         getProjects();
@@ -26,7 +26,8 @@ const ProjectsList = () => {
                                 <p className="link"><span>Repo link: </span>{project.repoLink}</p>
                                 <p className="link"><span>project link: </span>{project.siteLink}</p>
                                 <div className="admin-project-item-action-btns">
-                                    <Link href={`/admin/projects/${project.id}`} className="admin-btn admin-btn-accent">edit</Link>
+                                    <Link href={`/admin/projects/${project.id}`}
+                                          className="admin-btn admin-btn-accent">edit</Link>
                                     <button className="admin-btn admin-btn-accent">publish</button>
                                     <button className="admin-btn admin-btn-danger">delete</button>
                                 </div>
@@ -62,9 +63,12 @@ const ProjectsList = () => {
                                     <td>{project.description.substring(0, 30)}...</td>
                                     <td>
                                         <div className="table-action-btns">
-                                            <Link href={`/admin/projects/${project.id}`} className="admin-btn admin-btn-accent">edit</Link>
+                                            <Link href={`/admin/projects/${project.id}`}
+                                                  className="admin-btn admin-btn-accent">edit</Link>
                                             <button className="admin-btn admin-btn-accent">publish</button>
-                                            <button className="admin-btn admin-btn-danger">delete</button>
+                                            <button className="admin-btn admin-btn-danger"
+                                                    onClick={() => deleteProject(project.id)}>delete
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>

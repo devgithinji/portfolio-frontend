@@ -3,6 +3,7 @@ import {createContext, useContext, useEffect, useReducer} from "react";
 import reducer from "./reducer";
 import axios from "axios";
 import {
+    DELETE_PROJECT,
     GET_PROJECTS,
     LOAD_CATEGORIES,
     LOGIN,
@@ -78,6 +79,16 @@ const AppProvider = ({children}) => {
     const getCategories = async () => {
         const {data} = await authFetch.get('/category');
         dispatch({type: LOAD_CATEGORIES, payload: data})
+    }
+    //delete project
+    const deleteProject = async (projectId) => {
+        try {
+            const {data} = await authFetch.delete(`/projects/${projectId}`);
+            dispatch({type: DELETE_PROJECT, payload: projectId})
+            toast.success(data);
+        } catch (e) {
+            toast.error(e.response.data.error);
+        }
     }
     //update project
     const updateProject = async (projectDetails, projectId) => {
@@ -190,7 +201,8 @@ const AppProvider = ({children}) => {
                 setFormError,
                 getProjects,
                 getProject,
-                updateProject
+                updateProject,
+                deleteProject
             }}>
             {children}
         </AppContext.Provider>

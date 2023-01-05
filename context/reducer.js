@@ -1,4 +1,5 @@
 import {
+    DELETE_PROJECT,
     GET_PROJECTS,
     LOAD_CATEGORIES,
     LOGIN,
@@ -48,6 +49,11 @@ const reducer = (state, action) => {
 
     if (action.type === SET_EDIT_PROJECT) {
         return {...state, project: action.payload};
+    }
+
+    if (action.type === DELETE_PROJECT) {
+        const projects = state.projects.filter(project => project.id !== action.payload)
+        return {...state, projects}
     }
 
     if (action.type === SET_FORM_ERROR) {
