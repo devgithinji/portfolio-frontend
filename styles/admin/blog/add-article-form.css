@@ -13,23 +13,44 @@
 }
 
 
-.sec-html li{
+.sec-html li {
     list-style: unset;
 }
 
-.sec-html th{
+.sec-html th {
     color: unset;
 }
 
-.editor-header{
-    display: flex;
-    justify-content: space-between;
+
+.article-img {
+    height: 100px;
+    width: 200px;
+    object-fit: contain;
+    cursor: pointer;
 }
 
+.images-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.image-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 
 @media screen and (min-width: 992px) {
     .article-editor-container {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image-item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 20px;
     }
 }

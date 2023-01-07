@@ -6,6 +6,8 @@ import {useAppContext} from "../../../context/appContext";
 import Editor from "react-markdown-editor-lite";
 import ReactMarkdown from "react-markdown";
 import MarkdownIt from "markdown-it";
+import {FaTrash} from "react-icons/fa";
+import {toast} from "react-toastify";
 
 
 const AddArticleForm = () => {
@@ -19,7 +21,8 @@ const AddArticleForm = () => {
         addPost,
         getPost,
         post,
-        uploadImage
+        uploadImage,
+        deleteImage
     } = useAppContext();
 
     const mdEditor = useRef(null);
@@ -83,6 +86,19 @@ const AddArticleForm = () => {
         callback(result)
     }
 
+    const deleteImg = (imageId) => {
+        deleteImage(imageId)
+    }
+
+    const copyImage = async (imagepath) => {
+        try {
+            await navigator.clipboard.writeText(imagepath);
+            toast('Image link copied')
+        } catch (e) {
+            toast.error('Image link not copied')
+        }
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -100,10 +116,27 @@ const AddArticleForm = () => {
                                error={errors.title}/>
                     <SelectInput type="select" value={tags} setValue={setTags} id='category' options={categories}
                                  name='Category' error={errors.category} multiselect={false}/>
-                    {post &&
+                    {isEditing &&
                         (
                             <div className="blog-input">
                                 <label htmlFor="content">Article Content</label>
+                                {post && (
+                                    <div className="images-list">
+                                        <div>Images</div>
+                                        {post.images && post.images.map(image => {
+                                            return (
+                                                <div key={image.id} className="image-item">
+                                                    <img onClick={() => copyImage(image.path)} src={image.path} alt=""
+                                                         className="article-img"/>
+                                                    <button type="button" className="admin-btn admin-btn-accent"
+                                                            onClick={() => deleteImg(image.id)}>delete
+                                                    </button>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                )
+                                }
                                 <Editor
                                     ref={mdEditor}
                                     style={{

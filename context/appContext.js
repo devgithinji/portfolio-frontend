@@ -3,6 +3,8 @@ import {createContext, useContext, useEffect, useReducer} from "react";
 import reducer from "./reducer";
 import axios from "axios";
 import {
+    ADD_IMAGE,
+    DELETE_IMAGE,
     DELETE_PROJECT, GET_POSTS,
     GET_PROJECTS,
     LOAD_CATEGORIES,
@@ -60,7 +62,7 @@ const AppProvider = ({children}) => {
     authFetch.interceptors.response.use((response) => {
         return response;
     }, (error) => {
-        if(error.code === 'ERR_NETWORK'){
+        if (error.code === 'ERR_NETWORK') {
             toast.error('something went wrong')
             return Promise.reject(error);
         }
@@ -85,17 +87,30 @@ const AppProvider = ({children}) => {
         const {data} = await authFetch.get('/category');
         dispatch({type: LOAD_CATEGORIES, payload: data})
     }
+    //delete image
+    const deleteImage = async (imageId) => {
+        try {
+            const {data} = await authFetch.delete(`image/${imageId}`);
+            toast.success(data)
+            dispatch({type: DELETE_IMAGE, payload: imageId})
+        } catch (e) {
+
+        }
+    }
     //upload post image
     const uploadImage = async (formData) => {
         try {
-            const {data: {path}} = await authFetch.post(`/image`, formData, {
+            const {data} = await authFetch.post(`/image`, formData, {
                 headers: {
                     'content-type': 'multipart/form-data'
                 }
             });
+
             toast.success('image updated successfully')
 
-            return path;
+            dispatch({type: ADD_IMAGE, payload: data})
+
+            return data.path;
         } catch (e) {
             if (e.response.status === 422) {
                 const error = e.response.data.errors;
@@ -183,7 +198,7 @@ const AppProvider = ({children}) => {
         try {
             const {data} = await authFetch.get('/projects');
             dispatch({type: GET_PROJECTS, payload: data})
-        }catch (e) {
+        } catch (e) {
             console.log(e)
         }
     }
@@ -266,7 +281,8 @@ const AppProvider = ({children}) => {
                 addPost,
                 getPosts,
                 getPost,
-                uploadImage
+                uploadImage,
+                deleteImage
             }}>
             {children}
         </AppContext.Provider>

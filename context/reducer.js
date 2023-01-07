@@ -1,4 +1,6 @@
 import {
+    ADD_IMAGE,
+    DELETE_IMAGE,
     DELETE_PROJECT, GET_POSTS,
     GET_PROJECTS,
     LOAD_CATEGORIES,
@@ -8,7 +10,7 @@ import {
     LOGOUT_USER, SET_EDIT_PROJECT,
     SET_FORM_ERROR, SET_NOT_FOUND, SET_POST, START_FORM_LOAD,
     START_PAGE_LOAD, STOP_FORM_LOAD,
-     STOP_PAGE_LOAD
+    STOP_PAGE_LOAD
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -63,6 +65,23 @@ const reducer = (state, action) => {
 
     if (action.type === SET_POST) {
         return {...state, post: action.payload}
+    }
+
+    if (action.type === ADD_IMAGE) {
+        const image = action.payload;
+        const post = state.post;
+        const images = state.post.images;
+        const newImages = [...images, image]
+
+        return {...state, post: {...post, images: newImages}}
+    }
+
+    if (action.type === DELETE_IMAGE) {
+        const imageId = action.payload;
+        const post = state.post;
+        const images = state.post.images.filter(img => img.id !== imageId);
+
+        return {...state, post: {...post, images}}
     }
 
     if (action.type === SET_FORM_ERROR) {
