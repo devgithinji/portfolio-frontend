@@ -3,7 +3,7 @@ import {createContext, useContext, useEffect, useReducer} from "react";
 import reducer from "./reducer";
 import axios from "axios";
 import {
-    ADD_IMAGE,
+    ADD_IMAGE, CLEAR_POST,
     DELETE_IMAGE,
     DELETE_PROJECT, GET_POSTS,
     GET_PROJECTS,
@@ -140,9 +140,10 @@ const AppProvider = ({children}) => {
     const updatePost = async (postDetails, postId) => {
         dispatch({type: START_FORM_LOAD})
         try {
-            const {data} = await authFetch.post(`/posts/${postId}`, postDetails);
+            const {data} = await authFetch.put(`/posts/${postId}`, postDetails);
             toast.success('post updated successfully')
-            router.push('/admin/blog')
+            await router.push('/admin/blog')
+            dispatch({type: CLEAR_POST})
         } catch (e) {
             if (e.response.status === 422) {
                 const error = e.response.data.errors;

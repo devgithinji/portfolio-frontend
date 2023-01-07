@@ -1,5 +1,5 @@
 import {
-    ADD_IMAGE,
+    ADD_IMAGE, CLEAR_POST,
     DELETE_IMAGE,
     DELETE_PROJECT, GET_POSTS,
     GET_PROJECTS,
@@ -65,6 +65,10 @@ const reducer = (state, action) => {
 
     if (action.type === SET_POST) {
         return {...state, post: action.payload}
+    }
+
+    if (action.type === CLEAR_POST) {
+        return {...state, post: {}}
     }
 
     if (action.type === ADD_IMAGE) {

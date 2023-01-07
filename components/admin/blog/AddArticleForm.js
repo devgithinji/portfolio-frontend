@@ -34,18 +34,15 @@ const AddArticleForm = () => {
         deleteImage
     } = useAppContext();
 
-    const mdEditor = useRef(null);
+    let mdEditor;
     const router = useRouter();
     const [title, setTitle] = useState('');
     const [tags, setTags] = useState([]);
     const [content, setContent] = useState('')
     const [isEditing, setIsEditing] = useState(false);
-    // Initialize a markdown parser
+    // Initialize a mark down parser
     const mdParser = new MarkdownIt({
-        html: true,
-        linkify: true,
-        typographer: true,
-        highlight: function (str, lang) {
+        html: true, linkify: true, typographer: true, highlight: function (str, lang) {
             if (lang && hljs.getLanguage(lang)) {
                 try {
                     return hljs.highlight(lang, str).value
@@ -65,6 +62,7 @@ const AddArticleForm = () => {
         .use(mark)
         .use(tasklists)
     const postIdRef = useRef();
+    const contentRef = useRef();
 
 
     useEffect(() => {
@@ -83,7 +81,7 @@ const AddArticleForm = () => {
     useEffect(() => {
         if (post) {
             setTitle(post.title)
-            setTags(post.tag.name)
+            setTags([post.tag.name])
             setContent(post.content ? post.content : '')
             postIdRef.current = post.id
         }
@@ -97,13 +95,16 @@ const AddArticleForm = () => {
         }
 
         if (!tags[0]) {
-            setFormError({title: 'category is required'})
+            setFormError({category: 'category is required'})
             return false;
         }
 
-        if (isEditing && !content) {
-            setFormError({content: 'content is required'})
-            return false;
+        if (isEditing) {
+            const articleContent = mdEditor.getMdValue();
+            if (!articleContent) {
+                setFormError({content: 'content is required'})
+                return false;
+            }
         }
 
         return true;
@@ -111,6 +112,7 @@ const AddArticleForm = () => {
 
     const handleChange = ({html, md}) => {
         setContent(md);
+        contentRef.current = md
     }
 
 
@@ -138,75 +140,66 @@ const AddArticleForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const isValid = validateForm();
 
         if (!isValid) return;
 
         if (isEditing) {
-            updatePost({title, tag: tags[0], content})
+            const articleContent = mdEditor.getMdValue();
+            const data = {title, tag: tags[0], content: articleContent};
+            updatePost(data, postIdRef.current)
         } else {
-            addPost({title, tag: tags[0]});
+            const data = {title, tag: tags[0]};
+            addPost(data);
         }
     }
 
-    return (
-        <div className="admin-section card">
-            <form className="form-container" action="" onSubmit={handleSubmit}>
-                <div className="inputs-container">
-                    <FormInput value={title} setValue={setTitle} placeholder='Title' id='title' name='Title'
-                               error={errors.title}/>
-                    <SelectInput type="select" value={tags} setValue={setTags} id='category' options={categories}
-                                 name='Category' error={errors.category} multiselect={false}/>
-                    {isEditing &&
-                        (
-                            <div className="blog-input">
-                                <label htmlFor="content">Article Content</label>
-                                {post && (
-                                    <div className="images-list">
-                                        <div>Images</div>
-                                        {post.images && post.images.map(image => {
-                                            return (
-                                                <div key={image.id} className="image-item">
-                                                    <img onClick={() => copyImage(image.path)} src={image.path} alt=""
-                                                         className="article-img"/>
-                                                    <button type="button" className="admin-btn admin-btn-accent"
-                                                            onClick={() => deleteImg(image.id)}>delete
-                                                    </button>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                )
-                                }
-                                <Editor
-                                    ref={mdEditor}
-                                    style={{
-                                        minHeight: "500px"
-                                    }}
-                                    config={{
-                                        view: {
-                                            menu: true,
-                                            md: true,
-                                            html: false
-                                        }
-                                    }}
-                                    onImageUpload={onImageUpload}
-                                    onChange={handleChange}
-                                    value={content}
-                                    renderHTML={text => mdParser.render(text)}
-                                />
-                                {errors && <span className="form-error">{errors.content}</span>}
-                            </div>
-                        )
-                    }
-                </div>
-                <button type="submit" className="form-btn"
-                        disabled={isFormLoading}>
-                    {isFormLoading ? 'Please wait...' : isEditing ? 'Edit Article' : 'Add Article'}
-                </button>
-            </form>
-        </div>
-    );
+    return (<div className="admin-section card">
+        <form className="form-container" action="" onSubmit={handleSubmit}>
+            <div className="inputs-container">
+                <FormInput value={title} setValue={setTitle} placeholder='Title' id='title' name='Title'
+                           error={errors.title}/>
+                <SelectInput type="select" value={tags} setValue={setTags} id='category' options={categories}
+                             name='Category' error={errors.category} multiselect={false}/>
+                {isEditing && (<div className="blog-input">
+                    <label htmlFor="content">Article Content</label>
+                    {post && (<div className="images-list">
+                        <div>Images</div>
+                        {post.images && post.images.map(image => {
+                            return (<div key={image.id} className="image-item">
+                                <img onClick={() => copyImage(image.path)} src={image.path} alt=""
+                                     className="article-img"/>
+                                <button type="button" className="admin-btn admin-btn-accent"
+                                        onClick={() => deleteImg(image.id)}>delete
+                                </button>
+                            </div>)
+                        })}
+                    </div>)}
+                    <Editor
+                        ref={node => mdEditor = node}
+                        style={{
+                            minHeight: "500px"
+                        }}
+                        config={{
+                            view: {
+                                menu: true, md: true, html: false
+                            }
+                        }}
+                        onImageUpload={onImageUpload}
+                        onChange={handleChange}
+                        value={content}
+                        renderHTML={text => mdParser.render(text)}
+                    />
+                    {errors && <span className="form-error">{errors.content}</span>}
+                </div>)}
+            </div>
+            <button type="submit" className="form-btn"
+                    disabled={isFormLoading}>
+                {isFormLoading ? 'Please wait...' : isEditing ? 'Edit Article' : 'Add Article'}
+            </button>
+        </form>
+    </div>);
 };
 
 export default AddArticleForm;
