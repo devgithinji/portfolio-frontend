@@ -1,13 +1,35 @@
 import React, {useEffect} from 'react';
 import Link from "next/link";
 import {useAppContext} from "../../../context/appContext";
+import {confirmAlert} from 'react-confirm-alert';
 
 const ProjectsList = () => {
-    const {getPosts, posts} = useAppContext();
+    const {getPosts, posts, deletePost} = useAppContext();
 
     useEffect(() => {
         getPosts();
     }, [])
+
+    const deletePst = (postId) => {
+        confirmAlert({
+            title: 'Confirm to delete',
+            message: 'Are you sure to delete post?',
+            closeOnClickOutside: true,
+            closeOnEscape: true,
+            overlayClassName: "custom-overlay",
+            buttons: [
+                {
+                    label: 'Delete',
+                    onClick: () => deletePost(postId)
+                },
+                {
+                    label: 'No'
+                }
+            ]
+        });
+    };
+
+
     return (
         <div className="admin-section">
             <div className="add-btn-container card">
@@ -27,7 +49,8 @@ const ProjectsList = () => {
                                 </p>
                                 <span className="article-tag">{post.tag.name}</span>
                                 <div className="admin-article-item-action-btns">
-                                    <Link href={`/admin/blog/${post.id}`} className="admin-btn admin-btn-accent">edit</Link>
+                                    <Link href={`/admin/blog/${post.id}`}
+                                          className="admin-btn admin-btn-accent">edit</Link>
                                     <button className="admin-btn admin-btn-accent">publish</button>
                                     <button className="admin-btn admin-btn-danger">delete</button>
                                 </div>
@@ -58,9 +81,12 @@ const ProjectsList = () => {
                                     <td>{post.content?.substring(0, 20)}</td>
                                     <td>
                                         <div className="table-action-btns">
-                                            <Link href={`/admin/blog/${post.id}`} className="admin-btn admin-btn-accent">edit</Link>
+                                            <Link href={`/admin/blog/${post.id}`}
+                                                  className="admin-btn admin-btn-accent">edit</Link>
                                             <button className="admin-btn admin-btn-accent">publish</button>
-                                            <button className="admin-btn admin-btn-danger">delete</button>
+                                            <button className="admin-btn admin-btn-danger"
+                                                    onClick={() => deletePst(post.id)}>delete
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>

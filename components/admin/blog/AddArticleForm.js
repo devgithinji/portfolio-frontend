@@ -81,7 +81,7 @@ const AddArticleForm = () => {
     useEffect(() => {
         if (post) {
             setTitle(post.title)
-            setTags([post.tag.name])
+            setTags([post.tag?.name])
             setContent(post.content ? post.content : '')
             postIdRef.current = post.id
         }

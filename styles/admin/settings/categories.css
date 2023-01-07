@@ -39,3 +39,22 @@
 .cat-danger {
     background: red;
 }
+
+.edit-category-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.edit-category-modal h1 {
+    font-size: 20px;
+    text-align: center;
+}
+
+.category-modal-btns {
+    display: flex;
+    justify-content: space-between;
+}

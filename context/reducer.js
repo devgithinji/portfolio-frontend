@@ -1,6 +1,7 @@
 import {
-    ADD_IMAGE, CLEAR_POST,
-    DELETE_IMAGE,
+    ADD_CATEGORY,
+    ADD_IMAGE, CLEAR_POST, DELETE_CATEGORY,
+    DELETE_IMAGE, DELETE_POST,
     DELETE_PROJECT, GET_POSTS,
     GET_PROJECTS,
     LOAD_CATEGORIES,
@@ -10,7 +11,7 @@ import {
     LOGOUT_USER, SET_EDIT_PROJECT,
     SET_FORM_ERROR, SET_NOT_FOUND, SET_POST, START_FORM_LOAD,
     START_PAGE_LOAD, STOP_FORM_LOAD,
-    STOP_PAGE_LOAD
+    STOP_PAGE_LOAD, UPDATE_CATEGORY
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -45,6 +46,29 @@ const reducer = (state, action) => {
         return {...state, categories: action.payload}
     }
 
+    if (action.type === ADD_CATEGORY) {
+        const categories = state.categories;
+        const newCategories = [...categories, action.payload]
+        return {...state, categories: newCategories}
+    }
+
+    if (action.type === UPDATE_CATEGORY) {
+        const data = action.payload;
+        const categories = state.categories;
+        const newCategories = categories.map(cat => {
+            if (cat.id === data.id) {
+                return data;
+            }
+            return cat;
+        });
+        return {...state, categories: newCategories}
+    }
+    if (action.type === DELETE_CATEGORY) {
+        const categories = state.categories;
+        const newCategories = categories.filter(cat => cat.id !== action.payload);
+        return {...state, categories: newCategories}
+    }
+
     if (action.type === GET_PROJECTS) {
         return {...state, projects: action.payload}
     }
@@ -65,6 +89,10 @@ const reducer = (state, action) => {
 
     if (action.type === SET_POST) {
         return {...state, post: action.payload}
+    }
+    if (action.type === DELETE_POST) {
+        const posts = state.posts.filter(post => post.id !== action.payload)
+        return {...state, posts}
     }
 
     if (action.type === CLEAR_POST) {

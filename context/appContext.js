@@ -1,21 +1,33 @@
-//set default state
-import {createContext, useContext, useEffect, useReducer} from "react";
+import {createContext, useContext, useReducer} from "react";
 import reducer from "./reducer";
 import axios from "axios";
 import {
-    ADD_IMAGE, CLEAR_POST,
+    ADD_CATEGORY,
+    ADD_IMAGE,
+    CLEAR_POST, DELETE_CATEGORY,
     DELETE_IMAGE,
-    DELETE_PROJECT, GET_POSTS,
+    DELETE_POST,
+    DELETE_PROJECT,
+    GET_POSTS,
     GET_PROJECTS,
     LOAD_CATEGORIES,
     LOGIN,
     LOGIN_BEGIN,
     LOGIN_ERROR,
-    LOGOUT_USER, SET_EDIT_PROJECT,
-    SET_FORM_ERROR, SET_NOT_FOUND, SET_POST, START_FORM_LOAD, START_PAGE_LOAD, STOP_FORM_LOAD, STOP_PAGE_LOAD,
+    LOGOUT_USER,
+    SET_EDIT_PROJECT,
+    SET_FORM_ERROR,
+    SET_NOT_FOUND,
+    SET_POST,
+    START_FORM_LOAD,
+    START_PAGE_LOAD,
+    STOP_FORM_LOAD,
+    STOP_PAGE_LOAD, UPDATE_CATEGORY
 } from "./actions";
 import {toast} from "react-toastify";
 import {useRouter} from "next/router";
+
+//set default state
 
 let user = null;
 let token = null;
@@ -83,9 +95,42 @@ const AppProvider = ({children}) => {
     })
 
 
+    //get categories
     const getCategories = async () => {
         const {data} = await authFetch.get('/category');
         dispatch({type: LOAD_CATEGORIES, payload: data})
+    }
+    //add category
+    const addCategory = async (catData) => {
+        try {
+            const {data} = await authFetch.post('/category', catData);
+            dispatch({type: ADD_CATEGORY, payload: data})
+            toast.success('category added')
+            return data;
+        } catch (e) {
+
+        }
+    }
+    //update category
+    const updateCategory = async (catData, catId) => {
+        try {
+            const {data} = await authFetch.put(`/category/${catId}`, catData)
+            toast.success('category updated')
+            dispatch({type: UPDATE_CATEGORY, payload: data})
+            return data;
+        } catch (e) {
+
+        }
+    }
+    //delete category
+    const deleteCategory = async (catId) => {
+        try {
+            const {data} = await authFetch.delete(`/category/${catId}`)
+            toast.success(data)
+            dispatch({type: DELETE_CATEGORY, payload: catId})
+        } catch (e) {
+
+        }
     }
     //delete image
     const deleteImage = async (imageId) => {
@@ -136,6 +181,16 @@ const AppProvider = ({children}) => {
         const {data} = await authFetch.get('/posts');
         dispatch({type: GET_POSTS, payload: data})
     }
+    //delete post
+    const deletePost = async (postId) => {
+        try {
+            const {data} = await authFetch.delete(`/posts/${postId}`);
+            dispatch({type: DELETE_POST, payload: postId})
+            toast.success(data);
+        } catch (e) {
+            toast.error(e.response.data.error);
+        }
+    }
     //update post
     const updatePost = async (postDetails, postId) => {
         dispatch({type: START_FORM_LOAD})
@@ -143,7 +198,7 @@ const AppProvider = ({children}) => {
             const {data} = await authFetch.put(`/posts/${postId}`, postDetails);
             toast.success('post updated successfully')
             await router.push('/admin/blog')
-            dispatch({type: CLEAR_POST})
+            dispatch({type: CLEAR_POST, payload: postId})
         } catch (e) {
             if (e.response.status === 422) {
                 const error = e.response.data.errors;
@@ -218,7 +273,6 @@ const AppProvider = ({children}) => {
             console.log(e)
         }
     }
-
     //add projects
     const addProject = async (projectDetails) => {
         dispatch({type: START_FORM_LOAD})
@@ -238,7 +292,6 @@ const AppProvider = ({children}) => {
         }
         dispatch({type: STOP_FORM_LOAD})
     }
-
     const loginUser = async (userDetails) => {
         dispatch({type: LOGIN_BEGIN})
         try {
@@ -261,26 +314,22 @@ const AppProvider = ({children}) => {
 
         }
     }
-
-
     const setFormError = (error) => {
         dispatch({type: SET_FORM_ERROR, payload: error})
     }
-
     const logoutUser = () => {
         dispatch({type: LOGOUT_USER})
         removeUserFromLocalStorage();
     }
-
     const addUserToLocalStorage = ({user, token}) => {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", token)
     }
-
     const removeUserFromLocalStorage = () => {
         localStorage.removeItem("user")
         localStorage.removeItem("token")
     }
+
     return (
         <AppContext.Provider
             value={{
@@ -288,7 +337,9 @@ const AppProvider = ({children}) => {
                 logoutUser,
                 loginUser,
                 addProject,
+                addCategory,
                 getCategories,
+                deleteCategory,
                 setFormError,
                 getProjects,
                 getProject,
@@ -299,7 +350,9 @@ const AppProvider = ({children}) => {
                 getPosts,
                 getPost,
                 uploadImage,
-                deleteImage
+                deleteImage,
+                updateCategory,
+                deletePost
             }}>
             {children}
         </AppContext.Provider>
