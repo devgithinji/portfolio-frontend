@@ -1,5 +1,5 @@
 import React from 'react';
-import {FaCog, FaFile, FaFileCode, FaHome, FaTimes} from "react-icons/fa";
+import {FaBriefcase, FaCog, FaFile, FaFileCode, FaHome, FaTimes, FaUserGraduate} from "react-icons/fa";
 import Link from "next/link";
 import {useRouter} from "next/router";
 
@@ -23,6 +23,12 @@ const Navbar = ({isNavActive, setNavActive}) => {
                 </Link>
                 <Link href="/admin/blog" className={router.pathname === "/admin/blog" ? 'nav-link active' : 'nav-link'}>
                     <FaFile className="link-icon"/> Blogs
+                </Link>
+                <Link href="/admin/education" className={router.pathname === "/admin/education" ? 'nav-link active' : 'nav-link'}>
+                    <FaUserGraduate className="link-icon"/> Education
+                </Link>
+                <Link href="/admin/work" className={router.pathname === "/admin/work" ? 'nav-link active' : 'nav-link'}>
+                    <FaBriefcase className="link-icon"/> Work
                 </Link>
                 <Link href="/admin/settings" className={router.pathname === "/admin/settings" ? 'nav-link active' : 'nav-link'}>
                     <FaCog className="link-icon"/> Settings
