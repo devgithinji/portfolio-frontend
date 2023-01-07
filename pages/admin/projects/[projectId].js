@@ -9,7 +9,7 @@ const EditProject = () => {
         links: [
             {
                 name: 'Home',
-                url: '/',
+                url: '/admin',
                 isPresent: false
             },
             {

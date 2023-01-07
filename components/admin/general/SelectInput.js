@@ -31,12 +31,17 @@ const SelectInput = ({value, multiselect = false, setValue, id, name, error, opt
             <label htmlFor={id}>{name}</label>
             <div className="select-container">
                 <div className="select-btn" onClick={() => setDropDownOpen(!isDropDownOpen)}>
-                    {value.length > 0 ? value.join(', ') : 'Select Category'}
+                    {multiselect ? value.length > 0 ? value.join(', ') : 'Select Category' : value ? value : 'Select Category'}
                     {isDropDownOpen ? <FaAngleUp/> : <FaAngleDown/>}
                 </div>
                 <div className={isDropDownOpen ? 'options-container active' : 'options-container'}>
                     {options.map(option => {
-                        const isChecked = value.findIndex(val => val === option.name) !== -1;
+                        let isChecked;
+                        if(multiselect){
+                             isChecked = value.findIndex(val => val === option.name) !== -1;
+                        }else{
+                            isChecked = value === option.name
+                        }
                         return (
                             <div className="select-option" key={option.id}>
                                 <input type="checkbox" id={option.id} value={option.name} onChange={selectHandler}

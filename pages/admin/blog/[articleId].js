@@ -6,7 +6,7 @@ import AddArticleForm from "../../../components/admin/blog/AddArticleForm";
 const AddArticle = () => {
 
     const breadCrumbData = {
-        pageName: 'Add Article',
+        pageName: 'Edit Article',
         links: [
             {
                 name: 'Home',
@@ -19,7 +19,7 @@ const AddArticle = () => {
                 isPresent: false
             },
             {
-                name: 'Add Article',
+                name: 'Edit Article',
                 isPresent: true
             }
         ]

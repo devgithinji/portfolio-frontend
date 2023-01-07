@@ -1,42 +1,133 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import FormInput from "../general/FormInput";
 import SelectInput from "../general/SelectInput";
-import dynamic from "next/dynamic";
-import MarkdownIt from 'markdown-it';
+import {useRouter} from "next/router";
+import {useAppContext} from "../../../context/appContext";
+import Editor from "react-markdown-editor-lite";
+import ReactMarkdown from "react-markdown";
+import MarkdownIt from "markdown-it";
+
 
 const AddArticleForm = () => {
-    const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
-        ssr: false,
-    });
+    const {
+        getCategories,
+        categories,
+        setFormError,
+        errors,
+        isFormLoading,
+        isPageLoading,
+        addPost,
+        getPost,
+        post,
+        uploadImage
+    } = useAppContext();
+
+    const mdEditor = useRef(null);
+    const router = useRouter();
     const [title, setTitle] = useState('');
     const [tags, setTags] = useState([]);
-    const [errors, setErrors] = useState({})
-    const [isLoading, setLoading] = useState(false);
-    const options = ["option one", "option two", "option three", "option four"]
-
+    const [content, setContent] = useState('')
+    const [isEditing, setIsEditing] = useState(false);
+    // Initialize a markdown parser
     const mdParser = new MarkdownIt(/* Markdown-it options */);
+    const postIdRef = useRef();
 
-    const handleEditorChange = ({html, text}) => {
-        console.log('handleEditorChange', html, text);
-    };
+
+    useEffect(() => {
+        getCategories()
+    }, [])
+
+
+    useEffect(() => {
+        const articleId = router.query.articleId;
+        if (articleId) {
+            setIsEditing(true);
+            getPost(articleId);
+        }
+    }, [router])
+
+    useEffect(() => {
+        if (post) {
+            setTitle(post.title)
+            setTags(post.tag.name)
+            setContent(post.content ? post.content : '')
+            postIdRef.current = post.id
+        }
+    }, [post])
+
+
+    const validateForm = () => {
+        if (!title) {
+            setFormError({title: 'title is required'})
+            return false;
+        }
+
+        if (!tags[0]) {
+            setFormError({title: 'category is required'})
+            return false;
+        }
+
+        return true;
+    }
+
+    const handleChange = ({html, md}) => {
+        setContent(md);
+    }
+
+
+    const onImageUpload = async (file, callback) => {
+        const formData = new FormData();
+        formData.append("postId", postIdRef.current)
+        formData.append("image", file);
+        const result = await uploadImage(formData);
+        callback(result)
+    }
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const isValid = validateForm();
+        if (isValid) {
+            addPost({title, tag: tags[0]});
+        }
+    }
 
     return (
         <div className="admin-section card">
-            <form className="form-container" action="">
+            <form className="form-container" action="" onSubmit={handleSubmit}>
                 <div className="inputs-container">
-                    <FormInput value={title} setValue={setTitle} placeholder='Title' id='title' name='title'
-                               error={errors.name}/>
-                    <SelectInput type="select" value={tags} setValue={setTags} id='category' options={options}
+                    <FormInput value={title} setValue={setTitle} placeholder='Title' id='title' name='Title'
+                               error={errors.title}/>
+                    <SelectInput type="select" value={tags} setValue={setTags} id='category' options={categories}
                                  name='Category' error={errors.category} multiselect={false}/>
-                    <div className="form-item admin-form-item blog-input">
-                        <label htmlFor="content">Article Content</label>
-                        <MdEditor style={{height: '500px'}} renderHTML={text => mdParser.render(text)}
-                                  onChange={handleEditorChange}/>
-                    </div>
+                    {post &&
+                        (
+                            <div className="blog-input">
+                                <label htmlFor="content">Article Content</label>
+                                <Editor
+                                    ref={mdEditor}
+                                    style={{
+                                        minHeight: "500px"
+                                    }}
+                                    config={{
+                                        view: {
+                                            menu: true,
+                                            md: true,
+                                            html: false
+                                        }
+                                    }}
+                                    onImageUpload={onImageUpload}
+                                    onChange={handleChange}
+                                    value={content}
+                                    renderHTML={(text) => mdParser.render(text)}
+                                />
+                            </div>
+                        )
+                    }
                 </div>
                 <button type="submit" className="form-btn"
-                        disabled={isLoading}>
-                    {isLoading ? 'Please wait...' : 'Add Article'}
+                        disabled={isFormLoading}>
+                    {isFormLoading ? 'Please wait...' : isEditing ? 'Edit Article' : 'Add Article'}
                 </button>
             </form>
         </div>

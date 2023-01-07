@@ -155,6 +155,8 @@
 
     .blog-input {
         grid-column: 1/3;
+        display: grid;
+        gap: 10px;
     }
 }
 

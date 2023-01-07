@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Link from "next/link";
+import {useAppContext} from "../../../context/appContext";
 
 const ProjectsList = () => {
+    const {getPosts, posts} = useAppContext();
+
+    useEffect(() => {
+        getPosts();
+    }, [])
     return (
         <div className="admin-section">
             <div className="add-btn-container card">
@@ -10,76 +16,25 @@ const ProjectsList = () => {
                 </Link>
             </div>
             <div className="admin-list-items">
-                <div className="admin-article-item card">
-                    <h1 className="card-sub-title"><span>Title: </span>Blog Title</h1>
-                    <p>
-                        <span>Description: </span>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit.
-                    </p>
-                    <span className="article-tag">spring boot</span>
-                    <div className="admin-article-item-action-btns">
-                        <button className="admin-btn admin-btn-accent">edit</button>
-                        <button className="admin-btn admin-btn-accent">publish</button>
-                        <button className="admin-btn admin-btn-danger">delete</button>
-                    </div>
-                </div>
-                <div className="admin-article-item card">
-                    <h1 className="card-sub-title"><span>Title: </span>Blog Title</h1>
-                    <p>
-                        <span>Description: </span>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit.
-                    </p>
-                    <span className="article-tag">spring boot</span>
-                    <div className="admin-article-item-action-btns">
-                        <button className="admin-btn admin-btn-accent">edit</button>
-                        <button className="admin-btn admin-btn-accent">publish</button>
-                        <button className="admin-btn admin-btn-danger">delete</button>
-                    </div>
-                </div>
-                <div className="admin-article-item card">
-                    <h1 className="card-sub-title"><span>Title: </span>Blog Title</h1>
-                    <p>
-                        <span>Description: </span>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit.
-                    </p>
-                    <span className="article-tag">spring boot</span>
-                    <div className="admin-article-item-action-btns">
-                        <button className="admin-btn admin-btn-accent">edit</button>
-                        <button className="admin-btn admin-btn-accent">publish</button>
-                        <button className="admin-btn admin-btn-danger">delete</button>
-                    </div>
-                </div>
-                <div className="admin-article-item card">
-                    <h1 className="card-sub-title"><span>Title: </span>Blog Title</h1>
-                    <p>
-                        <span>Description: </span>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit.
-                    </p>
-                    <span className="article-tag">spring boot</span>
-                    <div className="admin-article-item-action-btns">
-                        <button className="admin-btn admin-btn-accent">edit</button>
-                        <button className="admin-btn admin-btn-accent">publish</button>
-                        <button className="admin-btn admin-btn-danger">delete</button>
-                    </div>
-                </div>
-                <div className="admin-article-item card">
-                    <h1 className="card-sub-title"><span>Title: </span>Blog Title</h1>
-                    <p>
-                        <span>Description: </span>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit.
-                    </p>
-                    <span className="article-tag">spring boot</span>
-                    <div className="admin-article-item-action-btns">
-                        <button className="admin-btn admin-btn-accent">edit</button>
-                        <button className="admin-btn admin-btn-accent">publish</button>
-                        <button className="admin-btn admin-btn-danger">delete</button>
-                    </div>
-                </div>
+                {
+                    posts.map((post, index) => {
+                        return (
+                            <div className="admin-article-item card" key={post.id}>
+                                <h1 className="card-sub-title"><span>Title: </span>{post.title}</h1>
+                                <p>
+                                    <span>Description: </span>
+                                    {post.content?.substring(0, 20)}
+                                </p>
+                                <span className="article-tag">{post.tag.name}</span>
+                                <div className="admin-article-item-action-btns">
+                                    <Link href={`/admin/blog/${post.id}`} className="admin-btn admin-btn-accent">edit</Link>
+                                    <button className="admin-btn admin-btn-accent">publish</button>
+                                    <button className="admin-btn admin-btn-danger">delete</button>
+                                </div>
+                            </div>
+                        )
+                    })
+                }
             </div>
             <div className="card table-list">
                 <div className="admin-table">
@@ -94,71 +49,23 @@ const ProjectsList = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor.</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
-                            <td>
-                                <div className="table-action-btns">
-                                    <button className="admin-btn admin-btn-accent">edit</button>
-                                    <button className="admin-btn admin-btn-accent">publish</button>
-                                    <button className="admin-btn admin-btn-danger">delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor.</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
-                            <td>
-                                <div className="table-action-btns">
-                                    <button className="admin-btn admin-btn-accent">edit</button>
-                                    <button className="admin-btn admin-btn-accent">publish</button>
-                                    <button className="admin-btn admin-btn-danger">delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor.</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
-                            <td>
-                                <div className="table-action-btns">
-                                    <button className="admin-btn admin-btn-accent">edit</button>
-                                    <button className="admin-btn admin-btn-accent">publish</button>
-                                    <button className="admin-btn admin-btn-danger">delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor.</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
-                            <td>
-                                <div className="table-action-btns">
-                                    <button className="admin-btn admin-btn-accent">edit</button>
-                                    <button className="admin-btn admin-btn-accent">publish</button>
-                                    <button className="admin-btn admin-btn-danger">delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Lorem ipsum dolor.</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, perspiciatis.</td>
-                            <td>
-                                <div className="table-action-btns">
-                                    <button className="admin-btn admin-btn-accent">edit</button>
-                                    <button className="admin-btn admin-btn-accent">publish</button>
-                                    <button className="admin-btn admin-btn-danger">delete</button>
-                                </div>
-                            </td>
-                        </tr>
+                        {posts.map((post, index) => {
+                            return (
+                                <tr key={post.id}>
+                                    <td>{index + 1}</td>
+                                    <td>{post.title}</td>
+                                    <td>{post.tag.name}</td>
+                                    <td>{post.content?.substring(0, 20)}</td>
+                                    <td>
+                                        <div className="table-action-btns">
+                                            <Link href={`/admin/blog/${post.id}`} className="admin-btn admin-btn-accent">edit</Link>
+                                            <button className="admin-btn admin-btn-accent">publish</button>
+                                            <button className="admin-btn admin-btn-danger">delete</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        })}
                         </tbody>
                     </table>
                 </div>

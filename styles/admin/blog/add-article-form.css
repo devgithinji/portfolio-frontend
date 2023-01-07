@@ -11,3 +11,25 @@
 .add-article-form label {
     text-transform: capitalize;
 }
+
+
+.sec-html li{
+    list-style: unset;
+}
+
+.sec-html th{
+    color: unset;
+}
+
+.editor-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+@media screen and (min-width: 992px) {
+    .article-editor-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

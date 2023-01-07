@@ -9,7 +9,7 @@ const AddProject = () => {
         links: [
             {
                 name: 'Home',
-                url: '/',
+                url: '/admin',
                 isPresent: false
             },
             {

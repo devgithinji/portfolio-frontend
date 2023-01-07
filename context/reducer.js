@@ -1,14 +1,14 @@
 import {
-    DELETE_PROJECT,
+    DELETE_PROJECT, GET_POSTS,
     GET_PROJECTS,
     LOAD_CATEGORIES,
     LOGIN,
     LOGIN_BEGIN,
     LOGIN_ERROR,
     LOGOUT_USER, SET_EDIT_PROJECT,
-    SET_FORM_ERROR, SET_NOT_FOUND, START_FORM_LOAD,
-    START_LOAD, START_PAGE_LOAD, STOP_FORM_LOAD,
-    STOP_LOAD, STOP_PAGE_LOAD
+    SET_FORM_ERROR, SET_NOT_FOUND, SET_POST, START_FORM_LOAD,
+    START_PAGE_LOAD, STOP_FORM_LOAD,
+     STOP_PAGE_LOAD
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -54,6 +54,15 @@ const reducer = (state, action) => {
     if (action.type === DELETE_PROJECT) {
         const projects = state.projects.filter(project => project.id !== action.payload)
         return {...state, projects}
+    }
+
+    if (action.type === GET_POSTS) {
+        const {posts} = action.payload
+        return {...state, posts: posts}
+    }
+
+    if (action.type === SET_POST) {
+        return {...state, post: action.payload}
     }
 
     if (action.type === SET_FORM_ERROR) {

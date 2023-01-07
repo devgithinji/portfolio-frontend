@@ -29,7 +29,9 @@ const ProjectsList = () => {
                                     <Link href={`/admin/projects/${project.id}`}
                                           className="admin-btn admin-btn-accent">edit</Link>
                                     <button className="admin-btn admin-btn-accent">publish</button>
-                                    <button className="admin-btn admin-btn-danger">delete</button>
+                                    <button className="admin-btn admin-btn-danger"
+                                            onClick={() => deleteProject(project.id)}>delete
+                                    </button>
                                 </div>
                             </div>
                         )
@@ -78,7 +80,6 @@ const ProjectsList = () => {
                     </table>
                 </div>
             </div>
-
         </div>
     );
 };

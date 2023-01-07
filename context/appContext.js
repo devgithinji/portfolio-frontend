@@ -3,14 +3,14 @@ import {createContext, useContext, useEffect, useReducer} from "react";
 import reducer from "./reducer";
 import axios from "axios";
 import {
-    DELETE_PROJECT,
+    DELETE_PROJECT, GET_POSTS,
     GET_PROJECTS,
     LOAD_CATEGORIES,
     LOGIN,
     LOGIN_BEGIN,
     LOGIN_ERROR,
     LOGOUT_USER, SET_EDIT_PROJECT,
-    SET_FORM_ERROR, SET_NOT_FOUND, START_FORM_LOAD, START_PAGE_LOAD, STOP_FORM_LOAD, STOP_PAGE_LOAD,
+    SET_FORM_ERROR, SET_NOT_FOUND, SET_POST, START_FORM_LOAD, START_PAGE_LOAD, STOP_FORM_LOAD, STOP_PAGE_LOAD,
 } from "./actions";
 import {toast} from "react-toastify";
 import {useRouter} from "next/router";
@@ -30,6 +30,8 @@ const initialState = {
     token: token,
     projects: [],
     project: null,
+    posts: [],
+    post: null,
     categories: [],
     errors: {},
     notFoundError: false
@@ -58,7 +60,10 @@ const AppProvider = ({children}) => {
     authFetch.interceptors.response.use((response) => {
         return response;
     }, (error) => {
-        console.log(error)
+        if(error.code === 'ERR_NETWORK'){
+            toast.error('something went wrong')
+            return Promise.reject(error);
+        }
         const status = error.response.status;
         if (status === 401) {
             logoutUser();
@@ -79,6 +84,57 @@ const AppProvider = ({children}) => {
     const getCategories = async () => {
         const {data} = await authFetch.get('/category');
         dispatch({type: LOAD_CATEGORIES, payload: data})
+    }
+    //upload post image
+    const uploadImage = async (formData) => {
+        try {
+            const {data: {path}} = await authFetch.post(`/image`, formData, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            });
+            toast.success('image updated successfully')
+
+            return path;
+        } catch (e) {
+            if (e.response.status === 422) {
+                const error = e.response.data.errors;
+                toast.error(error)
+            }
+        }
+    }
+    //get post
+    const getPost = async (postId) => {
+        dispatch({type: START_PAGE_LOAD})
+        try {
+            const {data} = await authFetch.get(`/posts/admin/${postId}`)
+            dispatch({type: SET_POST, payload: data})
+        } catch (e) {
+            if (e.response.status === 404) {
+                dispatch({type: SET_NOT_FOUND, payload: true})
+            }
+        }
+        dispatch({type: STOP_PAGE_LOAD})
+    }
+    //get posts
+    const getPosts = async () => {
+        const {data} = await authFetch.get('/posts');
+        dispatch({type: GET_POSTS, payload: data})
+    }
+    //add post
+    const addPost = async (postDetails) => {
+        dispatch({type: START_FORM_LOAD})
+        try {
+            const {data} = await authFetch.post('/posts', postDetails);
+            toast.success('post added successfully')
+            router.push('/admin/blog')
+        } catch (e) {
+            if (e.response.status === 422) {
+                const error = e.response.data.errors;
+                dispatch({type: SET_FORM_ERROR, payload: error})
+            }
+        }
+        dispatch({type: STOP_FORM_LOAD})
     }
     //delete project
     const deleteProject = async (projectId) => {
@@ -124,8 +180,12 @@ const AppProvider = ({children}) => {
     }
     //get projects
     const getProjects = async () => {
-        const {data} = await authFetch.get('/projects');
-        dispatch({type: GET_PROJECTS, payload: data})
+        try {
+            const {data} = await authFetch.get('/projects');
+            dispatch({type: GET_PROJECTS, payload: data})
+        }catch (e) {
+            console.log(e)
+        }
     }
 
     //add projects
@@ -202,7 +262,11 @@ const AppProvider = ({children}) => {
                 getProjects,
                 getProject,
                 updateProject,
-                deleteProject
+                deleteProject,
+                addPost,
+                getPosts,
+                getPost,
+                uploadImage
             }}>
             {children}
         </AppContext.Provider>
