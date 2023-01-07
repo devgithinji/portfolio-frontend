@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import {ToastContainer} from "react-toastify";
 import {AppProvider} from "../context/appContext";
 import "react-markdown-editor-lite/lib/index.css";
+import 'highlight.js/styles/atom-one-light.css'
 
 
 export default function App({Component, pageProps}) {

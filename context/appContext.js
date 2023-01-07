@@ -136,6 +136,21 @@ const AppProvider = ({children}) => {
         const {data} = await authFetch.get('/posts');
         dispatch({type: GET_POSTS, payload: data})
     }
+    //update post
+    const updatePost = async (postDetails, postId) => {
+        dispatch({type: START_FORM_LOAD})
+        try {
+            const {data} = await authFetch.post(`/posts/${postId}`, postDetails);
+            toast.success('post updated successfully')
+            router.push('/admin/blog')
+        } catch (e) {
+            if (e.response.status === 422) {
+                const error = e.response.data.errors;
+                dispatch({type: SET_FORM_ERROR, payload: error})
+            }
+        }
+        dispatch({type: STOP_FORM_LOAD})
+    }
     //add post
     const addPost = async (postDetails) => {
         dispatch({type: START_FORM_LOAD})
@@ -279,6 +294,7 @@ const AppProvider = ({children}) => {
                 updateProject,
                 deleteProject,
                 addPost,
+                updatePost,
                 getPosts,
                 getPost,
                 uploadImage,

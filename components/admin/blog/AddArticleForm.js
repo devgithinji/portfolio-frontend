@@ -4,10 +4,18 @@ import SelectInput from "../general/SelectInput";
 import {useRouter} from "next/router";
 import {useAppContext} from "../../../context/appContext";
 import Editor from "react-markdown-editor-lite";
-import ReactMarkdown from "react-markdown";
 import MarkdownIt from "markdown-it";
-import {FaTrash} from "react-icons/fa";
 import {toast} from "react-toastify";
+import emoji from 'markdown-it-emoji'
+import subscript from 'markdown-it-sub'
+import superscript from 'markdown-it-sup'
+import footnote from 'markdown-it-footnote'
+import deflist from 'markdown-it-deflist'
+import abbreviation from 'markdown-it-abbr'
+import insert from 'markdown-it-ins'
+import mark from 'markdown-it-mark'
+import tasklists from 'markdown-it-task-lists'
+import hljs from "highlight.js";
 
 
 const AddArticleForm = () => {
@@ -19,6 +27,7 @@ const AddArticleForm = () => {
         isFormLoading,
         isPageLoading,
         addPost,
+        updatePost,
         getPost,
         post,
         uploadImage,
@@ -32,7 +41,29 @@ const AddArticleForm = () => {
     const [content, setContent] = useState('')
     const [isEditing, setIsEditing] = useState(false);
     // Initialize a markdown parser
-    const mdParser = new MarkdownIt(/* Markdown-it options */);
+    const mdParser = new MarkdownIt({
+        html: true,
+        linkify: true,
+        typographer: true,
+        highlight: function (str, lang) {
+            if (lang && hljs.getLanguage(lang)) {
+                try {
+                    return hljs.highlight(lang, str).value
+                } catch (__) {
+                }
+            }
+            return '' // use external default escaping
+        }
+    })
+        .use(emoji)
+        .use(subscript)
+        .use(superscript)
+        .use(footnote)
+        .use(deflist)
+        .use(abbreviation)
+        .use(insert)
+        .use(mark)
+        .use(tasklists)
     const postIdRef = useRef();
 
 
@@ -70,6 +101,11 @@ const AddArticleForm = () => {
             return false;
         }
 
+        if (isEditing && !content) {
+            setFormError({content: 'content is required'})
+            return false;
+        }
+
         return true;
     }
 
@@ -103,7 +139,12 @@ const AddArticleForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const isValid = validateForm();
-        if (isValid) {
+
+        if (!isValid) return;
+
+        if (isEditing) {
+            updatePost({title, tag: tags[0], content})
+        } else {
             addPost({title, tag: tags[0]});
         }
     }
@@ -152,8 +193,9 @@ const AddArticleForm = () => {
                                     onImageUpload={onImageUpload}
                                     onChange={handleChange}
                                     value={content}
-                                    renderHTML={(text) => mdParser.render(text)}
+                                    renderHTML={text => mdParser.render(text)}
                                 />
+                                {errors && <span className="form-error">{errors.content}</span>}
                             </div>
                         )
                     }
