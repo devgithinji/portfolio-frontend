@@ -18,7 +18,7 @@ import {
     SET_EDIT_PROJECT,
     SET_FORM_ERROR,
     SET_NOT_FOUND,
-    SET_POST, SET_SCHOOL,
+    SET_POST, SET_PROFILE, SET_SCHOOL,
     START_FORM_LOAD,
     START_PAGE_LOAD,
     STOP_FORM_LOAD,
@@ -50,6 +50,7 @@ const initialState = {
     schools: [],
     school: null,
     jobs: [],
+    profile: null,
     job: null,
     errors: {},
     notFoundError: false
@@ -98,6 +99,31 @@ const AppProvider = ({children}) => {
         return Promise.reject(error);
     })
 
+    //get profile
+    const getProfile = async () => {
+        try {
+            const {data} = await authFetch.get('/profile')
+            dispatch({type: SET_PROFILE, payload: data})
+        } catch (e) {
+
+        }
+    }
+    //update profile
+    const updateProfile = async (profileData) => {
+        dispatch({type: START_FORM_LOAD})
+        try {
+            const {data} = await authFetch.put('/profile', profileData, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            });
+            dispatch({type: SET_PROFILE, payload: data})
+            toast.success('profile updated!')
+        } catch (e) {
+
+        }
+        dispatch({type: STOP_FORM_LOAD})
+    }
     //get jobs
     const getJobs = async () => {
         try {
@@ -121,7 +147,7 @@ const AppProvider = ({children}) => {
     //add job
     const addJob = async (jobData) => {
         dispatch({type: SET_FORM_ERROR, payload: {}})
-        dispatch({type: STOP_FORM_LOAD})
+        dispatch({type: START_FORM_LOAD})
         try {
             const {data} = await authFetch.post(`/job-history`, jobData);
             router.push('/admin/work')
@@ -137,7 +163,7 @@ const AppProvider = ({children}) => {
     //update job
     const updateJob = async (jobData, jobId) => {
         dispatch({type: SET_FORM_ERROR, payload: {}})
-        dispatch({type: STOP_FORM_LOAD})
+        dispatch({type: START_FORM_LOAD})
         try {
             const {data} = await authFetch.put(`/job-history/${jobId}`, jobData);
             router.push('/admin/work')
@@ -507,7 +533,9 @@ const AppProvider = ({children}) => {
                 getJob,
                 updateJob,
                 addJob,
-                deleteJob
+                deleteJob,
+                getProfile,
+                updateProfile
             }}>
             {children}
         </AppContext.Provider>

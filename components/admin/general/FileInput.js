@@ -31,7 +31,7 @@ const FileInput = ({fileType = "image", name, existingFile, id, error, setValue}
                     </div>
                 )}
                 {fileName && <p>{fileName}</p>}
-                {(fileType !== 'image' && existingFile) && <Link href={existingFile}>Download file</Link>}
+                {(fileType !== 'image' && existingFile) && <Link href={existingFile} className="accent">Download file</Link>}
                 <label htmlFor={id} className="upload-btn">Select {fileType === 'image' ? 'image' : 'file'}</label>
             </div>
             <input type="file" id={id} accept={acceptType} className="file-input" onChange={fileHandler}/>

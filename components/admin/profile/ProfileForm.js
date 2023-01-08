@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import FormInput from "../general/FormInput";
 import FileInput from "../general/FileInput";
 import {FaMinus, FaPlus} from "react-icons/fa";
+import {useAppContext} from "../../../context/appContext";
 
 const ProfileForm = () => {
+    const {errors, getProfile, updateProfile, profile, isFormLoading, setFormError} = useAppContext();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -11,10 +13,28 @@ const ProfileForm = () => {
     const [personalStatement, setPersonalStatement] = useState('');
     const [socialMediaLinks, setSocialMediaLinks] = useState(['']);
     const [skills, setSkills] = useState(['']);
-    const [resume, setResume] = useState('')
-    const [isLoading, setLoading] = useState(false);
-    const [errors, setErrors] = useState({});
+    const [resume, setResume] = useState(null)
     const [existingFile, setExistingFile] = useState('')
+
+    useEffect(() => {
+        getProfile();
+    }, [])
+
+    useEffect(() => {
+        if (profile) {
+            const {firstName, lastName, email, socialMediaLinks, resume, personalStatement, skills, phone} = profile
+            setFirstName(firstName)
+            setLastName(lastName)
+            setEmail(email)
+            setPhone(phone)
+            setPersonalStatement(personalStatement)
+            setSocialMediaLinks(socialMediaLinks)
+            setSkills(skills)
+            setExistingFile(resume)
+        }
+
+    }, [profile])
+
 
     const updateLink = (e) => {
         const id = e.target.id;
@@ -53,13 +73,63 @@ const ProfileForm = () => {
 
     const removeSkill = (e, index) => {
         e.preventDefault();
-        let skills = [...skills];
-        skills.splice(index, 1);
-        setSkills(skills)
+        let newSkills = [...skills];
+        newSkills.splice(index, 1);
+        setSkills(newSkills)
+    }
+
+    const isValid = () => {
+        if (!firstName) {
+            setFormError({firstName: 'first name is required'})
+            return false;
+        }
+
+        if (!lastName) {
+            setFormError({lastName: 'last name is required'})
+            return false;
+        }
+
+        if (!email) {
+            setFormError({email: 'email is required'})
+            return false;
+        }
+
+        if (!phone) {
+            setFormError({phone: 'phone number is required'})
+            return false;
+        }
+
+        if (!personalStatement) {
+            setFormError({personalStatement: 'personal statement is required'})
+            return false;
+        }
+        if (socialMediaLinks.length === 0) {
+            setFormError({socialMediaLinks: 'social media links is required'})
+            return false;
+        }
+        if (skills.length === 0) {
+            setFormError({socialMediaLinks: 'skills is required'})
+            return false;
+        }
+
+        return true;
+
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(socialMediaLinks)
+        if (!isValid()) return;
+        const formData = new FormData();
+        formData.append("firstName", firstName)
+        formData.append("lastName", lastName)
+        formData.append("email", email)
+        formData.append("phone", phone)
+        formData.append("socialMediaLinks[]", socialMediaLinks)
+        formData.append("skills[]", skills)
+        if (resume) {
+            formData.append("resume", resume)
+        }
+        formData.append("personalStatement", personalStatement)
+        updateProfile(formData);
     }
     return (
         <div className="admin-section card">
@@ -125,8 +195,8 @@ const ProfileForm = () => {
                     </div>
                 </div>
                 <button type="submit" className="form-btn"
-                        disabled={isLoading}>
-                    {isLoading ? 'Please wait...' : 'Submit'}
+                        disabled={isFormLoading}>
+                    {isFormLoading ? 'Please wait...' : 'Submit'}
                 </button>
             </form>
         </div>

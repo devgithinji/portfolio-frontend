@@ -1,17 +1,35 @@
 import {
     ADD_CATEGORY,
-    ADD_IMAGE, ADD_SCHOOL, CLEAR_POST, DELETE_CATEGORY,
-    DELETE_IMAGE, DELETE_JOB, DELETE_POST,
-    DELETE_PROJECT, DELETE_SCHOOL, GET_JOB, GET_JOBS, GET_POSTS,
-    GET_PROJECTS, GET_SCHOOLS,
+    ADD_IMAGE,
+    ADD_SCHOOL,
+    CLEAR_POST,
+    DELETE_CATEGORY,
+    DELETE_IMAGE,
+    DELETE_JOB,
+    DELETE_POST,
+    DELETE_PROJECT,
+    DELETE_SCHOOL,
+    GET_JOB,
+    GET_JOBS,
+    GET_POSTS,
+    GET_PROJECTS,
+    GET_SCHOOLS,
     LOAD_CATEGORIES,
     LOGIN,
     LOGIN_BEGIN,
     LOGIN_ERROR,
-    LOGOUT_USER, SET_EDIT_PROJECT,
-    SET_FORM_ERROR, SET_NOT_FOUND, SET_POST, SET_SCHOOL, START_FORM_LOAD,
-    START_PAGE_LOAD, STOP_FORM_LOAD,
-    STOP_PAGE_LOAD, UPDATE_CATEGORY,
+    LOGOUT_USER,
+    SET_EDIT_PROJECT,
+    SET_FORM_ERROR,
+    SET_NOT_FOUND,
+    SET_POST,
+    SET_PROFILE,
+    SET_SCHOOL,
+    START_FORM_LOAD,
+    START_PAGE_LOAD,
+    STOP_FORM_LOAD,
+    STOP_PAGE_LOAD,
+    UPDATE_CATEGORY,
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -25,10 +43,7 @@ const reducer = (state, action) => {
     if (action.type === LOGIN) {
         const {user, token} = action.payload
         return {
-            ...state,
-            isLoading: false,
-            user: user,
-            token: token
+            ...state, isLoading: false, user: user, token: token
         }
     }
 
@@ -146,6 +161,14 @@ const reducer = (state, action) => {
     if (action.type === DELETE_JOB) {
         const jobs = state.jobs.filter(job => job.id !== action.payload);
         return {...state, jobs}
+    }
+
+    if (action.type === SET_PROFILE) {
+        const data = action.payload;
+        const {firstName, lastName, email} = data
+        const user = {first_name: firstName, last_name: lastName, email}
+        localStorage.setItem("user", JSON.stringify(user))
+        return {...state, profile: action.payload, user}
     }
 
     if (action.type === SET_FORM_ERROR) {

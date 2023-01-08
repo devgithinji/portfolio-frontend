@@ -1,10 +1,18 @@
-import React, {useState} from 'react';
-import {FaBars, FaCaretDown, FaCaretUp, FaLock, FaPowerOff, FaUser} from "react-icons/fa";
-import Link from "next/link";
+import React, {useEffect, useState} from 'react';
+import {FaBars, FaCaretDown, FaCaretUp} from "react-icons/fa";
 import DropDown from "./DropDown";
+import {useAppContext} from "../../../context/appContext";
 
 const Header = ({setNavActive}) => {
+    const {user} = useAppContext();
+    const [activeUser, setActiveUser] = useState(null)
     const [isDropDownActive, setDropDownActive] = useState(false);
+
+    useEffect(()=>{
+        if(user){
+            setActiveUser(user);
+        }
+    },[user])
     const showDropDown = () => {
         setDropDownActive(!isDropDownActive)
     }
@@ -16,7 +24,7 @@ const Header = ({setNavActive}) => {
             </button>
             <div className="account">
                 <div className="account-btn" onClick={showDropDown}>
-                    Dennis
+                    {activeUser && activeUser.first_name}
                     {isDropDownActive ? <FaCaretUp/> : <FaCaretDown/>}
                 </div>
                 <DropDown isDropDownActive={isDropDownActive} setDropDownActive={setDropDownActive}/>
