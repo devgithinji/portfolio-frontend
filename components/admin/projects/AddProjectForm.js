@@ -35,7 +35,7 @@ const AddProjectForm = () => {
     }, [])
 
     useEffect(() => {
-        if (project) {
+        if (project && isEditing) {
             const {description, image, name, repoLink, siteLink, tags} = project;
             setName(name)
             setDescription(description)

@@ -1,8 +1,8 @@
 import {
     ADD_CATEGORY,
     ADD_IMAGE, ADD_SCHOOL, CLEAR_POST, DELETE_CATEGORY,
-    DELETE_IMAGE, DELETE_POST,
-    DELETE_PROJECT, DELETE_SCHOOL, GET_POSTS,
+    DELETE_IMAGE, DELETE_JOB, DELETE_POST,
+    DELETE_PROJECT, DELETE_SCHOOL, GET_JOB, GET_JOBS, GET_POSTS,
     GET_PROJECTS, GET_SCHOOLS,
     LOAD_CATEGORIES,
     LOGIN,
@@ -11,7 +11,7 @@ import {
     LOGOUT_USER, SET_EDIT_PROJECT,
     SET_FORM_ERROR, SET_NOT_FOUND, SET_POST, SET_SCHOOL, START_FORM_LOAD,
     START_PAGE_LOAD, STOP_FORM_LOAD,
-    STOP_PAGE_LOAD, UPDATE_CATEGORY
+    STOP_PAGE_LOAD, UPDATE_CATEGORY,
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -133,6 +133,19 @@ const reducer = (state, action) => {
     if (action.type === DELETE_SCHOOL) {
         const schools = state.schools.filter(school => school.id !== action.payload);
         return {...state, schools}
+    }
+
+    if (action.type === GET_JOBS) {
+        return {...state, jobs: action.payload}
+    }
+
+    if (action.type === GET_JOB) {
+        return {...state, job: action.payload}
+    }
+
+    if (action.type === DELETE_JOB) {
+        const jobs = state.jobs.filter(job => job.id !== action.payload);
+        return {...state, jobs}
     }
 
     if (action.type === SET_FORM_ERROR) {

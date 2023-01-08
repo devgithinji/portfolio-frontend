@@ -34,7 +34,7 @@ const AddSchoolForm = () => {
     }, [router])
 
     useEffect(() => {
-        if (school) {
+        if (school && isEditing) {
             const {institution, level, qualification, award, durationRange} = school;
             setInstitution(institution)
             setLevel(level)

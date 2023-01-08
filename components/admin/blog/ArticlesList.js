@@ -19,11 +19,11 @@ const ProjectsList = () => {
             overlayClassName: "custom-overlay",
             buttons: [
                 {
-                    label: 'Delete',
-                    onClick: () => deletePost(postId)
+                    label: 'No'
                 },
                 {
-                    label: 'No'
+                    label: 'Delete',
+                    onClick: () => deletePost(postId)
                 }
             ]
         });

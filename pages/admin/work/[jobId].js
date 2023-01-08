@@ -1,11 +1,11 @@
 import React from 'react';
-import BreadCrumbs from "../../../components/admin/layout/BreadCrumbs";
 import AdminLayout from "../../../components/admin/layout/AdminLayout";
-import WorkList from "../../../components/admin/work/WorkList";
+import BreadCrumbs from "../../../components/admin/layout/BreadCrumbs";
+import AddJobForm from "../../../components/admin/work/AddJobForm";
 
-const Work = () => {
+const AddJob = () => {
     const breadCrumbData = {
-        pageName: 'Work',
+        pageName: 'Add Job',
         links: [
             {
                 name: 'Home',
@@ -13,7 +13,12 @@ const Work = () => {
                 isPresent: false
             },
             {
-                name: 'Work',
+                name: 'Jobs',
+                url: '/admin/work',
+                isPresent: false
+            },
+            {
+                name: 'Add Job',
                 isPresent: true
             }
         ]
@@ -21,9 +26,9 @@ const Work = () => {
     return (
         <AdminLayout>
             <BreadCrumbs {...breadCrumbData}/>
-            <WorkList/>
+            <AddJobForm/>
         </AdminLayout>
     );
 };
 
-export default Work;
+export default AddJob;

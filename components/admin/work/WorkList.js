@@ -3,18 +3,17 @@ import Link from "next/link";
 import {useAppContext} from "../../../context/appContext";
 import {confirmAlert} from "react-confirm-alert";
 
-const SchoolsList = () => {
-    const {schools, getSchools, deleteSchool} = useAppContext();
+const WorkList = () => {
+    const {jobs, getJobs, deleteJob} = useAppContext()
 
     useEffect(() => {
-        getSchools();
-    }, [])
+        getJobs();
+    })
 
-
-    const deleteSch = (schoolId) => {
+    const deleteInstitution = (jobId) => {
         confirmAlert({
             title: 'Confirm to delete',
-            message: 'Are you sure to delete school',
+            message: 'Are you sure to delete job?',
             closeOnClickOutside: true,
             closeOnEscape: true,
             overlayClassName: "custom-overlay",
@@ -24,7 +23,7 @@ const SchoolsList = () => {
                 },
                 {
                     label: 'Delete',
-                    onClick: () => deleteSchool(schoolId)
+                    onClick: () => deleteJob(jobId)
                 }
             ]
         });
@@ -33,26 +32,34 @@ const SchoolsList = () => {
     return (
         <div className="admin-section">
             <div className="add-btn-container card">
-                <Link href="/admin/education/add-school" className="admin-btn admin-btn-accent">
-                    Add School
+                <Link href="/admin/work/add-job" className="admin-btn admin-btn-accent">
+                    Add Job History
                 </Link>
             </div>
             <div className="admin-list-items">
                 {
-                    schools.map((school, index) => {
+                    jobs.map((job, index) => {
                         return (
-                            <div className="admin-article-item card" key={school.id}>
-                                <h1 className="card-sub-title">{school.institution}</h1>
-                                <p>{school.level}</p>
-                                <p>{school.qualification}</p>
-                                <p>{school.award}</p>
-                                <p>{school.durationRange}</p>
+                            <div className="admin-article-item card" key={job.id}>
+                                <h1 className="card-sub-title accent">{job.institution}</h1>
+                                <p>{job.title}</p>
+                                <p>{job.description}</p>
+                                <p>{job.durationRange}</p>
+                                <h1 className="card-sub-title accent">Achievements</h1>
+                                {job && job.achievementsList.map((achievement, index) => {
+                                    return (
+                                        <div key={index} className="flex-row">
+                                            <span>{index + 1}</span>
+                                            <p>{achievement}</p>
+                                        </div>
+                                    )
+                                })}
 
                                 <div className="admin-article-item-action-btns">
-                                    <Link href={`/admin/education/${school.id}`}
+                                    <Link href={`/admin/work/${job.id}`}
                                           className="admin-btn admin-btn-accent">edit</Link>
                                     <button className="admin-btn admin-btn-danger"
-                                            onClick={() => deleteSch(school.id)}>delete
+                                            onClick={() => deleteInstitution(job.id)}>delete
                                     </button>
                                 </div>
                             </div>
@@ -67,29 +74,27 @@ const SchoolsList = () => {
                         <tr>
                             <th>No.</th>
                             <th>Institution</th>
-                            <th>Level</th>
-                            <th>Qualification</th>
-                            <th>Award</th>
+                            <th>Title</th>
+                            <th>Description</th>
                             <th>Duration</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {schools.map((school, index) => {
+                        {jobs.map((job, index) => {
                             return (
-                                <tr key={school.id}>
+                                <tr key={job.id}>
                                     <td>{index + 1}</td>
-                                    <td>{school.institution}</td>
-                                    <td>{school.level}</td>
-                                    <td>{school.qualification}</td>
-                                    <td>{school.award}</td>
-                                    <td>{school.durationRange}</td>
+                                    <td>{job.institution}</td>
+                                    <td>{job.title}</td>
+                                    <td>{job.description}</td>
+                                    <td>{job.durationRange}</td>
                                     <td>
                                         <div className="table-action-btns">
-                                            <Link href={`/admin/education/${school.id}`}
+                                            <Link href={`/admin/work/${job.id}`}
                                                   className="admin-btn admin-btn-accent">edit</Link>
                                             <button className="admin-btn admin-btn-danger"
-                                                    onClick={() => deleteSch(school.id)}>delete
+                                                    onClick={() => deleteInstitution(job.id)}>delete
                                             </button>
                                         </div>
                                     </td>
@@ -104,4 +109,4 @@ const SchoolsList = () => {
     );
 };
 
-export default SchoolsList;
+export default WorkList;

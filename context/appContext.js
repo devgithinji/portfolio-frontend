@@ -3,11 +3,11 @@ import reducer from "./reducer";
 import axios from "axios";
 import {
     ADD_CATEGORY,
-    ADD_IMAGE, ADD_SCHOOL,
+    ADD_IMAGE, ADD_JOB, ADD_SCHOOL,
     CLEAR_POST, DELETE_CATEGORY,
-    DELETE_IMAGE,
+    DELETE_IMAGE, DELETE_JOB,
     DELETE_POST,
-    DELETE_PROJECT, DELETE_SCHOOL,
+    DELETE_PROJECT, DELETE_SCHOOL, GET_JOB, GET_JOBS,
     GET_POSTS,
     GET_PROJECTS, GET_SCHOOLS,
     LOAD_CATEGORIES,
@@ -22,7 +22,7 @@ import {
     START_FORM_LOAD,
     START_PAGE_LOAD,
     STOP_FORM_LOAD,
-    STOP_PAGE_LOAD, UPDATE_CATEGORY, UPDATE_SCHOOL
+    STOP_PAGE_LOAD, UPDATE_CATEGORY, UPDATE_JOB, UPDATE_SCHOOL
 } from "./actions";
 import {toast} from "react-toastify";
 import {useRouter} from "next/router";
@@ -50,7 +50,7 @@ const initialState = {
     schools: [],
     school: null,
     jobs: [],
-    job: {},
+    job: null,
     errors: {},
     notFoundError: false
 }
@@ -98,27 +98,101 @@ const AppProvider = ({children}) => {
         return Promise.reject(error);
     })
 
+    //get jobs
+    const getJobs = async () => {
+        try {
+            const {data} = await authFetch.get('/job-history');
+            dispatch({type: GET_JOBS, payload: data})
+        } catch (e) {
+
+        }
+    }
+
+    //get job
+    const getJob = async (jobId) => {
+        try {
+            const {data} = await authFetch.get(`/job-history/${jobId}`);
+            dispatch({type: GET_JOB, payload: data})
+        } catch (e) {
+
+        }
+    }
+
+    //add job
+    const addJob = async (jobData) => {
+        dispatch({type: SET_FORM_ERROR, payload: {}})
+        dispatch({type: STOP_FORM_LOAD})
+        try {
+            const {data} = await authFetch.post(`/job-history`, jobData);
+            router.push('/admin/work')
+        } catch (e) {
+            if (e.response.status === 422) {
+                const error = e.response.data.errors;
+                dispatch({type: SET_FORM_ERROR, payload: error})
+            }
+        }
+        dispatch({type: STOP_FORM_LOAD})
+    }
+
+    //update job
+    const updateJob = async (jobData, jobId) => {
+        dispatch({type: SET_FORM_ERROR, payload: {}})
+        dispatch({type: STOP_FORM_LOAD})
+        try {
+            const {data} = await authFetch.put(`/job-history/${jobId}`, jobData);
+            router.push('/admin/work')
+        } catch (e) {
+            if (e.response.status === 422) {
+                const error = e.response.data.errors;
+                dispatch({type: SET_FORM_ERROR, payload: error})
+            }
+        }
+        dispatch({type: STOP_FORM_LOAD})
+    }
+
+    //const delete job
+    const deleteJob = async (jobId) => {
+        dispatch({type: SET_FORM_ERROR, payload: {}})
+        try {
+            const {data} = await authFetch.delete(`/job-history/${jobId}`);
+            dispatch({type: DELETE_JOB, payload: jobId})
+        } catch (e) {
+
+        }
+    }
+
+
     //add school
     const addSchool = async (schoolData) => {
+        dispatch({type: SET_FORM_ERROR, payload: {}})
+        dispatch({type: START_FORM_LOAD})
         try {
             const {data} = await authFetch.post('/education-history', schoolData);
             dispatch({type: ADD_SCHOOL, payload: data})
             toast.success('school added successfully')
             router.push('/admin/education')
         } catch (e) {
-
+            if (e.response.status === 422) {
+                const error = e.response.data.errors;
+                dispatch({type: SET_FORM_ERROR, payload: error})
+            }
         }
+        dispatch({type: STOP_FORM_LOAD})
     }
 
     //update school
     const updateSchool = async (schoolData, schoolId) => {
+        dispatch({type: SET_FORM_ERROR, payload: {}})
         dispatch({type: START_FORM_LOAD})
         try {
             const {data} = await authFetch.put(`/education-history/${schoolId}`, schoolData);
             toast.success('school updated successfully')
             router.push('/admin/education')
         } catch (e) {
-
+            if (e.response.status === 422) {
+                const error = e.response.data.errors;
+                dispatch({type: SET_FORM_ERROR, payload: error})
+            }
         }
         dispatch({type: STOP_FORM_LOAD})
     }
@@ -259,6 +333,7 @@ const AppProvider = ({children}) => {
     }
     //update post
     const updatePost = async (postDetails, postId) => {
+        dispatch({type: SET_FORM_ERROR, payload: {}})
         dispatch({type: START_FORM_LOAD})
         try {
             const {data} = await authFetch.put(`/posts/${postId}`, postDetails);
@@ -275,6 +350,7 @@ const AppProvider = ({children}) => {
     }
     //add post
     const addPost = async (postDetails) => {
+        dispatch({type: SET_FORM_ERROR, payload: {}})
         dispatch({type: START_FORM_LOAD})
         try {
             const {data} = await authFetch.post('/posts', postDetails);
@@ -300,6 +376,7 @@ const AppProvider = ({children}) => {
     }
     //update project
     const updateProject = async (projectDetails, projectId) => {
+        dispatch({type: SET_FORM_ERROR, payload: {}})
         dispatch({type: START_FORM_LOAD})
         try {
             const {data} = await authFetch.put(`/projects/${projectId}`, projectDetails, {
@@ -342,6 +419,7 @@ const AppProvider = ({children}) => {
     }
     //add projects
     const addProject = async (projectDetails) => {
+        dispatch({type: SET_FORM_ERROR, payload: {}})
         dispatch({type: START_FORM_LOAD})
         try {
             const {data} = await authFetch.post('/projects', projectDetails, {
@@ -424,7 +502,12 @@ const AppProvider = ({children}) => {
                 addSchool,
                 getSchool,
                 updateSchool,
-                deleteSchool
+                deleteSchool,
+                getJobs,
+                getJob,
+                updateJob,
+                addJob,
+                deleteJob
             }}>
             {children}
         </AppContext.Provider>
