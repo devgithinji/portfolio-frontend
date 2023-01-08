@@ -1,15 +1,15 @@
 import {
     ADD_CATEGORY,
-    ADD_IMAGE, CLEAR_POST, DELETE_CATEGORY,
+    ADD_IMAGE, ADD_SCHOOL, CLEAR_POST, DELETE_CATEGORY,
     DELETE_IMAGE, DELETE_POST,
-    DELETE_PROJECT, GET_POSTS,
-    GET_PROJECTS,
+    DELETE_PROJECT, DELETE_SCHOOL, GET_POSTS,
+    GET_PROJECTS, GET_SCHOOLS,
     LOAD_CATEGORIES,
     LOGIN,
     LOGIN_BEGIN,
     LOGIN_ERROR,
     LOGOUT_USER, SET_EDIT_PROJECT,
-    SET_FORM_ERROR, SET_NOT_FOUND, SET_POST, START_FORM_LOAD,
+    SET_FORM_ERROR, SET_NOT_FOUND, SET_POST, SET_SCHOOL, START_FORM_LOAD,
     START_PAGE_LOAD, STOP_FORM_LOAD,
     STOP_PAGE_LOAD, UPDATE_CATEGORY
 } from "./actions";
@@ -114,6 +114,25 @@ const reducer = (state, action) => {
         const images = state.post.images.filter(img => img.id !== imageId);
 
         return {...state, post: {...post, images}}
+    }
+
+    if (action.type === GET_SCHOOLS) {
+        return {...state, schools: action.payload}
+    }
+
+    if (action.type === ADD_SCHOOL) {
+        const schools = state.schools;
+        const newSchools = [...schools, action.payload]
+        return {...state, schools: newSchools}
+    }
+
+    if (action.type === SET_SCHOOL) {
+        return {...state, school: action.payload}
+    }
+
+    if (action.type === DELETE_SCHOOL) {
+        const schools = state.schools.filter(school => school.id !== action.payload);
+        return {...state, schools}
     }
 
     if (action.type === SET_FORM_ERROR) {

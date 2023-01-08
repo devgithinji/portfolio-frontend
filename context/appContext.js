@@ -3,13 +3,13 @@ import reducer from "./reducer";
 import axios from "axios";
 import {
     ADD_CATEGORY,
-    ADD_IMAGE,
+    ADD_IMAGE, ADD_SCHOOL,
     CLEAR_POST, DELETE_CATEGORY,
     DELETE_IMAGE,
     DELETE_POST,
-    DELETE_PROJECT,
+    DELETE_PROJECT, DELETE_SCHOOL,
     GET_POSTS,
-    GET_PROJECTS,
+    GET_PROJECTS, GET_SCHOOLS,
     LOAD_CATEGORIES,
     LOGIN,
     LOGIN_BEGIN,
@@ -18,11 +18,11 @@ import {
     SET_EDIT_PROJECT,
     SET_FORM_ERROR,
     SET_NOT_FOUND,
-    SET_POST,
+    SET_POST, SET_SCHOOL,
     START_FORM_LOAD,
     START_PAGE_LOAD,
     STOP_FORM_LOAD,
-    STOP_PAGE_LOAD, UPDATE_CATEGORY
+    STOP_PAGE_LOAD, UPDATE_CATEGORY, UPDATE_SCHOOL
 } from "./actions";
 import {toast} from "react-toastify";
 import {useRouter} from "next/router";
@@ -47,6 +47,10 @@ const initialState = {
     posts: [],
     post: null,
     categories: [],
+    schools: [],
+    school: null,
+    jobs: [],
+    job: {},
     errors: {},
     notFoundError: false
 }
@@ -93,6 +97,67 @@ const AppProvider = ({children}) => {
 
         return Promise.reject(error);
     })
+
+    //add school
+    const addSchool = async (schoolData) => {
+        try {
+            const {data} = await authFetch.post('/education-history', schoolData);
+            dispatch({type: ADD_SCHOOL, payload: data})
+            toast.success('school added successfully')
+            router.push('/admin/education')
+        } catch (e) {
+
+        }
+    }
+
+    //update school
+    const updateSchool = async (schoolData, schoolId) => {
+        dispatch({type: START_FORM_LOAD})
+        try {
+            const {data} = await authFetch.put(`/education-history/${schoolId}`, schoolData);
+            toast.success('school updated successfully')
+            router.push('/admin/education')
+        } catch (e) {
+
+        }
+        dispatch({type: STOP_FORM_LOAD})
+    }
+
+    //get school
+    const getSchool = async (schoolId) => {
+        dispatch({type: SET_NOT_FOUND, payload: false})
+        dispatch({type: START_PAGE_LOAD})
+        try {
+            const {data} = await authFetch.get(`/education-history/${schoolId}`)
+            dispatch({type: SET_SCHOOL, payload: data})
+        } catch (e) {
+            if (e.response.status === 404) {
+                dispatch({type: SET_NOT_FOUND, payload: true})
+            }
+        }
+        dispatch({type: STOP_PAGE_LOAD})
+    }
+
+    //get schools
+    const getSchools = async () => {
+        try {
+            const {data} = await authFetch.get('/education-history');
+            dispatch({type: GET_SCHOOLS, payload: data})
+        } catch (e) {
+
+        }
+    }
+
+    //delete school
+    const deleteSchool = async (schoolId) => {
+        try {
+            const {data} = await authFetch.delete(`/education-history/${schoolId}`)
+            toast.success(data)
+            dispatch({type: DELETE_SCHOOL, payload: schoolId})
+        } catch (e) {
+
+        }
+    }
 
 
     //get categories
@@ -165,6 +230,7 @@ const AppProvider = ({children}) => {
     }
     //get post
     const getPost = async (postId) => {
+        dispatch({type: SET_NOT_FOUND, payload: false})
         dispatch({type: START_PAGE_LOAD})
         try {
             const {data} = await authFetch.get(`/posts/admin/${postId}`)
@@ -253,6 +319,7 @@ const AppProvider = ({children}) => {
     }
     //get project
     const getProject = async (projectId) => {
+        dispatch({type: SET_NOT_FOUND, payload: false})
         dispatch({type: START_PAGE_LOAD})
         try {
             const {data} = await authFetch.get(`/projects/${projectId}`)
@@ -352,7 +419,12 @@ const AppProvider = ({children}) => {
                 uploadImage,
                 deleteImage,
                 updateCategory,
-                deletePost
+                deletePost,
+                getSchools,
+                addSchool,
+                getSchool,
+                updateSchool,
+                deleteSchool
             }}>
             {children}
         </AppContext.Provider>

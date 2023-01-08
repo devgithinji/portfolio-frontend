@@ -1,11 +1,11 @@
 import React from 'react';
 import AdminLayout from "../../../components/admin/layout/AdminLayout";
 import BreadCrumbs from "../../../components/admin/layout/BreadCrumbs";
-import SchoolsList from "../../../components/admin/education/SchoolsList";
+import AddSchoolForm from "../../../components/admin/education/AddSchoolForm";
 
-const Education = () => {
+const AddSchool = () => {
     const breadCrumbData = {
-        pageName: 'Education',
+        pageName: 'Edit School',
         links: [
             {
                 name: 'Home',
@@ -13,7 +13,12 @@ const Education = () => {
                 isPresent: false
             },
             {
-                name: 'Education',
+                name: 'Schools',
+                url: '/admin/education',
+                isPresent: false
+            },
+            {
+                name: 'Edit School',
                 isPresent: true
             }
         ]
@@ -21,9 +26,9 @@ const Education = () => {
     return (
         <AdminLayout>
             <BreadCrumbs {...breadCrumbData}/>
-            <SchoolsList/>
+            <AddSchoolForm/>
         </AdminLayout>
     );
 };
 
-export default Education;
+export default AddSchool;
