@@ -98,8 +98,8 @@ const reducer = (state, action) => {
     }
 
     if (action.type === GET_POSTS) {
-        const {posts} = action.payload
-        return {...state, posts: posts}
+        const {posts, pageNo, pageSize, totalPages} = action.payload
+        return {...state, posts: posts, postsPage: pageNo, postsPageSize: pageSize, postsTotalPages: totalPages};
     }
 
     if (action.type === SET_POST) {

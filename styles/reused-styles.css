@@ -128,3 +128,45 @@
     display: flex;
     gap: 10px;
 }
+
+/*pagination*/
+
+.navigationButtons {
+    width: 80%;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.navigationButtons a {
+    min-width: 50px;
+    height: 40px;
+    display: grid;
+    place-content: center;
+    margin: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--accent);
+    color: var(--primary-900);
+    cursor: pointer;
+}
+
+.navigationButtons a:hover {
+    color: white;
+    background-color: var(--accent);
+}
+
+.navigationActive a {
+    color: white;
+    background-color: var(--accent);
+}
+
+.navigationDisabled a {
+    color: var(--primary-900);
+    background-color: var(--accent-light);
+}
+
+.previousButton, .nextButton {
+    width: 100px;
+}

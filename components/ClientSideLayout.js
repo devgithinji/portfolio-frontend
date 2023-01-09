@@ -3,7 +3,7 @@ import Header from "./Header";
 import BackToTop from "./BackToTop";
 import Footer from "./Footer";
 
-const ClientSideLayout = ({children}) => {
+const ClientSideLayout = ({children, posts, pageNo, totalPages, categories, post}) => {
     return (
         <>
             <Header/>

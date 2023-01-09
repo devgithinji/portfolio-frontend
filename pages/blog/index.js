@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ClientSideLayout from "../../components/ClientSideLayout";
 import Hero from "../../components/blog/Hero";
 import Navigation from "../../components/general/Navigation";
 import AllBlogs from "../../components/blog/AllBlogs";
 import OtherBlogs from "../../components/blog/OtherBlogs";
 import Head from "next/head";
+import axiosInstance from "../../utils/axios-instance";
 
-const Blog = () => {
+const Blog = ({posts, pageNo, totalPages, categories}) => {
+
     return (
         <>
             <Head>
@@ -16,33 +18,25 @@ const Blog = () => {
                 <meta name="keywords" content="Dennis, Githinji, Software Engineer, Java, JavaScript, React, Node Js"/>
                 <link rel="icon" type="image/x-icon" href="/images/dennis-githinji.png"/>
             </Head>
-            <ClientSideLayout>
+            <ClientSideLayout categories={categories} totalPages={totalPages} pageNo={pageNo} posts={posts}>
                 <Hero/>
-                <Navigation>
-                    <div className="nav-item active">
-                        All
-                    </div>
-                    <div className="nav-item">
-                        Microservices
-                    </div>
-                    <div className="nav-item">
-                        Java
-                    </div>
-                    <div className="nav-item">
-                        Spring Boot
-                    </div>
-                    <div className="nav-item">
-                        Spring Security
-                    </div>
-                    <div className="nav-item">
-                        Hibernate
-                    </div>
-                </Navigation>
-                <AllBlogs/>
+                <Navigation categories={categories}/>
+                <AllBlogs posts={posts} totalPages={totalPages} pageNo={pageNo}/>
                 <OtherBlogs/>
             </ClientSideLayout>
         </>
     );
+};
+
+export const getServerSideProps = async context => {
+
+    const {data: {posts, pageNo, totalPages}} = await axiosInstance.get('/posts');
+    const {data: categories} = await axiosInstance.get('/category');
+    console.log(categories)
+
+    return {
+        props: {posts, pageNo, totalPages, categories},
+    }
 };
 
 export default Blog;

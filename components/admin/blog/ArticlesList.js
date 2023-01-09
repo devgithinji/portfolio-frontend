@@ -2,9 +2,10 @@ import React, {useEffect} from 'react';
 import Link from "next/link";
 import {useAppContext} from "../../../context/appContext";
 import {confirmAlert} from 'react-confirm-alert';
+import ReactPaginate from "react-paginate";
 
 const ProjectsList = () => {
-    const {getPosts, posts, deletePost} = useAppContext();
+    const {getPosts, posts, deletePost, postsPage, postsPageSize, postsTotalPages} = useAppContext();
 
     useEffect(() => {
         getPosts();
@@ -28,6 +29,10 @@ const ProjectsList = () => {
             ]
         });
     };
+
+    const handlePageClick = ({selected}) => {
+        getPosts(selected)
+    }
 
 
     return (
@@ -97,6 +102,25 @@ const ProjectsList = () => {
                         </table>
                     ) : <div style={{textAlign: 'center'}}>No posts found</div>}
                 </div>
+            </div>
+            <div className="admin-section">
+                {postsTotalPages && (
+                    <ReactPaginate
+                        breakLabel="..."
+                        nextLabel="next >"
+                        onPageChange={handlePageClick}
+                        pageRangeDisplayed={5}
+                        marginPagesDisplayed={2}
+                        pageCount={postsTotalPages}
+                        previousLabel="< previous"
+                        renderOnZeroPageCount={null}
+                        containerClassName={"navigationButtons"}
+                        previousLinkClassName={"previousButton"}
+                        nextLinkClassName={"nextButton"}
+                        disabledClassName={"navigationDisabled"}
+                        activeClassName={"navigationActive"}
+                    />
+                )}
             </div>
         </div>
     );

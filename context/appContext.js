@@ -45,6 +45,9 @@ const initialState = {
     projects: [],
     project: null,
     posts: [],
+    postsPage: 0,
+    postsPageSize: null,
+    postsTotalPages: null,
     post: null,
     categories: [],
     schools: [],
@@ -362,8 +365,8 @@ const AppProvider = ({children}) => {
         dispatch({type: STOP_PAGE_LOAD})
     }
     //get posts
-    const getPosts = async () => {
-        const {data} = await authFetch.get('/posts');
+    const getPosts = async (pageNo = 0) => {
+        const {data} = await authFetch.get(`/posts/?pageNo=${pageNo}`);
         dispatch({type: GET_POSTS, payload: data})
     }
     //delete post

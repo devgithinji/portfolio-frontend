@@ -4,8 +4,9 @@ import Hero from "../../components/blog/Hero";
 import OtherBlogs from "../../components/blog/OtherBlogs";
 import ArticleContent from "../../components/blog/ArticleContent";
 import Head from "next/head";
+import axiosInstance from "../../utils/axios-instance";
 
-const ArticlePage = () => {
+const ArticlePage = ({post}) => {
     return (
         <>
             <Head>
@@ -15,13 +16,26 @@ const ArticlePage = () => {
                 <meta name="keywords" content="Dennis, Githinji, Software Engineer, Java, JavaScript, React, Node Js"/>
                 <link rel="icon" type="image/x-icon" href="/images/dennis-githinji.png"/>
             </Head>
-            <ClientSideLayout>
+            <ClientSideLayout post={post}>
                 <Hero/>
-                <ArticleContent/>
+                <ArticleContent {...post}/>
                 <OtherBlogs/>
             </ClientSideLayout>
         </>
     );
 };
+
+export const getServerSideProps = async context => {
+
+    const slug = context.query.slug
+
+    const {data} = await axiosInstance.get(`/posts/${slug}`);
+
+
+    return {
+        props: {post: data},
+    }
+};
+
 
 export default ArticlePage;
