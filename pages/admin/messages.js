@@ -1,6 +1,7 @@
 import React from 'react';
 import AdminLayout from "../../components/admin/layout/AdminLayout";
 import BreadCrumbs from "../../components/admin/layout/BreadCrumbs";
+import MessagesList from "../../components/admin/messages/MessagesList";
 
 const Messages = () => {
     const breadCrumbData = {
@@ -20,6 +21,7 @@ const Messages = () => {
     return (
         <AdminLayout>
             <BreadCrumbs {...breadCrumbData}/>
+            <MessagesList/>
         </AdminLayout>
     );
 };

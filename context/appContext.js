@@ -16,7 +16,7 @@ import {
     LOGIN_ERROR,
     LOGOUT_USER,
     SET_EDIT_PROJECT,
-    SET_FORM_ERROR,
+    SET_FORM_ERROR, SET_MESSAGES,
     SET_NOT_FOUND,
     SET_POST, SET_PROFILE, SET_SCHOOL,
     START_FORM_LOAD,
@@ -52,6 +52,7 @@ const initialState = {
     jobs: [],
     profile: null,
     job: null,
+    messages: [],
     errors: {},
     notFoundError: false
 }
@@ -98,6 +99,16 @@ const AppProvider = ({children}) => {
 
         return Promise.reject(error);
     })
+
+    //get messages
+    const getMessages = async () => {
+        try {
+            const {data} = await authFetch.get('/message');
+            dispatch({type: SET_MESSAGES, payload: data})
+        } catch (e) {
+
+        }
+    }
 
     //get profile
     const getProfile = async () => {
@@ -535,7 +546,8 @@ const AppProvider = ({children}) => {
                 addJob,
                 deleteJob,
                 getProfile,
-                updateProfile
+                updateProfile,
+                getMessages
             }}>
             {children}
         </AppContext.Provider>

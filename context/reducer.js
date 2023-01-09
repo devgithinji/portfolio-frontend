@@ -20,7 +20,7 @@ import {
     LOGIN_ERROR,
     LOGOUT_USER,
     SET_EDIT_PROJECT,
-    SET_FORM_ERROR,
+    SET_FORM_ERROR, SET_MESSAGES,
     SET_NOT_FOUND,
     SET_POST,
     SET_PROFILE,
@@ -169,6 +169,10 @@ const reducer = (state, action) => {
         const user = {first_name: firstName, last_name: lastName, email}
         localStorage.setItem("user", JSON.stringify(user))
         return {...state, profile: action.payload, user}
+    }
+
+    if (action.type === SET_MESSAGES) {
+        return {...state, messages: action.payload}
     }
 
     if (action.type === SET_FORM_ERROR) {
