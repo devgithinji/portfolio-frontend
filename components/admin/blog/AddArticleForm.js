@@ -31,7 +31,8 @@ const AddArticleForm = () => {
         getPost,
         post,
         uploadImage,
-        deleteImage
+        deleteImage,
+        resetPost
     } = useAppContext();
 
     let mdEditor;
@@ -67,6 +68,14 @@ const AddArticleForm = () => {
 
     useEffect(() => {
         getCategories()
+        const handleRouteChange = (url, {shallow}) => {
+            resetPost();
+        }
+        router.events.on('routeChangeStart', handleRouteChange)
+
+        return () => {
+            router.events.off('routeChangeStart', handleRouteChange)
+        }
     }, [])
 
 
@@ -81,7 +90,10 @@ const AddArticleForm = () => {
     useEffect(() => {
         if (post) {
             setTitle(post.title)
-            setTags([post.tag?.name])
+            const tag = post.tag ? post.tag.name : null;
+            if (tag) {
+                setTags([tag])
+            }
             setContent(post.content ? post.content : '')
             postIdRef.current = post.id
         }

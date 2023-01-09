@@ -1,8 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FaAngleDown, FaAngleUp} from "react-icons/fa";
 
-const SelectInput = ({value, multiselect = false, setValue, id, name, error, options}) => {
+const SelectInput = ({value: newValue, multiselect = false, setValue, id, name, error, options}) => {
+    const [value, setLocalValue] = useState([])
     const [isDropDownOpen, setDropDownOpen] = useState(false)
+
+    useEffect(() => {
+        setLocalValue(newValue)
+    }, [newValue])
 
     const selectHandler = (e) => {
         const isChecked = e.target.checked

@@ -100,6 +100,14 @@ const AppProvider = ({children}) => {
         return Promise.reject(error);
     })
 
+    //reset post
+    const resetPost = () => {
+        dispatch({type: SET_POST, payload: null})
+    }
+    //resetProject
+    const resetProject = () => {
+        dispatch({type: SET_EDIT_PROJECT, payload: null})
+    }
     //get messages
     const getMessages = async () => {
         try {
@@ -547,7 +555,9 @@ const AppProvider = ({children}) => {
                 deleteJob,
                 getProfile,
                 updateProfile,
-                getMessages
+                getMessages,
+                resetProject,
+                resetPost
             }}>
             {children}
         </AppContext.Provider>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FaEnvelope, FaPhoneAlt, FaWhatsapp, FaMapMarkerAlt, FaLocationArrow, FaArrowRight} from "react-icons/fa";
+import {FaEnvelope, FaPhoneAlt, FaWhatsapp, FaMapMarkerAlt, FaLocationArrow} from "react-icons/fa";
 import Link from "next/link";
 import validator from 'validator';
 import axiosInstance from "../utils/axios-instance";
@@ -47,7 +47,6 @@ const ContactMe = () => {
         }
 
         return true;
-
     }
 
     const clearInputs = () => {
@@ -72,7 +71,6 @@ const ContactMe = () => {
             }
             setIsLoading(false);
         }
-
     }
 
     return (<section className="section contact" id="contact">

@@ -39,7 +39,7 @@ const ProjectsList = () => {
             </div>
             <div className="admin-list-items">
                 {
-                    posts.map((post, index) => {
+                    posts.length > 0 ? posts.map((post, index) => {
                         return (
                             <div className="admin-article-item card" key={post.id}>
                                 <h1 className="card-sub-title"><span>Title: </span>{post.title}</h1>
@@ -56,44 +56,46 @@ const ProjectsList = () => {
                                 </div>
                             </div>
                         )
-                    })
+                    }) : <div className="card" style={{textAlign: 'center', paddingBlock: '10px'}}>No posts found</div>
                 }
             </div>
             <div className="card table-list">
                 <div className="admin-table">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Content</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {posts.map((post, index) => {
-                            return (
-                                <tr key={post.id}>
-                                    <td>{index + 1}</td>
-                                    <td>{post.title}</td>
-                                    <td>{post.tag.name}</td>
-                                    <td>{post.content?.substring(0, 20)}</td>
-                                    <td>
-                                        <div className="table-action-btns">
-                                            <Link href={`/admin/blog/${post.id}`}
-                                                  className="admin-btn admin-btn-accent">edit</Link>
-                                            <button className="admin-btn admin-btn-accent">publish</button>
-                                            <button className="admin-btn admin-btn-danger"
-                                                    onClick={() => deletePst(post.id)}>delete
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                        </tbody>
-                    </table>
+                    {posts.length > 0 ? (
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Content</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {posts.map((post, index) => {
+                                return (
+                                    <tr key={post.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{post.title}</td>
+                                        <td>{post.tag.name}</td>
+                                        <td>{post.content?.substring(0, 20)}</td>
+                                        <td>
+                                            <div className="table-action-btns">
+                                                <Link href={`/admin/blog/${post.id}`}
+                                                      className="admin-btn admin-btn-accent">edit</Link>
+                                                <button className="admin-btn admin-btn-accent">publish</button>
+                                                <button className="admin-btn admin-btn-danger"
+                                                        onClick={() => deletePst(post.id)}>delete
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                            </tbody>
+                        </table>
+                    ) : <div style={{textAlign: 'center'}}>No posts found</div>}
                 </div>
             </div>
         </div>

@@ -18,7 +18,8 @@ const AddProjectForm = () => {
         setFormError,
         getProject,
         project,
-        notFoundError
+        notFoundError,
+        resetProject
     } = useAppContext();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -32,6 +33,14 @@ const AddProjectForm = () => {
 
     useEffect(() => {
         getCategories();
+        const handleRouteChange = (url, {shallow}) => {
+            resetProject();
+        }
+        router.events.on('routeChangeStart', handleRouteChange)
+
+        return () => {
+            router.events.off('routeChangeStart', handleRouteChange)
+        }
     }, [])
 
     useEffect(() => {
@@ -105,7 +114,7 @@ const AddProjectForm = () => {
             data.append('description', description)
 
             if (isEditing) {
-                if(image){
+                if (image) {
                     data.append('image', image)
                 }
                 updateProject(data, projectId)
