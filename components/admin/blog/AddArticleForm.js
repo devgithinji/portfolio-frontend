@@ -16,6 +16,7 @@ import insert from 'markdown-it-ins'
 import mark from 'markdown-it-mark'
 import tasklists from 'markdown-it-task-lists'
 import hljs from "highlight.js";
+import FileInput from "../general/FileInput";
 
 
 const AddArticleForm = () => {
@@ -40,6 +41,8 @@ const AddArticleForm = () => {
     const [title, setTitle] = useState('');
     const [tags, setTags] = useState([]);
     const [content, setContent] = useState('')
+    const [image, setImage] = useState('')
+    const [existingFile, setExistingFile] = useState('')
     const [isEditing, setIsEditing] = useState(false);
     // Initialize a mark down parser
     const mdParser = new MarkdownIt({
@@ -88,7 +91,7 @@ const AddArticleForm = () => {
     }, [router])
 
     useEffect(() => {
-        if (post) {
+        if (post && isEditing) {
             setTitle(post.title)
             const tag = post.tag ? post.tag.name : null;
             if (tag) {
@@ -96,6 +99,7 @@ const AddArticleForm = () => {
             }
             setContent(post.content ? post.content : '')
             postIdRef.current = post.id
+            setExistingFile(post.image)
         }
     }, [post])
 
@@ -157,13 +161,18 @@ const AddArticleForm = () => {
 
         if (!isValid) return;
 
+        const formData = new FormData();
+        formData.append("title", title)
+        formData.append("tag", tags[0])
+        if (image) {
+            formData.append("image", image)
+        }
         if (isEditing) {
             const articleContent = mdEditor.getMdValue();
-            const data = {title, tag: tags[0], content: articleContent};
-            updatePost(data, postIdRef.current)
+            formData.append("content", articleContent)
+            updatePost(formData, postIdRef.current)
         } else {
-            const data = {title, tag: tags[0]};
-            addPost(data);
+            addPost(formData);
         }
     }
 
@@ -174,6 +183,8 @@ const AddArticleForm = () => {
                            error={errors.title}/>
                 <SelectInput type="select" value={tags} setValue={setTags} id='category' options={categories}
                              name='Category' error={errors.category} multiselect={false}/>
+                <FileInput name="Image" setValue={setImage} value={image} id="image" error={errors.image}
+                           existingFile={existingFile}/>
                 {isEditing && (<div className="blog-input">
                     <label htmlFor="content">Article Content</label>
                     {post && (<div className="images-list">

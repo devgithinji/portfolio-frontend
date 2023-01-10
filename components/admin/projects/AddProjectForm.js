@@ -139,8 +139,7 @@ const AddProjectForm = () => {
                 <SelectInput type="select" value={tags} setValue={setTags} id='category' options={categories}
                              name='Category'
                              error={errors.tags} multiselect={true}/>
-                <FileInput name="Image" setValue={setImage} value={image} type="file" id="image"
-                           error={errors.image}
+                <FileInput name="Image" setValue={setImage} value={image} id="image" error={errors.image}
                            existingFile={existingFile}/>
                 <FormInput type='textarea' value={description} setValue={setDescription} placeholder='Description'
                            id='description' name='Description' error={errors.description}/>

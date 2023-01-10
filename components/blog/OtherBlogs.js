@@ -2,29 +2,30 @@ import React from 'react';
 import Slider from 'react-slick'
 import BlogItem from "../general/BlogItem";
 import {FaArrowLeft, FaArrowRight} from "react-icons/fa";
+
 function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
+    const {className, style, onClick} = props;
     return (
         <div
             className={className}
-            style={{ ...style, display: "block", background: "green" }}
+            style={{...style, display: "block", background: "green"}}
             onClick={onClick}
         />
     );
 }
 
 function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
+    const {className, style, onClick} = props;
     return (
         <div
             className={className}
-            style={{ ...style, display: "block", background: "red" }}
+            style={{...style, display: "block", background: "red"}}
             onClick={onClick}
         />
     );
 }
 
-const OtherBlogs = () => {
+const OtherBlogs = ({randomPosts}) => {
     const settings = {
         arrows: true,
         infinite: true,
@@ -32,8 +33,8 @@ const OtherBlogs = () => {
         slidesToShow: 4,
         slidesToScroll: 4,
         initialSlide: 0,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,
+        nextArrow: <SampleNextArrow/>,
+        prevArrow: <SamplePrevArrow/>,
         responsive: [
             {
                 breakpoint: 1024,
@@ -67,16 +68,11 @@ const OtherBlogs = () => {
         <section className="blog-section other-blogs">
             <div className="container">
                 <h1 className="title">Articles you may like</h1>
-               <div>
-                   <Slider {...settings}>
-                       <BlogItem/>
-                       <BlogItem/>
-                       <BlogItem/>
-                       <BlogItem/>
-                       <BlogItem/>
-                       <BlogItem/>
-                   </Slider>
-               </div>
+                <div>
+                    <Slider {...settings}>
+                        {randomPosts && randomPosts.map(post => <BlogItem key={post.id} {...post} shortTitle="true"/>)}
+                    </Slider>
+                </div>
             </div>
         </section>
     );

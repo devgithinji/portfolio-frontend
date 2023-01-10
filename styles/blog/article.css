@@ -2,16 +2,16 @@
   #ARTICLE CSS
 \*-----------------------------------*/
 .article-section {
-    background: var(--primary-200);
+    background: var(--white);
 }
 
 .article-title {
-    color: var(--accent);
+    color: var(--primary-900);
     text-align: center;
 }
 
 .category-label {
-    background: var(--accent-light);
+    background: var(--accent);
     width: max-content;
     padding: 5px;
     border-radius: var(--radius-10);

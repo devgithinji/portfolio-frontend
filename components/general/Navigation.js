@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
-const Navigation = ({children, categories}) => {
+const Navigation = ({categories, itemClick, activeCategory}) => {
     const [newCategories, setNewCategories] = useState(null);
+
     useEffect(() => {
         const allCat = {id: 0, name: 'All'};
         setNewCategories([allCat, ...categories])
@@ -12,7 +13,9 @@ const Navigation = ({children, categories}) => {
             <div className="container">
                 {newCategories && newCategories.map(category => {
                     return (
-                        <div key={category.id} className="nav-item active">
+                        <div key={category.id}
+                             className={activeCategory === category.name ? 'nav-item active' : 'nav-item'}
+                             onClick={() => itemClick(category)}>
                             {category.name}
                         </div>
                     )

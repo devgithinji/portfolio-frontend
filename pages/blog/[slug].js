@@ -6,7 +6,7 @@ import ArticleContent from "../../components/blog/ArticleContent";
 import Head from "next/head";
 import axiosInstance from "../../utils/axios-instance";
 
-const ArticlePage = ({post}) => {
+const ArticlePage = ({post,randomPosts}) => {
     return (
         <>
             <Head>
@@ -19,7 +19,7 @@ const ArticlePage = ({post}) => {
             <ClientSideLayout post={post}>
                 <Hero/>
                 <ArticleContent {...post}/>
-                <OtherBlogs/>
+                <OtherBlogs randomPosts={randomPosts}/>
             </ClientSideLayout>
         </>
     );
@@ -30,10 +30,11 @@ export const getServerSideProps = async context => {
     const slug = context.query.slug
 
     const {data} = await axiosInstance.get(`/posts/${slug}`);
+    const {data: randomPosts} = await axiosInstance.get('/posts/random');
 
 
     return {
-        props: {post: data},
+        props: {post: data, randomPosts},
     }
 };
 

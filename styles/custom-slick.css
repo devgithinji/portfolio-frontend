@@ -29,4 +29,18 @@
 
 .slick-slider .slick-slide {
     padding: 0 15px;
+    height: auto;
 }
+.slick-slide > div{
+    height: 100%;
+}
+
+.slick-slide > div .blog{
+    justify-content: space-between;
+}
+
+.slick-track {
+    display: flex !important;
+    align-items: stretch !important;
+}
+

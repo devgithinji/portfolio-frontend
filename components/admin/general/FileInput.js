@@ -6,9 +6,9 @@ const FileInput = ({fileType = "image", name, existingFile, id, error, setValue}
     const [imagePreview, setImagePreview] = useState(existingFile ? existingFile : '');
     const [fileName, setFileName] = useState('');
 
-    useEffect(()=>{
+    useEffect(() => {
         setImagePreview(existingFile)
-    },[existingFile])
+    }, [existingFile])
 
     const acceptType = fileType === 'image' ? 'image/jpeg, image/png, image/jpg' : 'application/pdf';
 
@@ -21,17 +21,26 @@ const FileInput = ({fileType = "image", name, existingFile, id, error, setValue}
         }
     }
 
+    const preview = () => {
+        if (fileType === 'image') {
+            if (imagePreview && imagePreview !== '') {
+                return (
+                    <div className="image-container">
+                        <img src={imagePreview} alt="" className="img"/>
+                    </div>
+                )
+            }
+        }
+    }
+
     return (
         <div className="form-item admin-form-item">
             <label>{name}</label>
             <div className="image-uploader">
-                {(fileType === 'image' && imagePreview !== '') && (
-                    <div className="image-container">
-                        <img src={imagePreview} alt="" className="img"/>
-                    </div>
-                )}
+                {preview()}
                 {fileName && <p>{fileName}</p>}
-                {(fileType !== 'image' && existingFile) && <Link href={existingFile} className="accent">Download file</Link>}
+                {(fileType !== 'image' && existingFile) &&
+                    <Link href={existingFile} className="accent">Download file</Link>}
                 <label htmlFor={id} className="upload-btn">Select {fileType === 'image' ? 'image' : 'file'}</label>
             </div>
             <input type="file" id={id} accept={acceptType} className="file-input" onChange={fileHandler}/>

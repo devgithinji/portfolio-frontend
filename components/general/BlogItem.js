@@ -1,16 +1,20 @@
 import React from 'react';
 import Link from "next/link";
+import moment from "moment";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkHtml from "remark-html";
+import remarkCodeBlocks from "remark-code-blocks";
 
-const BlogItem = ({id, createdAt, title, slug, content, blogUrl, bogId, tag}) => {
+const BlogItem = ({id, createdAt, title, slug, content, image, blogUrl, bogId, tag, shortTitle = false}) => {
     return (
         <Link href={`/blog/${slug}`} className="blog">
             <div className="blog-img">
-                <img src="/images/blog-one.png" className="img" alt="blog one"/>
-                <div className="date-posted">{createdAt}</div>
+                <img src={image} className="img" alt="blog one"/>
+                <div className="date-posted">{moment(createdAt, "YYYY-MM-DD").format("Do MMM YYYY")}</div>
             </div>
             <div className="blog-content">
                 <h3 className="card-title">{title}</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet atque commodi dolores.</p>
                 <span className="card-sub-title">Read More</span>
             </div>
         </Link>

@@ -170,3 +170,18 @@
 .previousButton, .nextButton {
     width: 100px;
 }
+
+.not-found {
+    width: 100%;
+    padding-block: 30px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    font-weight: var(--fw-500);
+}
+.not-found-icon{
+    font-size: 40px;
+    color: var(--accent);
+}

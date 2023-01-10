@@ -384,7 +384,11 @@ const AppProvider = ({children}) => {
         dispatch({type: SET_FORM_ERROR, payload: {}})
         dispatch({type: START_FORM_LOAD})
         try {
-            const {data} = await authFetch.put(`/posts/${postId}`, postDetails);
+            const {data} = await authFetch.put(`/posts/${postId}`, postDetails, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            });
             toast.success('post updated successfully')
             await router.push('/admin/blog')
             dispatch({type: CLEAR_POST, payload: postId})
@@ -401,7 +405,11 @@ const AppProvider = ({children}) => {
         dispatch({type: SET_FORM_ERROR, payload: {}})
         dispatch({type: START_FORM_LOAD})
         try {
-            const {data} = await authFetch.post('/posts', postDetails);
+            const {data} = await authFetch.post('/posts', postDetails, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            });
             toast.success('post added successfully')
             router.push('/admin/blog')
         } catch (e) {
