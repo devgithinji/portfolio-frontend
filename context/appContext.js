@@ -499,7 +499,7 @@ const AppProvider = ({children}) => {
     const loginUser = async (userDetails) => {
         dispatch({type: LOGIN_BEGIN})
         try {
-            const {data} = await axios.post('http://localhost:8082/auth/login', userDetails);
+            const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`, userDetails);
             const {token, user} = data;
             dispatch({
                 type: LOGIN,
