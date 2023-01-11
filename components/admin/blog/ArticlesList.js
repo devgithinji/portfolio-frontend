@@ -5,7 +5,7 @@ import {confirmAlert} from 'react-confirm-alert';
 import ReactPaginate from "react-paginate";
 
 const ProjectsList = () => {
-    const {getPosts, posts, deletePost, postsPage, postsPageSize, postsTotalPages} = useAppContext();
+    const {getPosts, posts, deletePost,  postsTotalPages} = useAppContext();
 
     useEffect(() => {
         getPosts();

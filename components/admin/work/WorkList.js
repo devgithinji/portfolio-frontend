@@ -87,7 +87,7 @@ const WorkList = () => {
                                     <td>{index + 1}</td>
                                     <td>{job.institution}</td>
                                     <td>{job.title}</td>
-                                    <td>{job.description}</td>
+                                    <td>{job.description.substring(0, 20)}...</td>
                                     <td>{job.durationRange}</td>
                                     <td>
                                         <div className="table-action-btns">

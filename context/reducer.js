@@ -85,7 +85,14 @@ const reducer = (state, action) => {
     }
 
     if (action.type === GET_PROJECTS) {
-        return {...state, projects: action.payload}
+        const {projects, pageNo, pageSize, totalPages} = action.payload
+        return {
+            ...state,
+            projects: projects,
+            projectsPage: pageNo,
+            projectsPageSize: pageSize,
+            projectsTotalPages: totalPages
+        }
     }
 
     if (action.type === SET_EDIT_PROJECT) {

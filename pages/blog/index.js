@@ -29,7 +29,6 @@ const Blog = ({posts, pageNo, totalPages, categories, randomPosts}) => {
             } = await axiosInstance.get(`/posts?keyWord=${keyWord}`)
             const {posts: currentPosts, totalPages: currentTotalPages, pageNo} = data;
 
-
             setActiveCategory('All')
             setCurrentPage(pageNo)
             setPosts(currentPosts)
@@ -38,6 +37,8 @@ const Blog = ({posts, pageNo, totalPages, categories, randomPosts}) => {
     }
 
     const navItemClick = async (category) => {
+        setCurrentPage(0)
+        setSearchKey('')
         const {name} = category;
 
         const {
@@ -88,9 +89,15 @@ const Blog = ({posts, pageNo, totalPages, categories, randomPosts}) => {
 
 export const getServerSideProps = async context => {
 
-    const {data: {posts, pageNo, totalPages}} = await axiosInstance.get('/posts');
-    const {data: categories} = await axiosInstance.get('/category');
-    const {data: randomPosts} = await axiosInstance.get('/posts/random');
+    const [responseOne, responseTwo, responseThree] = await Promise.all([
+        await axiosInstance.get('/posts'),
+        await axiosInstance.get('/category'),
+        await axiosInstance.get('/posts/random')
+    ])
+
+    const {data: {posts, pageNo, totalPages}} = responseOne;
+    const {data: categories} = responseTwo;
+    const {data: randomPosts} =responseThree
 
     return {
         props: {posts, pageNo, totalPages, categories, randomPosts},

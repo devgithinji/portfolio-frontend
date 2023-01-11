@@ -2,9 +2,10 @@ import React, {useEffect} from 'react';
 import Link from "next/link";
 import {useAppContext} from "../../../context/appContext";
 import {confirmAlert} from "react-confirm-alert";
+import ReactPaginate from "react-paginate";
 
 const ProjectsList = () => {
-    const {getProjects, projects, deleteProject} = useAppContext();
+    const {getProjects, projects, deleteProject,projectsTotalPages} = useAppContext();
 
     useEffect(() => {
         getProjects();
@@ -29,6 +30,10 @@ const ProjectsList = () => {
             ]
         });
     };
+
+    const handlePageClick = ({selected}) => {
+        getProjects(selected)
+    }
 
 
     return (
@@ -102,6 +107,25 @@ const ProjectsList = () => {
                         </table>
                 ) : <div style={{textAlign: 'center'}}>No projects found</div>}
                 </div>
+            </div>
+            <div className="admin-section">
+                {projectsTotalPages && (
+                    <ReactPaginate
+                        breakLabel="..."
+                        nextLabel="next >"
+                        onPageChange={handlePageClick}
+                        pageRangeDisplayed={5}
+                        marginPagesDisplayed={2}
+                        pageCount={projectsTotalPages}
+                        previousLabel="< previous"
+                        renderOnZeroPageCount={null}
+                        containerClassName={"navigationButtons"}
+                        previousLinkClassName={"previousButton"}
+                        nextLinkClassName={"nextButton"}
+                        disabledClassName={"navigationDisabled"}
+                        activeClassName={"navigationActive"}
+                    />
+                )}
             </div>
         </div>
     );

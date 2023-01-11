@@ -43,6 +43,9 @@ const initialState = {
     user: user ? JSON.parse(user) : null,
     token: token,
     projects: [],
+    projectsPage: 0,
+    projectsPageSize: null,
+    projectsTotalPages: null,
     project: null,
     posts: [],
     postsPage: 0,
@@ -465,9 +468,9 @@ const AppProvider = ({children}) => {
         dispatch({type: STOP_PAGE_LOAD})
     }
     //get projects
-    const getProjects = async () => {
+    const getProjects = async (pageNo = 0) => {
         try {
-            const {data} = await authFetch.get('/projects');
+            const {data} = await authFetch.get(`/projects?pageNo=${pageNo}`);
             dispatch({type: GET_PROJECTS, payload: data})
         } catch (e) {
             console.log(e)

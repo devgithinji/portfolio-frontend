@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from "next/link";
 import Hero from "../components/main/Hero";
 import AboutMe from "../components/main/aboutme/AboutMe";
 import Services from "../components/main/Services";
@@ -8,8 +6,9 @@ import Projects from "../components/main/Projects";
 import Blogs from "../components/main/Blogs";
 import ContactMe from "../components/ContactMe";
 import ClientSideLayout from "../components/ClientSideLayout";
+import axiosInstance from "../utils/axios-instance";
 
-export default function Home() {
+export default function Home({posts, projects}) {
     return (
         <>
             <Head>
@@ -23,10 +22,25 @@ export default function Home() {
                 <Hero/>
                 <AboutMe/>
                 <Services/>
-                <Projects/>
-                <Blogs/>
+                <Projects projects={projects}/>
+                <Blogs posts={posts}/>
                 <ContactMe/>
             </ClientSideLayout>
         </>
     )
 }
+
+export const getServerSideProps = async context => {
+
+    const [firstResponse, secondResponse] = await Promise.all([
+        axiosInstance.get(`/posts/random?limit=3`),
+        axiosInstance.get(`/projects/random?limit=3`)
+    ]);
+
+    const {data: posts} = firstResponse;
+    const {data: projects} = secondResponse;
+
+    return {
+        props: {posts, projects},
+    }
+};
