@@ -123,12 +123,18 @@ const ProfileForm = () => {
         formData.append("lastName", lastName)
         formData.append("email", email)
         formData.append("phone", phone)
-        formData.append("socialMediaLinks[]", socialMediaLinks)
-        formData.append("skills[]", skills)
+        socialMediaLinks.forEach((link, index) => {
+            formData.append(`socialMediaLinks[${index}]`, link)
+        })
+        skills.forEach((skill, index) => {
+            formData.append(`skills[${index}]`, skill)
+        })
+
         if (resume) {
             formData.append("resume", resume)
         }
         formData.append("personalStatement", personalStatement)
+
         updateProfile(formData);
     }
     return (
