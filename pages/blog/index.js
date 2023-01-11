@@ -29,6 +29,8 @@ const Blog = ({posts, pageNo, totalPages, categories, randomPosts}) => {
             } = await axiosInstance.get(`/posts?keyWord=${keyWord}`)
             const {posts: currentPosts, totalPages: currentTotalPages, pageNo} = data;
 
+            console.log(currentPosts)
+
             setActiveCategory('All')
             setCurrentPage(pageNo)
             setPosts(currentPosts)
