@@ -15,7 +15,7 @@ const AllBlogs = ({posts, totalPages, pageNo, pageChange}) => {
                 : <div className="not-found">No Articles found <FaSadCry className='not-found-icon'/></div>
             }
 
-            <div style={{paddingBlock: '20px'}}>
+            <div style={{paddingBlock: '20px', marginTop: '20px'}}>
                 {totalPages > 0 && (
                     <ReactPaginate
                         breakLabel="..."

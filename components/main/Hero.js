@@ -3,7 +3,8 @@ import Link from "next/link";
 import {FaFileDownload} from "react-icons/fa";
 import SocialIcons from "./SocialIcons";
 
-const Hero = () => {
+const Hero = ({profile}) => {
+    const {resume, personalStatement, skills} = profile;
     return (
         <section className="section hero" id="home">
             <div className="container">
@@ -12,7 +13,7 @@ const Hero = () => {
                         Hello I'm <br/> Dennis Githinji
                     </h1>
                     <p className="hero-subtitle">FullStack Software Engineer</p>
-                    <Link href="/" className="btn btn-accent">
+                    <Link href={resume} className="btn btn-accent">
                         Download Resume
                         <FaFileDownload/>
                     </Link>

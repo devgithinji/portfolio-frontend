@@ -46,7 +46,7 @@ const AllProjects = ({projects, pageNo, totalPages, pageChange}) => {
                 </div>
             ) : <div className="not-found" style={{height: "auto"}}>No Projects found <FaSadCry className='not-found-icon'/></div>
             }
-            <div style={{paddingBlock: '20px'}}>
+            <div style={{paddingBlock: '20px',marginTop: '20px'}}>
                 {totalPages > 0 && (
                     <ReactPaginate
                         breakLabel="..."

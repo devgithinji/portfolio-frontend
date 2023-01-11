@@ -5,7 +5,7 @@ import BasicInfo from "./BasicInfo";
 import Education from "./Education";
 import Work from "./Work";
 
-const AboutMe = () => {
+const AboutMe = ({profile, schools, jobs}) => {
     const [activeTab, setActiveTab] = useState('aboutme');
 
     const changeTab = (tab) => {
@@ -38,9 +38,9 @@ const AboutMe = () => {
                         <span className="tab-label">Work</span>
                     </div>
                 </div>
-                {activeTab === 'aboutme' && <BasicInfo/>}
-                {activeTab === 'education' && <Education/>}
-                {activeTab === 'work' && <Work/>}
+                {activeTab === 'aboutme' && <BasicInfo profile={profile}/>}
+                {activeTab === 'education' && <Education schools={schools}/>}
+                {activeTab === 'work' && <Work jobs={jobs}/>}
             </div>
 
         </section>

@@ -8,7 +8,7 @@ import ContactMe from "../components/ContactMe";
 import ClientSideLayout from "../components/ClientSideLayout";
 import axiosInstance from "../utils/axios-instance";
 
-export default function Home({posts, projects}) {
+export default function Home({posts, projects,profile, schools, jobs}) {
     return (
         <>
             <Head>
@@ -19,8 +19,8 @@ export default function Home({posts, projects}) {
                 <link rel="icon" type="image/x-icon" href="/images/dennis-githinji.png"/>
             </Head>
             <ClientSideLayout>
-                <Hero/>
-                <AboutMe/>
+                <Hero profile={profile}/>
+                <AboutMe jobs={jobs} schools={schools} profile={profile}/>
                 <Services/>
                 <Projects projects={projects}/>
                 <Blogs posts={posts}/>
@@ -32,15 +32,21 @@ export default function Home({posts, projects}) {
 
 export const getServerSideProps = async context => {
 
-    const [firstResponse, secondResponse] = await Promise.all([
+    const [postsResponse, projectsResponse, profileResponse, educationResponse, jobsResponse] = await Promise.all([
         axiosInstance.get(`/posts/random?limit=3`),
-        axiosInstance.get(`/projects/random?limit=3`)
+        axiosInstance.get(`/projects/random?limit=3`),
+        axiosInstance.get('/profile'),
+        axiosInstance.get('/education-history'),
+        axiosInstance.get('/job-history')
     ]);
 
-    const {data: posts} = firstResponse;
-    const {data: projects} = secondResponse;
+    const {data: posts} = postsResponse;
+    const {data: projects} = projectsResponse;
+    const {data: profile} = profileResponse;
+    const {data: schools} = educationResponse;
+    const {data: jobs} = jobsResponse;
 
     return {
-        props: {posts, projects},
+        props: {posts, projects, profile, schools, jobs},
     }
 };
