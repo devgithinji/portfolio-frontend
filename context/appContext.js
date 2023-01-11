@@ -71,7 +71,7 @@ const AppProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     //axios instance
     const authFetch = axios.create({
-        baseURL: 'http://localhost:8082'
+        baseURL:  process.env.NEXT_PUBLIC_BASE_URL
     })
 
     //request
