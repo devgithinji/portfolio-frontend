@@ -60,3 +60,5 @@
 @import "admin/settings/categories.css";
 /*login*/
 @import "admin/auth/login.css";
+/*404*/
+@import "error.css";

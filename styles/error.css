@@ -1,0 +1,20 @@
+.error-body {
+    padding-bottom: 0;
+    display: grid;
+    place-content: center;
+}
+
+.error-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.error-container span {
+    text-transform: capitalize;
+}
+
+
+
+

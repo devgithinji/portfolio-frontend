@@ -18,6 +18,7 @@ const AdminLayout = ({children}) => {
 
     useEffect(() => {
         document.body.classList.add('admin-body');
+        document.body.classList.remove('error-body');
     }, [])
 
 
