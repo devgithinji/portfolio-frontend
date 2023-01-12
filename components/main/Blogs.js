@@ -13,7 +13,7 @@ const Blogs = ({posts}) => {
                 <div className="blog-list">
                     {posts && posts.map(post => <BlogItem key={post.id} {...post}/>)}
                 </div>
-                <Link href="components#" className="btn btn-accent">
+                <Link href="/blog" className="btn btn-accent">
                     View All
                     <FaArrowRight/>
                 </Link>

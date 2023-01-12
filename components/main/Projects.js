@@ -30,7 +30,7 @@ const Projects = ({projects}) => {
                         )
                     })}
                 </div>
-                <Link href="/pages/projects" className="btn btn-accent">
+                <Link href="/projects" className="btn btn-accent">
                     View All
                     <FaArrowRight/>
                 </Link>
