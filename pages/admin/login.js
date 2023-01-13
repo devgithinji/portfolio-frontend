@@ -51,7 +51,7 @@ const Login = () => {
                            error={errors.password}/>
                 <button type="submit" className="admin-btn admin-btn-accent w-100" style={{marginTop: "10px"}}
                         disabled={isLoading}>
-                    {isLoading ? 'PLease wait...' : 'Login'}
+                    {isLoading ? 'Please wait...' : 'Login'}
                 </button>
             </form>
         </div>

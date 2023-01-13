@@ -14,7 +14,7 @@ const AdminLayout = ({children}) => {
         if (!user) {
             router.push('/admin/login')
         }
-    }, [])
+    }, [user])
 
     useEffect(() => {
         document.body.classList.add('admin-body');
