@@ -20,7 +20,7 @@ const Work = ({jobs}) => {
                                 <h5 className="card-sub-title">{title}</h5>
                                 <p>{description}</p>
                                 <h5 className="card-sub-title">Achievements</h5>
-                                <ul className="skills-list">
+                                <ul className="work-skills-list">
                                     {achievementsList.map((achievement, index) => (
                                         <li key={index}>{achievement}</li>
                                     ))}

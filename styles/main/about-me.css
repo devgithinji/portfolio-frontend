@@ -42,8 +42,8 @@
     margin-block-end: 30px;
 }
 
-.about-me-banner img{
-    height: 500px;
+.about-me-banner img {
+    max-height: 400px;
     object-fit: contain;
 }
 
@@ -51,6 +51,7 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
+    align-items: center;
 }
 
 .about-me-content .sub-title, .about-me-content .title {
@@ -58,16 +59,47 @@
     text-align: center;
 }
 
-ul.skills-list li {
-    list-style-type: disc;
-    line-height: 1.8;
-    list-style-position: inside;
+.about-me-content .card-title {
+    font-size: var(--fs-4);
+    font-weight: var(--fw-600);
 }
 
-ul.skills-list li span {
-    display: inline;
+.about-me-content .section-text {
+    text-align: center;
+}
+
+.skills-list {
+    align-self: flex-start;
+}
+
+.skill {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.skill-header span {
     font-weight: var(--fw-500);
-    color: var(--primary-900);
+}
+
+.skill-icon {
+    background-color: var(--accent);
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.skill-content {
+    margin-left: 20px;
 }
 
 .about-me-content .btn-accent:is(:hover, :focus) {
@@ -120,6 +152,15 @@ ul.skills-list li span {
 
 .work-list-item .card-sub-title {
     color: var(--accent);
+}
+
+
+ul.work-skills-list li {
+    list-style-type: disc;
+    line-height: 1.8;
+    list-style-position: inside;
+    text-indent: -1em;
+    padding-left: 1em;
 }
 
 /*common*/

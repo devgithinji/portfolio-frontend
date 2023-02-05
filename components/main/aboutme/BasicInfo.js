@@ -7,23 +7,29 @@ const BasicInfo = ({profile}) => {
     return (
         <div className="tab-content basic-info">
             <div className="about-me-banner">
-                <img src="/images/abt-me.png" className="img" alt="dennis githinji"/>
+                <img src="/images/about-me.png" className="img" alt="dennis githinji"/>
             </div>
             <div className="about-me-content">
                 <h2 className="sub-title">About Me</h2>
                 <h1 className="title">I'm Dennis Githinji</h1>
                 <p className="section-text">{personalStatement}</p>
                 <h2 className="card-title">Skills</h2>
-                <ul className="skills-list">
+                <div className="skills-list">
                     {skills.map((skill, index) => {
                         const [area, skills] = skill.split(":");
                         return (
-                            <li key={index}>
-                                <span>{area}</span>: {skills}
-                            </li>
+                            <div className="skill" key={index}>
+                                <div className="skill-header">
+                                    <div className="skill-icon"></div>
+                                    <span>{area}</span>
+                                </div>
+                                <div className="skill-content">
+                                    {skills}
+                                </div>
+                            </div>
                         )
                     })}
-                </ul>
+                </div>
                 <Link href={resume} className="btn btn-accent">
                     Download Resume
                     <FaDownload/>
