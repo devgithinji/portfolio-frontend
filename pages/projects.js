@@ -25,7 +25,7 @@ const Projects = ({categories, projects, pageNo, pageSize, totalPages}) => {
 
         const {
             data
-        } = await axiosInstance.get(`/projects?pageNo=${currentPage}&category=${name}`)
+        } = await axiosInstance.get(`/projects?pageNo=0&category=${name}`)
 
         const {projects: currentProjects, totalPages: currentTotalPages, pageNo} = data;
 
