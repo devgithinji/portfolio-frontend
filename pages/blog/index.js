@@ -45,7 +45,7 @@ const Blog = ({posts, pageNo, totalPages, categories, randomPosts}) => {
 
         const {
             data
-        } = await axiosInstance.get(`/posts?pageNo=${currentPage}&category=${name}`)
+        } = await axiosInstance.get(`/posts?pageNo=0&category=${name}`)
 
         const {posts: currentPosts, totalPages: currentTotalPages, pageNo} = data;
 
