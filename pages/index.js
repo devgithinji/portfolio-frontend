@@ -7,8 +7,9 @@ import Blogs from "../components/main/Blogs";
 import ContactMe from "../components/ContactMe";
 import ClientSideLayout from "../components/ClientSideLayout";
 import axiosInstance from "../utils/axios-instance";
+import Script from "next/script";
 
-export default function Home({posts, projects,profile, schools, jobs}) {
+export default function Home({posts, projects, profile, schools, jobs}) {
     return (
         <>
             <Head>
