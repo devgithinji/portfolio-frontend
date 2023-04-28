@@ -20,7 +20,7 @@ const Hero = ({profile}) => {
                     <SocialIcons/>
                 </div>
                 <div className="hero-banner">
-                    <img src="/images/hero-banner.png" alt="hero banner" className="img"/>
+                    <img src="/images/hero-banner.webp" alt="hero banner" className="img"/>
                 </div>
             </div>
         </section>

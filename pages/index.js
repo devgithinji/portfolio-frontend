@@ -18,8 +18,8 @@ export default function Home({posts, projects, profile, schools, jobs}) {
                 <meta name="author" content="Dennis Githinji"/>
                 <meta name="keywords" content="Dennis, Githinji, Software Engineer, Java, JavaScript, React, Node Js"/>
                 <link rel="icon" type="image/x-icon" href="/images/dennis-githinji.png"/>
-                <link rel="preload" href="/images/hero-banner.png" as="image"/>
-                <link rel="preload" href="/images/about-me.png" as="image"/>
+                <link rel="preload" href="/images/hero-banner.webp" as="image"/>
+                <link rel="preload" href="/images/about-me.webp" as="image"/>
             </Head>
             <ClientSideLayout>
                 <Hero profile={profile}/>

@@ -7,7 +7,7 @@ const BasicInfo = ({profile}) => {
     return (
         <div className="tab-content basic-info">
             <div className="about-me-banner">
-                <img src="/images/about-me.png" className="img" alt="dennis githinji"/>
+                <img src="/images/about-me.webp" className="img" alt="dennis githinji"/>
             </div>
             <div className="about-me-content">
                 <h2 className="sub-title">About Me</h2>
