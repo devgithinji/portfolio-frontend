@@ -10,7 +10,7 @@ const Hero = ({profile}) => {
             <div className="container">
                 <div className="hero-content">
                     <h1 className="hero-title">
-                        Hello I'm <br/> Dennis Wakahia
+                        Hello I'm <br/> Dennis Githinji
                     </h1>
                     <p className="hero-subtitle">FullStack Software Engineer</p>
                     <Link href={resume} className="btn btn-accent">

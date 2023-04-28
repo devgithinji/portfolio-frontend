@@ -11,7 +11,7 @@ const BasicInfo = ({profile}) => {
             </div>
             <div className="about-me-content">
                 <h2 className="sub-title">About Me</h2>
-                <h1 className="title">I'm Dennis Wakahia</h1>
+                <h1 className="title">I'm Dennis Githinji</h1>
                 <p className="section-text">{personalStatement}</p>
                 <h2 className="card-title">Skills</h2>
                 <div className="skills-list">
