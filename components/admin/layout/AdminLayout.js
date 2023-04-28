@@ -7,12 +7,15 @@ import {useRouter} from "next/router";
 
 const AdminLayout = ({children}) => {
     const [isNavActive, setNavActive] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const {user} = useAppContext();
     const router = useRouter();
 
     useEffect(() => {
         if (!user) {
             router.push('/admin/login')
+        }else {
+            setIsLoading(false);
         }
     }, [user])
 
@@ -22,15 +25,18 @@ const AdminLayout = ({children}) => {
     }, [])
 
 
-    return (
-        <>
-            <Header setNavActive={setNavActive}/>
-            <Navbar isNavActive={isNavActive} setNavActive={setNavActive}/>
-            <BodyContent>
-                {children}
-            </BodyContent>
-        </>
-    );
+    if(!isLoading && user){
+        return (
+            <>
+                <Header setNavActive={setNavActive}/>
+                <Navbar isNavActive={isNavActive} setNavActive={setNavActive}/>
+                <BodyContent>
+                    {children}
+                </BodyContent>
+            </>
+        );
+    }
+
 };
 
 export default AdminLayout;
