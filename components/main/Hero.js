@@ -20,7 +20,13 @@ const Hero = ({profile}) => {
                     <SocialIcons/>
                 </div>
                 <div className="hero-banner">
+                    <div className="projects-bg badge">
+                        20 + <br/> projects
+                    </div>
                     <img src="/images/hero-banner.webp" alt="hero banner" className="img"/>
+                    <div className="visits-bg badge">
+                        30 + <br/> visits
+                    </div>
                 </div>
             </div>
         </section>
