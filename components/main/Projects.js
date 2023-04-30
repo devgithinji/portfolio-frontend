@@ -18,10 +18,10 @@ const Projects = ({projects}) => {
                                     <h3 className="card-title">{name}</h3>
                                     <p>{description}</p>
                                     <div className="project-btns">
-                                        <Link href={repoLink} className="project-btn">
+                                        <Link href={repoLink} className="project-btn" target="_blank">
                                             <FaGithub/>
                                         </Link>
-                                        <Link href={siteLink} className="project-btn outline">
+                                        <Link href={siteLink} className="project-btn outline" target="_blank">
                                             <FaLink/>
                                         </Link>
                                     </div>

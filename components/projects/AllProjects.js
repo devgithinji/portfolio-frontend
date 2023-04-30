@@ -29,12 +29,12 @@ const AllProjects = ({projects, pageNo, totalPages, pageChange}) => {
                                     <p>{description}</p>
                                     <div className="project-links">
                                         {siteLink !== 'empty' && (
-                                            <Link href={siteLink} className="button-link">
+                                            <Link href={siteLink} className="button-link" target="_blank">
                                                 Project
                                                 <FaEye/>
                                             </Link>
                                         )}
-                                        <Link href={repoLink} className="button-link">
+                                        <Link href={repoLink} className="button-link" target="_blank">
                                             Repo
                                             <FaGithub/>
                                         </Link>
