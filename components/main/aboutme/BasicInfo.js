@@ -30,7 +30,7 @@ const BasicInfo = ({profile}) => {
                         )
                     })}
                 </div>
-                <Link href={resume} className="btn btn-accent">
+                <Link href={resume} className="btn btn-accent" target="_blank">
                     Download Resume
                     <FaDownload/>
                 </Link>

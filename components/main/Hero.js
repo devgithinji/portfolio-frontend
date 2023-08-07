@@ -13,7 +13,7 @@ const Hero = ({profile}) => {
                         Hello I'm <br/> Dennis Githinji
                     </h1>
                     <p className="hero-subtitle">FullStack Software Engineer</p>
-                    <Link href={resume} className="btn btn-accent">
+                    <Link href={resume} className="btn btn-accent" target="_blank">
                         Download Resume
                         <FaFileDownload/>
                     </Link>
