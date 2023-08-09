@@ -6,8 +6,9 @@ import {useRouter} from "next/router";
 const Header = () => {
     const [isOpenNavOpen, setNavOpen] = useState(false)
     const [isHeaderFixed, setHeaderFixed] = useState(false)
-    const [activePath, setActivePath] = useState('/')
     const router = useRouter();
+    const [activePath, setActivePath] = useState(router.pathname)
+
 
 
     const headerFixedFunc = () => {
@@ -24,24 +25,25 @@ const Header = () => {
     }, [])
 
     useEffect(() => {
-        router.events.on('hashChangeStart', onHashChangeStart);
-        router.events.on('routeChangeComplete', onRouteChange)
+        setActivePath(router.pathname)
+        // router.events.on('hashChangeStart', onHashChangeStart);
+        // router.events.on('routeChangeComplete', onRouteChange)
+        //
+        // return () => {
+        //     router.events.off('hashChangeStart', onHashChangeStart)
+        //     router.events.off('routeChangeComplete', onRouteChange)
+        // }
+    }, [router.pathname])
 
-        return () => {
-            router.events.off('hashChangeStart', onHashChangeStart)
-            router.events.off('routeChangeComplete', onRouteChange)
-        }
-    }, [router.events])
-
-    const onHashChangeStart = (url) => {
-        setNavOpen(false)
-        setActivePath(url)
-    }
-
-    const onRouteChange = (url) => {
-        setActivePath(url)
-        setNavOpen(false)
-    }
+    // const onHashChangeStart = (url) => {
+    //     setNavOpen(false)
+    //     setActivePath(url)
+    // }
+    //
+    // const onRouteChange = (url) => {
+    //     setActivePath(url)
+    //     setNavOpen(false)
+    // }
 
 
     return (
