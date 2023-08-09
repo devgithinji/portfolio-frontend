@@ -60,14 +60,12 @@ const Header = () => {
                         </li>
                         <li>
                             <Link href="/#aboutme"
-                                  className={activePath === '/#aboutme' ? 'navbar-link active' : 'navbar-link'}
-                                  scroll={activePath === '/'}>About
+                                  className={activePath === '/#aboutme' ? 'navbar-link active' : 'navbar-link'}>About
                                 Me</Link>
                         </li>
                         <li>
                             <Link href="/#services"
-                                  className={activePath === '/#services' ? 'navbar-link active' : 'navbar-link'}
-                                  scroll={activePath === '/'}>Services</Link>
+                                  className={activePath === '/#services' ? 'navbar-link active' : 'navbar-link'}>Services</Link>
                         </li>
                         <li>
                             <Link href="/projects"
@@ -79,8 +77,7 @@ const Header = () => {
                         </li>
                         <li>
                             <Link href="/#contact"
-                                  className={activePath === '/#contact' ? 'navbar-link active' : 'navbar-link'}
-                                  scroll={activePath === '/'}>Contact</Link>
+                                  className={activePath === '/#contact' ? 'navbar-link active' : 'navbar-link'}>Contact</Link>
                         </li>
                     </ul>
                 </nav>
