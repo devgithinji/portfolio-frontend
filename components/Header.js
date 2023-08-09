@@ -7,7 +7,7 @@ const Header = () => {
     const [isOpenNavOpen, setNavOpen] = useState(false)
     const [isHeaderFixed, setHeaderFixed] = useState(false)
     const router = useRouter();
-    const [activePath, setActivePath] = useState(router.pathname)
+    const [activePath, setActivePath] = useState(router.asPath)
 
 
 
@@ -25,7 +25,7 @@ const Header = () => {
     }, [])
 
     useEffect(() => {
-        setActivePath(router.pathname)
+        setActivePath(router.asPath)
         // router.events.on('hashChangeStart', onHashChangeStart);
         // router.events.on('routeChangeComplete', onRouteChange)
         //
@@ -33,7 +33,7 @@ const Header = () => {
         //     router.events.off('hashChangeStart', onHashChangeStart)
         //     router.events.off('routeChangeComplete', onRouteChange)
         // }
-    }, [router.pathname])
+    }, [router.asPath])
 
     // const onHashChangeStart = (url) => {
     //     setNavOpen(false)
