@@ -34,10 +34,14 @@ const AllProjects = ({projects, pageNo, totalPages, pageChange}) => {
                                                 <FaEye/>
                                             </Link>
                                         )}
-                                        <Link href={repoLink} className="button-link" target="_blank">
-                                            Repo
-                                            <FaGithub/>
-                                        </Link>
+                                        { repoLink !== 'empty' &&
+                                        (
+                                            <Link href={repoLink} className="button-link" target="_blank">
+                                                Repo
+                                                <FaGithub/>
+                                            </Link>
+                                        )
+                                        }
                                     </div>
                                 </div>
                             </div>
