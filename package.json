@@ -15,6 +15,7 @@
   "dependencies": {
     "@next/env": "^13.4.19",
     "@next/font": "13.1.1",
+    "@sentry/nextjs": "^7.64.0",
     "axios": "^1.2.2",
     "highlight.js": "^11.7.0",
     "markdown-it": "^13.0.1",
