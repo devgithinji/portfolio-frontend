@@ -36,7 +36,7 @@ const ArticleContent = ({id, createdAt, title, slug, content, blogUrl, blogId, p
                         }
                     }}
                     remarkPlugins={[remarkGfm, remarkHtml, remarkCodeBlocks]}/>
-                <Link href='' className="live-link">Read on Dev.To Blog</Link>
+                {/*<Link href='' className="live-link">Read on Dev.To Blog</Link>*/}
                 <span
                     className="published-date">Published on: {moment(createdAt, "YYYY MM dd").format("Do MMM YYYY")}</span>
             </div>

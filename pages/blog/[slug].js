@@ -6,7 +6,7 @@ import ArticleContent from "../../components/blog/ArticleContent";
 import Head from "next/head";
 import axiosInstance from "../../utils/axios-instance";
 
-const ArticlePage = ({post,randomPosts}) => {
+const ArticlePage = ({post, randomPosts}) => {
     return (
         <>
             <Head>
@@ -29,12 +29,33 @@ export const getServerSideProps = async context => {
 
     const slug = context.query.slug
 
-    const {data} = await axiosInstance.get(`/posts/${slug}`);
-    const {data: randomPosts} = await axiosInstance.get('/posts/random');
+    try {
+        const [postDataResponse, randomPostsResponse] = await Promise.all([
+            axiosInstance.get(`/posts/${slug}`),
+            axiosInstance.get('/posts/random')
+        ]);
+        const post = postDataResponse.data;
+        const randomPosts = randomPostsResponse.data;
 
+        return {
+            props: {post, randomPosts}
+        };
+    } catch (error) {
+        console.error("Error fetching data:", error);
 
-    return {
-        props: {post: data, randomPosts},
+        if (error.response && error.response.status === 404) {
+            return {
+                notFound: true // Return a 404 page
+            };
+        }
+
+        // Return a 500 error page
+        return {
+            redirect: {
+                destination: '/500', // Replace with the actual path to your 500 error page
+                permanent: false,
+            }
+        };
     }
 };
 
