@@ -16,7 +16,6 @@ docker-compose.yml
 
 # Ignore development and test files
 *.md
-*.json
 *.yml
 *.yaml
 *.conf
