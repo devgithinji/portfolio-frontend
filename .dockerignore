@@ -1,0 +1,23 @@
+# .dockerignore
+
+# Ignore version control files
+.git
+.gitignore
+
+# Ignore unnecessary build artifacts
+node_modules
+*.log
+npm-debug.log
+
+# Ignore Docker-specific files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Ignore development and test files
+*.md
+*.json
+*.yml
+*.yaml
+*.conf
+*.env
