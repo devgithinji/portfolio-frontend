@@ -32,10 +32,11 @@ jobs:
           key: ${{secrets.EC2_PRIVATE_KEY}}
           script: |
             # remove stopped containers and dangling images
-            docker container prune -f && docker image prune -f
+            docker container prune -f && docker image prune -af
             
             # stop and remove existing container if running
-            docker rm -f portfolio-frontend || true
+            docker stop portfolio-frontend 
+            docker rm portfolio-frontend
             
             # remove docker image
             docker rmi densoftdev/portfolio-frontend:latest
