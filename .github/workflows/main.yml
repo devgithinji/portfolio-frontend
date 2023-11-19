@@ -31,19 +31,24 @@ jobs:
           username: ${{secrets.EC2_USERNAME}}
           key: ${{secrets.EC2_PRIVATE_KEY}}
           script: |
+            # remove stopped containers and dangling images
+            docker container prune -f && docker image prune -f
+            
+            # stop and remove existing container if running
+            docker rm -f portfolio-frontend || true
+            
+            # remove docker image
+            docker rmi densoftdev/portfolio-frontend:latest
+            
             # docker pull image
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-frontend:latest
-            # stop docker container
-            docker stop portfolio-frontend
+            
             # run docker container
             docker run --name portfolio-frontend -d -p 3000:3000 \
               -e NEXT_PUBLIC_BASE_URL="${{ secrets.NEXT_PUBLIC_BASE_URL }}" \
               -e NEXT_PUBLIC_GA_MEASUREMENT_ID="${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}" \
               ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-frontend:latest
-            # wait for the container to finish (adjust sleep time as needed)
-            sleep 20
-            # remove stopped containers and dangling images
-            docker container prune -f && docker image prune -f
+            
             
 
 
