@@ -40,6 +40,8 @@ jobs:
               -e NEXT_PUBLIC_BASE_URL="${{ secrets.NEXT_PUBLIC_BASE_URL }}" \
               -e NEXT_PUBLIC_GA_MEASUREMENT_ID="${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}" \
               ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-frontend:latest
+            # wait for the container to finish (adjust sleep time as needed)
+            sleep 20
             # remove stopped containers and dangling images
             docker container prune -f && docker image prune -f
             
