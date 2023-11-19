@@ -4,13 +4,9 @@ FROM node:16.18.1-alpine
 # Set the working directory to /app
 WORKDIR /app
 
-# Define an ARG for build-time customization
-ARG NEXT_PUBLIC_BASE_URL
-ARG NEXT_PUBLIC_GA_MEASUREMENT_ID
-
 # Set the environment variable for build and runtime
-ENV NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
-ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=$NEXT_PUBLIC_GA_MEASUREMENT_ID
+ENV NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=${NEXT_PUBLIC_GA_MEASUREMENT_ID}
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
