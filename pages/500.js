@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Error from "../components/error/Error";
 import Head from "next/head";
 
 const NotFoundPage = () => {
+
+    useEffect(()=>{
+        console.log(process.env.NEXT_PUBLIC_BASE_URL)
+    },[])
+
     return (
         <>
             <Head>
