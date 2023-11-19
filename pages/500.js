@@ -6,6 +6,7 @@ const NotFoundPage = () => {
 
     useEffect(()=>{
         console.log(process.env.NEXT_PUBLIC_BASE_URL)
+        console.log("nothing")
     },[])
 
     return (
