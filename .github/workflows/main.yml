@@ -46,8 +46,6 @@ jobs:
             
             # run docker container
             docker run --name portfolio-frontend -d --network projectsnet -p 3000:3000 \
-              -e NEXT_PUBLIC_BASE_URL="${{ secrets.NEXT_PUBLIC_BASE_URL }}" \
-              -e NEXT_PUBLIC_GA_MEASUREMENT_ID="${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}" \
               ${{ secrets.DOCKERHUB_USERNAME }}/portfolio-frontend:latest
             
             

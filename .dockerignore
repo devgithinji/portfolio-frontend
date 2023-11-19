@@ -19,4 +19,4 @@ docker-compose.yml
 *.yml
 *.yaml
 *.conf
-*.env
+#*.env

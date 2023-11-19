@@ -5,8 +5,7 @@ FROM node:16.18.1-alpine
 WORKDIR /app
 
 # Set the environment variable for build and runtime
-ENV NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
-ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=${NEXT_PUBLIC_GA_MEASUREMENT_ID}
+ENV NODE_ENV=production
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
@@ -16,6 +15,7 @@ RUN npm install
 
 # Bundle your app's source code inside the Docker image
 COPY . .
+COPY .env.production .env
 
 # Build the Next.js app for production
 RUN npm run build
