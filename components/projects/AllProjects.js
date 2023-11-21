@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from "next/link";
 import {FaEye, FaGithub, FaSadCry} from "react-icons/fa";
-import ReactPaginate from "react-paginate";
+import ResponsivePagination from 'react-responsive-pagination';
+
 
 const AllProjects = ({projects, pageNo, totalPages, pageChange}) => {
     return (
@@ -34,13 +35,13 @@ const AllProjects = ({projects, pageNo, totalPages, pageChange}) => {
                                                 <FaEye/>
                                             </Link>
                                         )}
-                                        { repoLink !== 'empty' &&
-                                        (
-                                            <Link href={repoLink} className="button-link" target="_blank">
-                                                Repo
-                                                <FaGithub/>
-                                            </Link>
-                                        )
+                                        {repoLink !== 'empty' &&
+                                            (
+                                                <Link href={repoLink} className="button-link" target="_blank">
+                                                    Repo
+                                                    <FaGithub/>
+                                                </Link>
+                                            )
                                         }
                                     </div>
                                 </div>
@@ -48,25 +49,21 @@ const AllProjects = ({projects, pageNo, totalPages, pageChange}) => {
                         )
                     })}
                 </div>
-            ) : <div className="not-found" style={{height: "auto"}}>No Projects found <FaSadCry className='not-found-icon'/></div>
+            ) : <div className="not-found" style={{height: "auto"}}>No Projects found <FaSadCry
+                className='not-found-icon'/></div>
             }
-            <div style={{paddingBlock: '20px',marginTop: '20px'}}>
+            <div style={{paddingBlock: '20px', marginTop: '20px'}}>
                 {totalPages > 0 && (
-                    <ReactPaginate
-                        breakLabel="..."
-                        nextLabel="next >"
+                    <ResponsivePagination
+                        total={totalPages}
+                        current={pageNo + 1}
                         onPageChange={pageChange}
-                        pageRangeDisplayed={5}
-                        marginPagesDisplayed={2}
-                        pageCount={totalPages}
-                        forcePage={pageNo}
-                        previousLabel="< previous"
-                        renderOnZeroPageCount={null}
-                        containerClassName={"navigationButtons"}
-                        previousLinkClassName={"previousButton"}
-                        nextLinkClassName={"nextButton"}
-                        disabledClassName={"navigationDisabled"}
-                        activeClassName={"navigationActive"}
+                        className="my-pagination"
+                        pageItemClassName="pagination-item"
+                        pageLinkClassName="pagination-link"
+                        activeItemClassName="active-pagination-item"
+                        disabledItemClassName="disabled-pagination-item"
+                        navClassName="nav-item"
                     />
                 )}
             </div>

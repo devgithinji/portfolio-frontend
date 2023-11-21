@@ -3,9 +3,10 @@ import Link from "next/link";
 import {useAppContext} from "../../../context/appContext";
 import {confirmAlert} from 'react-confirm-alert';
 import ReactPaginate from "react-paginate";
+import ResponsivePagination from "react-responsive-pagination";
 
 const ProjectsList = () => {
-    const {getPosts, posts, deletePost,  postsTotalPages} = useAppContext();
+    const {getPosts, posts, postsPage, deletePost, postsTotalPages} = useAppContext();
 
     useEffect(() => {
         getPosts();
@@ -30,7 +31,7 @@ const ProjectsList = () => {
         });
     };
 
-    const handlePageClick = ({selected}) => {
+    const handlePageClick = (selected) => {
         getPosts(selected)
     }
 
@@ -105,20 +106,17 @@ const ProjectsList = () => {
             </div>
             <div className="admin-section">
                 {postsTotalPages && (
-                    <ReactPaginate
-                        breakLabel="..."
-                        nextLabel="next >"
+
+                    <ResponsivePagination
+                        total={postsTotalPages}
+                        current={postsPage + 1}
                         onPageChange={handlePageClick}
-                        pageRangeDisplayed={5}
-                        marginPagesDisplayed={2}
-                        pageCount={postsTotalPages}
-                        previousLabel="< previous"
-                        renderOnZeroPageCount={null}
-                        containerClassName={"navigationButtons"}
-                        previousLinkClassName={"previousButton"}
-                        nextLinkClassName={"nextButton"}
-                        disabledClassName={"navigationDisabled"}
-                        activeClassName={"navigationActive"}
+                        className="my-pagination"
+                        pageItemClassName="pagination-item"
+                        pageLinkClassName="pagination-link"
+                        activeItemClassName="active-pagination-item"
+                        disabledItemClassName="disabled-pagination-item"
+                        navClassName="nav-item"
                     />
                 )}
             </div>

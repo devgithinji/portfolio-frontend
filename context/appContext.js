@@ -9,7 +9,8 @@ import {
     DELETE_POST,
     DELETE_PROJECT, DELETE_SCHOOL, GET_JOB, GET_JOBS,
     GET_POSTS,
-    GET_PROJECTS, GET_SCHOOLS,
+    GET_PROJECTS,
+    GET_SCHOOLS,
     LOAD_CATEGORIES,
     LOGIN,
     LOGIN_BEGIN,
@@ -368,8 +369,8 @@ const AppProvider = ({children}) => {
         dispatch({type: STOP_PAGE_LOAD})
     }
     //get posts
-    const getPosts = async (pageNo = 0) => {
-        const {data} = await authFetch.get(`/posts/?pageNo=${pageNo}`);
+    const getPosts = async (pageNo = 1) => {
+        const {data} = await authFetch.get(`/posts/?pageNo=${pageNo - 1}`);
         dispatch({type: GET_POSTS, payload: data})
     }
     //delete post
@@ -468,9 +469,9 @@ const AppProvider = ({children}) => {
         dispatch({type: STOP_PAGE_LOAD})
     }
     //get projects
-    const getProjects = async (pageNo = 0) => {
+    const getProjects = async (pageNo = 1) => {
         try {
-            const {data} = await authFetch.get(`/projects?pageNo=${pageNo}`);
+            const {data} = await authFetch.get(`/projects?pageNo=${pageNo - 1}`);
             dispatch({type: GET_PROJECTS, payload: data})
         } catch (e) {
             console.log(e)

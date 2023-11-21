@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import Link from "next/link";
 import {useAppContext} from "../../../context/appContext";
 import {confirmAlert} from "react-confirm-alert";
-import ReactPaginate from "react-paginate";
+import ResponsivePagination from "react-responsive-pagination";
 
 const ProjectsList = () => {
-    const {getProjects, projects, deleteProject,projectsTotalPages} = useAppContext();
+    const {getProjects, projects,projectsPage, deleteProject, projectsTotalPages} = useAppContext();
 
     useEffect(() => {
         getProjects();
@@ -31,7 +31,7 @@ const ProjectsList = () => {
         });
     };
 
-    const handlePageClick = ({selected}) => {
+    const handlePageClick = (selected) => {
         getProjects(selected)
     }
 
@@ -45,7 +45,7 @@ const ProjectsList = () => {
             </div>
             <div className="admin-list-items">
                 {
-                 projects.length > 0 ?   projects.map((project, index) => {
+                    projects.length > 0 ? projects.map((project, index) => {
                         return (
                             <div className="admin-project-item card" key={project.id}>
                                 <h1 className="card-sub-title"><span>Title: </span>{project.title}</h1>
@@ -61,12 +61,13 @@ const ProjectsList = () => {
                                 </div>
                             </div>
                         )
-                    }) : <div className="card" style={{textAlign: 'center', paddingBlock: '10px'}}>No projects found</div>
+                    }) : <div className="card" style={{textAlign: 'center', paddingBlock: '10px'}}>No projects
+                        found</div>
                 }
             </div>
             <div className="card table-list">
                 <div className="admin-table">
-                {projects.length > 0  ? (
+                    {projects.length > 0 ? (
                         <table>
                             <thead>
                             <tr>
@@ -105,30 +106,28 @@ const ProjectsList = () => {
                             })}
                             </tbody>
                         </table>
-                ) : <div style={{textAlign: 'center'}}>No projects found</div>}
+                    ) : <div style={{textAlign: 'center'}}>No projects found</div>}
                 </div>
             </div>
             <div className="admin-section">
                 {projectsTotalPages && (
-                    <ReactPaginate
-                        breakLabel="..."
-                        nextLabel="next >"
+
+                    <ResponsivePagination
+                        total={projectsTotalPages}
+                        current={projectsPage + 1}
                         onPageChange={handlePageClick}
-                        pageRangeDisplayed={5}
-                        marginPagesDisplayed={2}
-                        pageCount={projectsTotalPages}
-                        previousLabel="< previous"
-                        renderOnZeroPageCount={null}
-                        containerClassName={"navigationButtons"}
-                        previousLinkClassName={"previousButton"}
-                        nextLinkClassName={"nextButton"}
-                        disabledClassName={"navigationDisabled"}
-                        activeClassName={"navigationActive"}
+                        className="my-pagination"
+                        pageItemClassName="pagination-item"
+                        pageLinkClassName="pagination-link"
+                        activeItemClassName="active-pagination-item"
+                        disabledItemClassName="disabled-pagination-item"
+                        navClassName="nav-item"
                     />
                 )}
             </div>
         </div>
-    );
+    )
+        ;
 };
 
 export default ProjectsList;

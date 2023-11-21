@@ -62,3 +62,5 @@
 @import "admin/auth/login.css";
 /*404*/
 @import "error.css";
+
+@import "pagination.css";

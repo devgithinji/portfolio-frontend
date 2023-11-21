@@ -35,13 +35,11 @@ const Projects = ({categories, projects, pageNo, pageSize, totalPages}) => {
         setCurrentPage(pageNo)
     }
 
-    const pageChange = async ({selected}) => {
+    const pageChange = async (selected) => {
 
-        let url = `/projects?pageNo=${selected}&category=${activeCategory}`;
+        let url = `/projects?pageNo=${selected - 1}&category=${activeCategory}`;
 
-        const {
-            data
-        } = await axiosInstance.get(url)
+        const {data} = await axiosInstance.get(url)
 
         const {projects: currentProjects, totalPages: currentTotalPages, pageNo} = data;
 

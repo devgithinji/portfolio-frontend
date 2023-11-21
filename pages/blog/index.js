@@ -55,9 +55,9 @@ const Blog = ({posts, pageNo, totalPages, categories, randomPosts}) => {
         setCurrentPage(pageNo)
     }
 
-    const pageChange = async ({selected}) => {
+    const pageChange = async (selected) => {
 
-        let url = `/posts?pageNo=${selected}&keyWord=${keyWord}&category=${activeCategory}`;
+        let url = `/posts?pageNo=${selected - 1}&keyWord=${keyWord}&category=${activeCategory}`;
 
         const {
             data
@@ -99,7 +99,7 @@ export const getServerSideProps = async context => {
 
     const {data: {posts, pageNo, totalPages}} = responseOne;
     const {data: categories} = responseTwo;
-    const {data: randomPosts} =responseThree
+    const {data: randomPosts} = responseThree
 
     return {
         props: {posts, pageNo, totalPages, categories, randomPosts},

@@ -1,0 +1,39 @@
+.my-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination-item {
+    height: 40px;
+    width: 40px;
+    display: grid;
+    place-content: center;
+    background-color: var(--accent-light);
+    cursor: pointer;
+    border-radius: var(--radius-10);
+}
+
+.pagination-link {
+
+}
+
+.active-pagination-item {
+    background-color: var(--accent);
+}
+
+.disabled-pagination-item {
+    display: none;
+}
+
+.nav-item {
+    border: 2px solid var(--accent);
+}
+
+.previous-nav-item {
+
+}
+
+.next-nav-item {
+
+}

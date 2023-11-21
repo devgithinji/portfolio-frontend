@@ -1,7 +1,7 @@
 import React from 'react';
 import BlogItem from "../general/BlogItem";
-import ReactPaginate from "react-paginate";
 import {FaSadCry} from "react-icons/fa";
+import ResponsivePagination from "react-responsive-pagination";
 
 const AllBlogs = ({posts, totalPages, pageNo, pageChange}) => {
     return (
@@ -17,21 +17,16 @@ const AllBlogs = ({posts, totalPages, pageNo, pageChange}) => {
 
             <div style={{paddingBlock: '20px', marginTop: '20px'}}>
                 {totalPages > 0 && (
-                    <ReactPaginate
-                        breakLabel="..."
-                        nextLabel="next >"
+                    <ResponsivePagination
+                        total={totalPages}
+                        current={pageNo + 1}
                         onPageChange={pageChange}
-                        pageRangeDisplayed={5}
-                        marginPagesDisplayed={2}
-                        pageCount={totalPages}
-                        forcePage={pageNo}
-                        previousLabel="< previous"
-                        renderOnZeroPageCount={null}
-                        containerClassName={"navigationButtons"}
-                        previousLinkClassName={"previousButton"}
-                        nextLinkClassName={"nextButton"}
-                        disabledClassName={"navigationDisabled"}
-                        activeClassName={"navigationActive"}
+                        className="my-pagination"
+                        pageItemClassName="pagination-item"
+                        pageLinkClassName="pagination-link"
+                        activeItemClassName="active-pagination-item"
+                        disabledItemClassName="disabled-pagination-item"
+                        navClassName="nav-item"
                     />
                 )}
             </div>
