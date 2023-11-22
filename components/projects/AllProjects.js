@@ -52,7 +52,7 @@ const AllProjects = ({projects, pageNo, totalPages, pageChange}) => {
             ) : <div className="not-found" style={{height: "auto"}}>No Projects found <FaSadCry
                 className='not-found-icon'/></div>
             }
-            <div style={{paddingBlock: '20px', marginTop: '20px'}}>
+            <div style={{paddingBlock: '20px', marginTop: '20px',  width: '90vw', marginInline: 'auto'}}>
                 {totalPages > 0 && (
                     <ResponsivePagination
                         total={totalPages}
